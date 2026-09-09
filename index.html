@@ -1820,23 +1820,26 @@
         var currentPriceRaw = 0;
 
         document.addEventListener("DOMContentLoaded", function() {
-            setImageSrc('navLogoImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1546838729984053299/20260818_120544.png?ex=6aa13d54&is=6a9febd4&hm=06b042f900c3d5bb1ecbf92d88f4f53c6f69509df2bd0ab3233bf7fc7b772ae0&');
-            setImageSrc('stoneImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1546959897231499284/download.jpg?ex=6aa1ae2c&is=6aa05cac&hm=faa3f0524eae3c84b7d3202383e120f247aa9284d1de43b22e12cd1756adad8e&');
-            setImageSrc('copperImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1546959880529645649/images.png?ex=6aa1ae28&is=6aa05ca8&hm=7535a5616571557b598800ebe1f0cad42189a3ab6bb9cc8c3fa1677c49a87fec&');
-            setImageSrc('diamondImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1546959861483315240/download_1.jpg?ex=6aa1ae24&is=6aa05ca4&hm=1baeeee090f26a077c03ddebaf3b5a878956c803beceef46e2761934671536de&');
-            setImageSrc('amethystImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1546959853883367464/download_2.jpg?ex=6aa1ae22&is=6aa05ca2&hm=3c8e4326c16b6ce335a103c1117bb9600a7d05cea92154b148db72046f323658&');
+            // MEMAKAI LINK URL CDN BARU SESUAI PERINTAH
+            setImageSrc('navLogoImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547323743607464097/logo.png?ex=6aa30108&is=6aa1af88&hm=67594eec4153617f6132f9e69f0a523501f5a2d0d474cda3800f611c46895122&');
+            setImageSrc('stoneImg', 'image/stone.png');
+            setImageSrc('copperImg', 'image/images.png'); 
+            setImageSrc('diamondImg', 'image/diamond.png');
+            setImageSrc('amethystImg', 'image/amethys.png');
             
-            var shardUrl = 'https://cdn.discordapp.com/attachments/1499481645756055582/1546959843016048661/images_1.jpg?ex=6aa1ae1f&is=6aa05c9f&hm=82eb950314e47318a84e152832747ca5bbb825fe28d1f8894b34b85459304390&';
+            var shardUrl = 'image/shards.png';
             setImageSrc('shardImg1', shardUrl);
             setImageSrc('shardImg2', shardUrl);
             setImageSrc('shardImg3', shardUrl);
             setImageSrc('shardImg4', shardUrl);
 
+            // Avatar Tim tetap menggunakan API external dinamis (mc-heads)
             setImageSrc('ownerAvatar', 'https://mc-heads.net/avatar/DrXuan_/80');
             setImageSrc('devAvatar', 'https://mc-heads.net/avatar/ItsMijee/80');
             setImageSrc('staffAvatar', 'https://mc-heads.net/avatar/FinzNerf/80');
 
-            setImageSrc('qrisImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1542105757489823804/Kode_QRIS_MINEHERA_OFFICIAL_Digital__Kreatif_1.png?ex=6aa128e7&is=6a9fd767&hm=63560089f83a79c9a508ec21b4a73bd3a3d0f71ababa99771ca940c3d85512f1&');
+            // MEMAKAI LINK URL CDN BARU SESUAI PERINTAH
+            setImageSrc('qrisImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547323713270194278/qris.png?ex=6aa30101&is=6aa1af81&hm=ab610c25a6a147f9345131615b7f99cf207758ab80c86bf4b22b956a4856b4f8&');
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
             checkAutoLogin();
