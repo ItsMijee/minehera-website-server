@@ -3,2224 +3,1157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MineHera - Anarchy Server</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <title>MineHera - Premium Anarchy Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        :root {
+            --bg-dark: #080406;
+            --card-bg: rgba(20, 10, 14, 0.7);
+            --card-border: rgba(225, 29, 72, 0.2);
+            --primary-red: #e11d48;
+            --primary-hover: #be123c;
+            --gold: #fbbf24;
+            --silver: #cbd5e1;
+            --bronze: #d97706;
+            --amethyst: #c084fc;
+            --text-main: #fecdd3;
+            --text-muted: #94a3b8;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+
         body {
-            background-color: #0b0712;
+            background-color: var(--bg-dark);
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        #page-login {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .card-login {
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 20px;
-            padding: 28px 24px;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
-        }
-
-        .icon-header {
-            width: 48px;
-            height: 48px;
-            background: #1e1330;
-            border: 1px solid #3b2260;
-            border-radius: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 16px;
-            font-size: 1.2rem;
-        }
-
-        .title {
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #a78bfa;
-            margin-bottom: 16px;
-        }
-
-        .info-lore {
-            background: #1c142b;
-            border: 1px dashed #5b21b6;
-            color: #ddd6fe;
-            padding: 10px 12px;
-            border-radius: 12px;
-            font-size: 0.72rem;
-            line-height: 1.45;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .alert-error {
-            display: none;
-            background: #2d121e;
-            border: 1px solid #f43f5e;
-            color: #fb7185;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            line-height: 1.4;
-            margin-bottom: 16px;
-        }
-
-        .platform-switch {
-            background: #0b0712;
-            padding: 4px;
-            border-radius: 12px;
-            display: flex;
-            gap: 4px;
-            margin-bottom: 16px;
-            border: 1px solid #2a1b40;
-        }
-
-        .btn-tab {
-            flex: 1;
-            padding: 8px 0;
-            border: none;
-            background: transparent;
-            color: #a78bfa;
-            font-weight: 700;
-            font-size: 0.85rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-tab.active {
-            background: #8b5cf6;
-            color: #ffffff;
-            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.4);
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 12px;
-        }
-
-        .input-field {
-            width: 100%;
-            background: #0b0712;
-            border: 1px solid #2a1b40;
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: #ffffff;
-            font-size: 0.85rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .input-field:focus {
-            border-color: #8b5cf6;
-        }
-
-        .input-field::placeholder {
-            color: #6d5b88;
-        }
-
-        .referral-btn {
-            background: none;
-            border: none;
-            color: #a78bfa;
-            font-size: 0.75rem;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: #8b5cf6;
-            color: #ffffff;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-submit:hover {
-            background: #7c3aed;
-        }
-
-        #page-hub {
-            display: none;
-        }
-
-        .navbar {
-            background-color: #130d1f;
-            border-bottom: 1px solid #2a1b40;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar-logo img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            display: block;
-        }
-
-        .menu-btn {
-            background: transparent;
-            border: none;
-            color: #a78bfa;
-            cursor: pointer;
-            padding: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.2s;
-        }
-
-        .menu-btn:hover {
-            color: #8b5cf6;
-        }
-
-        .nav-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #130d1f;
-            border-bottom: 1px solid #2a1b40;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            flex-direction: column;
-            padding: 10px 0;
-        }
-
-        .nav-menu.active {
-            display: flex;
-        }
-
-        .nav-item {
-            padding: 14px 24px;
-            color: #e9d5ff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: background 0.2s, color 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-item:hover {
-            background-color: #1c142b;
-            color: #8b5cf6;
-        }
-
-        .nav-item.logout {
-            color: #fb7185;
-            border-top: 1px solid #2a1b40;
-            margin-top: 5px;
-        }
-
-        .nav-item.logout:hover {
-            background-color: #2d121e;
-            color: #f43f5e;
-        }
-
-        .nav-item i {
-            width: 20px;
-            height: 20px;
-            stroke-width: 1.8;
-        }
-
-        .hero-section {
-            padding: 40px 20px;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .server-status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #130d1f;
-            border: 1px solid #3b2260;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #c084fc;
-            margin-bottom: 24px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
-        }
-
-        .hero-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            color: #ffffff;
-        }
-
-        .hero-title span {
-            color: #8b5cf6;
-            text-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
-        }
-
-        .hero-desc {
-            font-size: 0.88rem;
-            color: #a78bfa;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .btn-action-primary {
-            width: 100%;
-            background: #8b5cf6;
-            color: #ffffff;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .btn-action-primary:hover {
-            background: #7c3aed;
-        }
-
-        .btn-action-secondary {
-            width: max-content;
-            padding: 8px 18px;
-            background: #130d1f;
-            color: #a78bfa;
-            border: 1px solid #3b2260;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.82rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-action-secondary:hover {
-            border-color: #8b5cf6;
-            color: #ffffff;
-        }
-
-        .server-ip-box {
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 14px;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 35px;
-        }
-
-        .ip-label {
-            font-size: 0.68rem;
-            color: #6d5b88;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-align: left;
-            margin-bottom: 2px;
-        }
-
-        .ip-text {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .btn-copy {
-            background: #2a1b40;
-            border: none;
-            color: #8b5cf6;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .btn-copy:hover {
-            background: #3b2260;
-        }
-
-        .stats-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 50px;
-        }
-
-        .stat-card {
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: border-color 0.2s;
-        }
-
-        .stat-card:hover {
-            border-color: #5b21b6;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            background: #1c142b;
-            border: 1px solid #3b2260;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #a78bfa;
-            margin-bottom: 12px;
-        }
-
-        .stat-card .stat-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .stat-card .stat-title {
-            font-size: 0.8rem;
-            color: #6d5b88;
-            font-weight: 600;
-        }
-
-        .section-about {
-            padding: 40px 0;
-            border-top: 1px solid #2a1b40;
-        }
-
-        .section-tag {
-            color: #a78bfa;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .section-title span {
-            color: #8b5cf6;
-        }
-
-        .about-text {
-            font-size: 0.88rem;
-            color: #a78bfa;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .feature-card {
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            background: #1c142b;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8b5cf6;
-            margin: 0 auto 12px;
-        }
-
-        .feature-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .feature-desc {
-            font-size: 0.8rem;
-            color: #a78bfa;
-            line-height: 1.5;
-        }
-
-        /* SEKSI DASHBOARD LAINNYA */
-        #sectionShop, #sectionFaq, #sectionTeam {
-            display: none;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .shop-header-title {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .shop-header-title h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-
-        .shop-header-title h2 span {
-            color: #8b5cf6;
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
-        }
-
-        .profile-check-card {
-            background: linear-gradient(135deg, #130d1f 0%, #1c132e 100%);
-            border: 1px solid #5b21b6;
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 28px;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: 0 8px 25px rgba(91, 33, 182, 0.15);
-        }
-
-        .profile-avatar {
-            width: 48px;
-            height: 48px;
-            background: #25163d;
-            border: 1px solid #7c3aed;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #a78bfa;
-        }
-
-        .store-tab-group {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 30px;
-            background: #0b0712;
-            padding: 6px;
-            border-radius: 16px;
-            border: 1px solid #2a1b40;
-        }
-
-        .store-tab {
-            flex: 1;
-            padding: 12px 0;
-            background: transparent;
-            border: none;
-            border-radius: 12px;
-            color: #a78bfa;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .store-tab.active {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-        }
-
-        .store-items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            text-align: left;
-        }
-
-        .item-card {
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 20px;
-            padding: 24px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .item-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .item-card.card-stone { border-color: #4b5563; }
-        .item-card.card-stone:hover { border-color: #9ca3af; box-shadow: 0 10px 25px rgba(156, 163, 175, 0.15); }
-        .item-card.card-copper { border-color: #92400e; }
-        .item-card.card-copper:hover { border-color: #f97316; box-shadow: 0 10px 25px rgba(249, 115, 22, 0.2); }
-        .item-card.card-diamond { border-color: #0284c7; }
-        .item-card.card-diamond:hover { border-color: #38bdf8; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); }
-        .item-card.card-amethyst { border-color: #7e22ce; background: linear-gradient(180deg, #180e2b 0%, #130d1f 100%); }
-        .item-card.card-amethyst:hover { border-color: #c084fc; box-shadow: 0 10px 35px rgba(192, 132, 252, 0.35); }
-        .item-card.card-shard { border-color: #3b2260; }
-        .item-card.card-shard:hover { border-color: #8b5cf6; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.25); }
-
-        .popular-badge, .bonus-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            color: #fff;
-            font-size: 0.68rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .popular-badge {
-            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
-        }
-
-        .bonus-badge {
-            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-        }
-
-        .item-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
-
-        .item-icon-box {
-            width: 64px;
-            height: 64px;
-            background: #ffffff;
-            border: 1px solid #3b2260;
-            border-radius: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 4px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .mc-item-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            image-rendering: pixelated;
-        }
-
-        .item-title {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.3px;
-        }
-
-        .price-tag-container {
-            background: rgba(11, 7, 18, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 10px 12px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-
-        .price-main {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #22c55e;
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-        }
-
-        .price-alt {
-            font-size: 0.72rem;
-            color: #a78bfa;
-            margin-top: 2px;
-            font-weight: 600;
-        }
-
-        .item-benefits {
-            list-style: none;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            color: #ddd6fe;
-        }
-
-        .item-benefits li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1.4;
-        }
-
-        .item-benefits li i {
-            width: 16px;
-            height: 16px;
-            color: #8b5cf6;
-            flex-shrink: 0;
-        }
-
-        .btn-buy-item {
-            width: 100%;
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 0.88rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.25);
-            letter-spacing: 0.3px;
-        }
-
-        .btn-buy-item:hover {
-            background: linear-gradient(135deg, #9d72ff 0%, #7c3aed 100%);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-        }
-
-        /* FAQ ACCORDION */
-        .faq-group-title {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #6d5b88;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin: 24px 0 12px;
-            text-align: left;
-        }
-
-        .faq-accordion-item {
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            transition: border-color 0.2s;
-            text-align: left;
-        }
-
-        .faq-accordion-item:hover {
-            border-color: #3b2260;
-        }
-
-        .faq-accordion-header {
-            padding: 18px 20px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .faq-accordion-toggle {
-            font-size: 1.2rem;
-            color: #a78bfa;
-            font-weight: 400;
-            transition: transform 0.2s;
-        }
-
-        .faq-accordion-body {
-            display: none;
-            padding: 0 20px 20px;
-            font-size: 0.85rem;
-            color: #a78bfa;
-            line-height: 1.6;
-            border-top: 1px solid transparent;
-        }
-
-        .faq-accordion-item.active {
-            border-color: #5b21b6;
-        }
-
-        .faq-accordion-item.active .faq-accordion-header {
-            color: #c084fc;
-        }
-
-        .faq-accordion-item.active .faq-accordion-body {
-            display: block;
-            border-top-color: rgba(255, 255, 255, 0.05);
-            padding-top: 14px;
-        }
-
-        /* SEKSI TIM PREMIUM & ULTRA LUXURY */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .team-card {
-            background: linear-gradient(180deg, rgba(25, 17, 43, 0.8) 0%, rgba(15, 9, 26, 0.95) 100%);
-            border: 1px solid #3b2260;
-            border-radius: 24px;
-            padding: 28px 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            backdrop-filter: blur(12px);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-        }
-
-        .team-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
-            opacity: 0.4;
-            transition: opacity 0.3s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-8px);
-            border-color: #8b5cf6;
-            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.25);
-        }
-
-        .team-card:hover::before {
-            opacity: 1;
-        }
-
-        .team-avatar-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .team-avatar-ring {
-            width: 90px;
-            height: 90px;
-            border-radius: 22px;
-            padding: 4px;
-            background: linear-gradient(135deg, #7c3aed 0%, #3b2260 100%);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .team-card.card-owner .team-avatar-ring {
-            background: linear-gradient(135deg, #ef4444 0%, #7f1d1d 100%);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
-        }
-
-        .team-card.card-dev .team-avatar-ring {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .team-card.card-staff .team-avatar-ring {
-            background: linear-gradient(135deg, #22c55e 0%, #14532d 100%);
-            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-        }
-
-        .team-head-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 18px;
-            object-fit: cover;
-            background: #0b0712;
-            image-rendering: pixelated;
-        }
-
-        .team-platform-tag {
-            position: absolute;
-            bottom: -6px;
-            right: -6px;
-            background: #0b0712;
-            color: #a78bfa;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 2px 8px;
-            border-radius: 8px;
-            border: 1px solid #3b2260;
-            text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .team-name {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .team-role-badge {
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 5px 14px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .role-owner { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .role-dev { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
-        .role-staff { background: rgba(34, 197, 94, 0.12); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
-
-        .team-lore {
-            font-size: 0.8rem;
-            color: #c4b5fd;
-            line-height: 1.6;
-            background: rgba(11, 7, 18, 0.6);
-            padding: 14px 12px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-card {
-            background: #130d1f;
-            border: 1px solid #5b21b6;
-            border-radius: 20px;
-            padding: 24px;
-            max-width: 440px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: #a78bfa;
-            cursor: pointer;
-        }
-
-        .qris-container {
-            margin-bottom: 16px;
-        }
-
-        .qris-img {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
-            border-radius: 12px;
-            background: #ffffff;
-            padding: 8px;
-            margin: 0 auto 12px;
-            display: block;
-        }
-
-        .warning-rules {
-            background: #1c142b;
-            border: 1px solid #5b21b6;
-            color: #ddd6fe;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 0.72rem;
-            text-align: left;
-            line-height: 1.45;
-            margin-bottom: 16px;
-        }
-
-        .warning-rules strong { color: #f43f5e; }
-
-        .upload-field {
-            background: #0b0712;
-            border: 1px dashed #3b2260;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 0.8rem;
-            color: #a78bfa;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 16px;
-            width: 100%;
-        }
-
-        .footer {
-            background: #07040b;
-            border-top: 1px solid #2a1b40;
-            padding: 40px 20px 20px;
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        .footer-desc {
-            font-size: 0.8rem;
-            color: #6d5b88;
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
-
-        .footer-links-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 24px;
-        }
-
-        .footer-links a {
-            color: #a78bfa;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .footer-links a:hover { color: #ffffff; }
-
-        .social-icons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            background: #130d1f;
-            border: 1px solid #2a1b40;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #a78bfa;
-            text-decoration: none;
-            transition: border-color 0.2s;
-        }
-
-        .social-btn:hover { border-color: #8b5cf6; color: #ffffff; }
-
-        .footer-bottom {
-            border-top: 1px solid #1c142b;
-            padding-top: 20px;
-            text-align: center;
-            font-size: 0.72rem;
-            color: #6d5b88;
-        }
-
-        .user-badge {
-            background: rgba(139, 92, 246, 0.05);
-            border: 1px solid #2a1b40;
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            color: #a78bfa;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .status-modal-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-        .status-icon-box {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 6px;
-        }
-        .status-icon-box.success { background: rgba(34, 197, 94, 0.15); border: 1px solid #22c55e; color: #22c55e; }
-        .status-icon-box.error { background: rgba(244, 63, 94, 0.15); border: 1px solid #f43f5e; color: #f43f5e; }
-        .status-icon-box.loading { background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; color: #8b5cf6; }
-
-        .spinner {
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid #8b5cf6;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(136, 19, 55, 0.1) 0%, transparent 50%);
+        }
+
+        /* AUTH PAGE (LOGIN & REGISTER) */
+        #page-login { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .card-login { background: #12070a; border: 1px solid var(--card-border); border-radius: 20px; padding: 32px 24px; width: 100%; max-width: 420px; box-shadow: 0 15px 35px rgba(225, 29, 72, 0.15); text-align: center; }
+        .login-head-preview { width: 72px; height: 72px; margin: 0 auto 16px; border-radius: 16px; background: #000; border: 2px solid var(--primary-red); padding: 4px; box-shadow: 0 0 15px rgba(225, 29, 72, 0.3); display: flex; align-items: center; justify-content: center; }
+        .login-head-preview img { width: 100%; height: 100%; border-radius: 10px; image-rendering: pixelated; object-fit: contain; }
+        .title { font-size: 1.4rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
+        .subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
+        .alert-error { display: none; background: rgba(225, 29, 72, 0.1); border: 1px solid var(--primary-red); color: #ffe4e6; padding: 12px; border-radius: 12px; font-size: 0.78rem; margin-bottom: 16px; text-align: left; }
+        
+        .platform-switch { background: #080304; padding: 4px; border-radius: 12px; display: flex; gap: 4px; margin-bottom: 16px; border: 1px solid var(--card-border); }
+        .btn-tab { flex: 1; padding: 10px 0; border: none; background: transparent; color: var(--text-muted); font-weight: 700; font-size: 0.85rem; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
+        .btn-tab.active { background: var(--primary-red); color: #ffffff; }
+        
+        .input-group { margin-bottom: 16px; text-align: left; }
+        .input-field { width: 100%; background: #080304; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #ffffff; font-size: 0.9rem; outline: none; transition: 0.2s; }
+        .input-field:focus { border-color: var(--primary-red); }
+        
+        .admin-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; justify-content: center;}
+        .admin-toggle input { accent-color: var(--primary-red); width: 16px; height: 16px; cursor: pointer;}
+        
+        .btn-submit { width: 100%; background: linear-gradient(135deg, var(--primary-red) 0%, #9f1239 100%); color: #ffffff; border: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3); }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5); }
+
+        .auth-switch-row { display: flex; gap: 10px; margin-bottom: 16px; }
+        .auth-switch-row button { flex: 1; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: 1px solid var(--card-border); background: #080304; color: var(--text-muted); }
+        .auth-switch-row button.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
+
+        /* NAVBAR & HUB */
+        #page-hub { display: none; }
+        .navbar { background: rgba(12, 5, 8, 0.95); border-bottom: 1px solid var(--card-border); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+        .navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
+        .brand-text { font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+        .brand-text span { color: var(--primary-red); }
+        
+        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
+        
+        .profile-container { position: relative; }
+        .profile-btn { display: flex; align-items: center; gap: 8px; background: transparent; border: none; cursor: pointer; }
+        .player-head-nav { width: 38px; height: 38px; border-radius: 10px; border: 2px solid var(--primary-red); background: #000; image-rendering: pixelated; }
+        
+        .profile-dropdown { display: none; position: absolute; right: 0; top: 50px; background: #12070a; border: 1px solid var(--card-border); border-radius: 12px; width: 200px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); flex-direction: column; overflow: hidden; z-index: 200; }
+        .profile-dropdown.active { display: flex; }
+        .profile-dropdown-item { padding: 12px 16px; color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.2s; }
+        .profile-dropdown-item:hover { background: rgba(225, 29, 72, 0.1); color: var(--primary-red); }
+        .profile-dropdown-item.logout { color: #f87171; border-bottom: none; }
+
+        .menu-btn { background: transparent; border: none; color: #fff; cursor: pointer; padding: 6px; display: flex; }
+        
+        .nav-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #0e0508; border-bottom: 1px solid var(--card-border); flex-direction: column; box-shadow: 0 15px 30px rgba(0,0,0,0.9); }
+        .nav-menu.active { display: flex; }
+        .nav-item { padding: 16px 20px; color: #e2e8f0; text-decoration: none; font-weight: 600; font-size: 0.92rem; display: flex; align-items: center; gap: 14px; transition: all 0.2s; cursor: pointer; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+        .nav-item:hover { background: rgba(225, 29, 72, 0.1); color: var(--primary-red); }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 25px 16px; }
+        .section-tag { color: var(--primary-red); font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; text-align: center; }
+        .section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 24px; text-align: center; }
+        .section-title span { color: var(--primary-red); }
+
+        /* HERO SECTION */
+        .hero-section { text-align: center; padding: 10px 0; }
+        .server-status-pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(225, 29, 72, 0.08); border: 1px solid rgba(225, 29, 72, 0.25); padding: 8px 18px; border-radius: 30px; font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 20px; }
+        .status-dot { width: 9px; height: 9px; background-color: #ef4444; border-radius: 50%; box-shadow: 0 0 10px #ef4444; }
+        .status-dot.online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
+        
+        .hero-title { font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; }
+        .hero-title span { color: var(--primary-red); }
+        .hero-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.6; max-width: 600px; margin: 0 auto 24px; }
+
+        .server-ip-box { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; max-width: 450px; margin: 0 auto 30px; }
+        .ip-text { font-size: 1rem; font-weight: 800; color: #ffffff; }
+        .btn-copy { background: var(--primary-red); border: none; color: #ffffff; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.82rem; transition: 0.2s; }
+        .btn-copy:hover { background: var(--primary-hover); }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+        .stat-card { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 8px; text-align: center; }
+        .stat-icon { width: 34px; height: 34px; background: rgba(225, 29, 72, 0.15); color: var(--primary-red); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+        .stat-value { font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 2px; }
+        .stat-label { font-size: 0.7rem; color: #94a3b8; font-weight: 600; }
+
+        /* DASHBOARD COUNTER REGISTERED PLAYERS */
+        .dashboard-counter-box { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto 30px; text-align: left; }
+        .counter-info-title { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .counter-info-val { font-size: 1.4rem; font-weight: 800; color: #4ade80; }
+
+        .dashboard-filler { background: linear-gradient(180deg, rgba(20, 10, 14, 0.8) 0%, #080304 100%); border: 1px solid var(--card-border); border-radius: 16px; padding: 30px 20px; text-align: center; margin-bottom: 20px; }
+        .dashboard-filler h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .dashboard-filler p { font-size: 0.85rem; color: #94a3b8; max-width: 500px; margin: 0 auto 20px; line-height: 1.6; }
+        .btn-discord-join { display: inline-flex; align-items: center; gap: 8px; background: #5865F2; color: #fff; padding: 12px 24px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .btn-discord-join:hover { background: #4752C4; transform: translateY(-2px); }
+
+        #sectionShop, #sectionTeam, #sectionDonator, #sectionAdmin, #sectionGallery, #sectionRules, #sectionVote { display: none; }
+
+        /* ACCORDION FAQ */
+        .faq-container { display: flex; flex-direction: column; gap: 12px; max-width: 700px; margin: 0 auto; }
+        .faq-item { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; }
+        .faq-question { padding: 16px 20px; font-weight: 700; font-size: 0.92rem; color: #fff; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .faq-question i { transition: transform 0.3s ease; color: var(--primary-red); }
+        .faq-answer { padding: 0 20px 16px 20px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* VOTE SECTION */
+        .vote-grid { display: flex; justify-content: center; max-width: 400px; margin: 0 auto; }
+        .vote-card { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; width: 100%; }
+        .vote-card:hover { border-color: var(--primary-red); transform: translateY(-3px); }
+        .vote-icon { width: 48px; height: 48px; background: rgba(225, 29, 72, 0.15); color: var(--primary-red); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 20px; }
+
+        /* TOP DONATUR */
+        .leaderboard-subnav { display: flex; gap: 8px; margin-bottom: 35px; justify-content: center; }
+        .subnav-btn { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); color: #94a3b8; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: 0.2s; }
+        .subnav-btn.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
+
+        .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 10px; margin: 40px 0; width: 100%; }
+        .podium-slot { flex: 1; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .podium-avatar { height: 140px; width: auto; max-width: 100%; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); margin-bottom: 12px; }
+        .podium-slot.rank-1 { transform: translateY(-20px); }
+        .podium-slot.rank-1 .podium-avatar { height: 175px; }
+        .badge-number { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; color: #000; margin-bottom: 8px; }
+        .rank-1 .badge-number { background: var(--gold); }
+        .rank-2 .badge-number { background: var(--silver); }
+        .rank-3 .badge-number { background: var(--bronze); color: #fff; }
+        .player-name-text { font-weight: 800; font-size: 0.88rem; color: #ffffff; white-space: nowrap; }
+        
+        .player-amount-wrapper { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin-top: 4px; width: 100%; }
+        .player-rp-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); }
+        .player-amount-val { font-weight: 800; font-size: 0.8rem; }
+        .rank-1 .player-amount-val { color: var(--gold); font-size: 0.95rem; }
+        .rank-2 .player-amount-val { color: var(--silver); }
+        .rank-3 .player-amount-val { color: var(--bronze); }
+
+        /* STORE SECTION */
+        .store-tab-switch { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
+        .btn-store-tab { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); color: var(--text-muted); padding: 10px 24px; border-radius: 12px; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: 0.25s; }
+        .btn-store-tab.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); box-shadow: 0 4px 15px rgba(225,29,72,0.3); }
+
+        .store-items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .item-card { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; text-align: center; }
+        .item-card:hover { border-color: var(--primary-red); transform: translateY(-3px); }
+        .rank-icon-wrapper { width: 50px; height: 50px; margin: 0 auto 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .rank-stone { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
+        .rank-copper { background: rgba(217, 119, 6, 0.1); color: #d97706; }
+        .rank-diamond { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
+        .rank-amethyst { background: rgba(192, 132, 252, 0.1); color: #c084fc; }
+        
+        .price-tag { font-size: 1.15rem; font-weight: 800; color: #4ade80; margin: 10px 0; }
+        .item-benefits { list-style: none; margin-bottom: 16px; font-size: 0.78rem; color: #cbd5e1; text-align: left; }
+        .item-benefits li { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+
+        /* GALERI */
+        .gallery-toolbar { display: flex; gap: 10px; margin-bottom: 20px; }
+        .search-gallery-input { flex: 1; background: #080304; border: 1px solid var(--card-border); color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; outline: none; }
+        .btn-upload { background: var(--primary-red); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        .gallery-item { background: #000; border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; position: relative; aspect-ratio: 1; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); padding: 15px 8px 8px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .uploader-name { font-size: 0.72rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* FULLSCREEN MODAL */
+        .img-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+        .img-modal-content { max-width: 90%; max-height: 90%; border-radius: 12px; border: 1px solid var(--primary-red); object-fit: contain; }
+
+        /* STAFF SECTION */
+        .team-grid { display: flex; flex-direction: column; gap: 16px; max-width: 400px; margin: 0 auto; }
+        .team-card { background: #0a0406; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .team-head-img { width: 85px; height: 85px; border-radius: 20px; margin: 16px auto 0 auto; image-rendering: pixelated; border: 2px solid var(--primary-red); padding: 2px; background: #000; box-shadow: 0 4px 15px rgba(225, 29, 72, 0.2); }
+        .team-name { font-size: 1.25rem; font-weight: 800; color: #fff; margin-top: 12px; order: 2; letter-spacing: 0.5px; }
+        .team-role { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; letter-spacing: 1px; order: 1; }
+        
+        .role-owner { border: 1px solid #f43f5e; color: #f43f5e; }
+        .role-coowner { border: 1px solid var(--gold); color: var(--gold); }
+        .role-headstaff { border: 1px solid #60a5fa; color: #60a5fa; }
+        .role-dev { border: 1px solid var(--amethyst); color: var(--amethyst); }
+
+        /* ADMIN PANEL */
+        .admin-box { background: rgba(20, 10, 14, 0.8); border: 1px dashed var(--primary-red); padding: 18px; border-radius: 14px; margin-bottom: 20px; text-align: left; }
+        .account-table-container { width: 100%; overflow-x: auto; margin-top: 10px; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; }
+        .admin-table th, .admin-table td { padding: 10px 12px; border-bottom: 1px solid var(--card-border); color: #fff; }
+        .admin-table th { color: var(--primary-red); font-weight: 700; background: rgba(225,29,72,0.05); }
+
+        /* MODAL PEMBELIAN */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-card { background: #12070a; border: 1px solid var(--primary-red); border-radius: 20px; padding: 24px; max-width: 420px; width: 100%; text-align: center; position: relative; }
+        .modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; }
+
+        /* NOTIF ALERT */
+        .custom-alert { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px); background: #12070a; border: 1px solid #22c55e; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px; z-index: 9999; opacity: 0; transition: all 0.3s ease; pointer-events: none; }
+        .custom-alert.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* FOOTER */
+        footer { border-top: 1px solid var(--card-border); background: #050203; padding: 40px 20px 24px; margin-top: 60px; }
+        .footer-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-col h4 { color: #fff; font-size: 0.95rem; font-weight: 800; margin-bottom: 14px; }
+        .footer-link { display: flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.82rem; margin-bottom: 10px; transition: 0.2s; }
+        .footer-link:hover { color: var(--primary-red); }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 18px; font-size: 0.75rem; color: #64748b; }
     </style>
 </head>
 <body>
 
-    <!-- PAGE LOGIN -->
-    <div id="page-login">
-        <div class="card-login">
-            <div class="icon-header">📱</div>
-            <h2 class="title">Selamat Datang</h2>
-            <p class="subtitle">Masukan username untuk memulai</p>
+    <div class="custom-alert" id="customAlert">
+        <i data-lucide="check-circle" style="color:#22c55e; width:18px;"></i> <span id="customAlertText">Berhasil!</span>
+    </div>
 
-            <div class="info-lore">
-                <strong>📌 PERHATIAN LOGIN:</strong><br>
-                Masukkan username Minecraft Anda dengan benar. Sistem kami mengirimkan bukti pembayaran langsung via Discord Webhook untuk dikonfirmasi oleh Admin.
+    <!-- MODAL GAMBAR GALERI -->
+    <div class="img-modal-overlay" id="imgModal" onclick="closeImgModal()">
+        <img class="img-modal-content" id="imgModalSrc" src="" alt="Fullscreen">
+    </div>
+
+    <!-- MODAL PEMBELIAN -->
+    <div class="modal-overlay" id="buyModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal()"><i data-lucide="x"></i></button>
+            <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:8px;" id="modalItemTitle">Detail Pembelian</h3>
+            
+            <div style="background:#080304; padding:12px; border-radius:12px; border:1px solid var(--card-border); margin-bottom:16px; text-align:left;">
+                <div style="font-size:0.75rem; color:var(--text-muted);">Total Tagihan:</div>
+                <div style="font-size:1.2rem; font-weight:800; color:#4ade80;" id="modalItemPrice">Rp 0</div>
             </div>
 
-            <div class="alert-error" id="errorBox"></div>
-
-            <div class="platform-switch">
-                <button class="btn-tab active" id="btnJava" onclick="switchPlatform('java')">Java</button>
-                <button class="btn-tab" id="btnBedrock" onclick="switchPlatform('bedrock')">Bedrock</button>
+            <div style="font-size:0.8rem; color:#e2e8f0; line-height:1.6; margin-bottom:20px; text-align:left; background: rgba(225, 29, 72, 0.1); padding: 12px; border-radius: 12px;">
+                <strong style="color:var(--primary-red);">ALUR PEMBELIAN:</strong><br>
+                1. Klik tombol Discord di bawah untuk bergabung.<br>
+                2. Pergi ke channel <b>#create-ticket</b> atau hubungi Admin.<br>
+                3. Kirim pesan dengan format:<br>
+                <code style="background:#000; padding:6px; border-radius:6px; color:var(--gold); display:block; margin-top:8px;">Order: [Nama Paket]<br>IGN Kamu: [Username]</code>
             </div>
 
-            <div class="input-group">
-                <input type="text" class="input-field" id="usernameInput" placeholder="Username Minecraft" oninput="handleBedrockPrefix()">
-            </div>
-
-            <button class="referral-btn">🎁 Punya kode referral?</button>
-
-            <button class="btn-submit" onclick="prosesLogin()">Lanjutkan &rarr;</button>
+            <a href="https://discord.gg/6tjxvPUFBH" target="_blank" class="btn-submit" style="text-decoration:none; display:inline-block;">Join Discord & Buka Tiket &rarr;</a>
         </div>
     </div>
 
-    <!-- MAIN DASHBOARD -->
+    <!-- LOGIN & REGISTER PAGE -->
+    <div id="page-login">
+        <div class="card-login">
+            <div class="login-head-preview">
+                <img id="loginHeadImg" src="https://mc-heads.net/avatar/MHF_Steve/64" alt="Skin Head" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/64'">
+            </div>
+            <h2 class="title">MineHera</h2>
+            <p class="subtitle" id="authSubtitle">Silahkan Register atau Login akun Anda</p>
+            <div class="alert-error" id="errorBox"></div>
+
+            <div class="auth-switch-row">
+                <button id="btnSwitchLogin" class="active" onclick="switchAuthMode('login')">Login</button>
+                <button id="btnSwitchRegister" onclick="switchAuthMode('register')">Register</button>
+            </div>
+
+            <div class="platform-switch">
+                <button class="btn-tab active" id="btnJava" onclick="switchPlatform('java')">Java Edition</button>
+                <button class="btn-tab" id="btnBedrock" onclick="switchPlatform('bedrock')">Bedrock / PE</button>
+            </div>
+
+            <div class="input-group">
+                <input type="text" class="input-field" id="usernameInput" placeholder="Username Minecraft (Bedrock pakai titik)..." oninput="updateLoginSkinPreview()">
+            </div>
+            <div class="input-group">
+                <input type="password" class="input-field" id="passwordInput" placeholder="Password Web Akun...">
+            </div>
+
+            <div class="admin-toggle" id="adminToggleContainer">
+                <input type="checkbox" id="isAdminCheck" onchange="toggleAdminField()">
+                <label for="isAdminCheck">Apakah anda admin?</label>
+            </div>
+            <div class="input-group" id="adminCodeGroup" style="display: none;">
+                <input type="password" class="input-field" id="adminCodeInput" placeholder="Masukan Kode Akses Admin...">
+            </div>
+
+            <button class="btn-submit" id="authSubmitBtn" onclick="prosesAuth()">Masuk Ke Web &rarr;</button>
+        </div>
+    </div>
+
+    <!-- MAIN HUB -->
     <div id="page-hub">
         <header class="navbar">
-            <a href="javascript:void(0)" class="navbar-logo" onclick="showDashboardHome()">
-                <img id="navLogoImg" alt="Server Logo">
+            <a href="javascript:void(0)" class="navbar-brand" onclick="showSection('sectionHome')">
+                <div class="brand-text">Mine<span>Hera</span></div>
             </a>
 
-            <button class="menu-btn" id="menuToggle" onclick="toggleMenu()">
-                <i data-lucide="menu" id="menuIcon"></i>
-            </button>
+            <div class="nav-right-actions">
+                <div class="profile-container">
+                    <button class="profile-btn" onclick="toggleProfileMenu()">
+                        <img id="navLogoImg" class="player-head-nav" src="https://mc-heads.net/avatar/MHF_Steve/64" alt="Profil" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/64'">
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 0.7rem; color: var(--text-muted);">Masuk Sebagai:</div>
+                            <div id="dropdownUsernameText" style="font-weight: 800; font-size: 0.9rem; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Player</div>
+                            <div id="dropdownPlatformText" style="font-size: 0.72rem; font-weight: 700; color: var(--primary-red); margin-top: 2px;">Platform: Java</div>
+                        </div>
+                        <a onclick="showSection('sectionHome'); toggleProfileMenu();" class="profile-dropdown-item"><i data-lucide="user" style="width:16px;"></i> Akun Saya</a>
+                        <a onclick="prosesLogout()" class="profile-dropdown-item logout"><i data-lucide="log-out" style="width:16px;"></i> Keluar Akun</a>
+                    </div>
+                </div>
+
+                <button class="menu-btn" onclick="toggleMenu()">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
 
             <nav class="nav-menu" id="navMenu">
-                <a onclick="showDashboardHome(); toggleMenu();" class="nav-item">
-                    <i data-lucide="home"></i> Beranda
-                </a>
-                <a onclick="showDashboardHome(); toggleMenu();" href="#about" class="nav-item">
-                    <i data-lucide="info"></i> Tentang
-                </a>
-                <a onclick="openTeamSection(); toggleMenu();" class="nav-item">
-                    <i data-lucide="users"></i> Tim MineHera
-                </a>
-                <a onclick="openFaqSection(); toggleMenu();" class="nav-item">
-                    <i data-lucide="help-circle"></i> FAQ
-                </a>
-                <a href="https://minecraft-mp.com/server-s358584" target="_blank" class="nav-item">
-                    <i data-lucide="check-square"></i> Vote
-                </a>
-                <a onclick="openShopSection(); toggleMenu();" class="nav-item">
-                    <i data-lucide="shopping-cart"></i> Toko / Shop
-                </a>
-                <a onclick="prosesLogout()" class="nav-item logout">
-                    <i data-lucide="log-out"></i> Keluar (Log Out)
-                </a>
+                <a onclick="showSection('sectionHome'); toggleMenu();" class="nav-item"><i data-lucide="home"></i> Beranda</a>
+                <a onclick="showSection('sectionRules'); toggleMenu();" class="nav-item"><i data-lucide="book-open"></i> Rules & FAQ</a>
+                <a onclick="showSection('sectionVote'); toggleMenu();" class="nav-item"><i data-lucide="thumbs-up"></i> Vote Server</a>
+                <a onclick="showSection('sectionDonator'); toggleMenu();" class="nav-item"><i data-lucide="award"></i> Top Donatur</a>
+                <a onclick="showSection('sectionGallery'); toggleMenu();" class="nav-item"><i data-lucide="image"></i> Galeri Server</a>
+                <a onclick="showSection('sectionShop'); toggleMenu();" class="nav-item"><i data-lucide="shopping-cart"></i> Store & Rank</a>
+                <a onclick="showSection('sectionTeam'); toggleMenu();" class="nav-item"><i data-lucide="users"></i> Staff Server</a>
+                <a onclick="showSection('sectionAdmin'); toggleMenu();" class="nav-item admin-link" id="navAdminBtn" style="display: none;"><i data-lucide="settings"></i> Panel Admin</a>
             </nav>
         </header>
 
-        <!-- SEKSI HOMEPAGE -->
-        <div class="hero-section" id="sectionHome">
-            <div class="server-status-pill">
-                <span class="status-dot" id="statusDot"></span>
-                <span id="statusText">Mengecek Server...</span>
-            </div>
-
-            <h1 class="hero-title">
-                Selamat Datang di <span>MineHera</span>
-            </h1>
-
-            <p class="hero-desc">
-                Server Minecraft Anarchy tanpa aturan terbaik di Indonesia. Bertahan hiduplah dari kehancuran, bangun basis tersembunyi, dan dominasi dunia tanpa batas!
-            </p>
-
-            <div class="action-buttons">
-                <a href="https://discord.gg/Y43puy3BSp" target="_blank" class="btn-action-primary">
-                    <i data-lucide="message-square"></i> Gabung Discord
-                </a>
-                <a href="https://minecraft-mp.com/server-s358584" target="_blank" class="btn-action-secondary">
-                    <i data-lucide="trophy" style="width: 14px; height: 14px;"></i> Vote Server
-                </a>
-            </div>
-
-            <div class="server-ip-box">
-                <div>
-                    <div class="ip-label">SERVER IP</div>
-                    <div class="ip-text" id="ipText">play.minehera.xyz:19155</div>
-                </div>
-                <button class="btn-copy" onclick="copyIp()">
-                    <i data-lucide="copy"></i>
-                </button>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i data-lucide="users"></i>
-                    </div>
-                    <div class="stat-value" id="onlinePlayers">0</div>
-                    <div class="stat-title">Pemain Online</div>
+        <!-- HOMEPAGE -->
+        <div class="container" id="sectionHome">
+            <div class="hero-section">
+                <div class="server-status-pill">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Mengecek Status Server...</span>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i data-lucide="server"></i>
-                    </div>
-                    <div class="stat-value">1.21.7</div>
-                    <div class="stat-title">Versi Server</div>
-                </div>
+                <h1 class="hero-title">Anarchy Server <span>MineHera</span></h1>
+                <p class="hero-desc">Sistem Lifesteal menanti! Bertahan hiduplah dari kehancuran, bangun basis tersembunyi, bunuh musuh untuk mengambil hatinya, dan dominasi dunia tanpa batas.</p>
 
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i data-lucide="user-check"></i>
-                    </div>
-                    <div class="stat-value">1.000+</div>
-                    <div class="stat-title">Total Pemain Terdaftar</div>
-                </div>
-            </div>
-
-            <div class="section-about" id="about">
-                <div class="section-tag">TENTANG KAMI</div>
-                <h2 class="section-title">Tentang <span>Server</span></h2>
-                <p class="about-text">
-                    MineHera adalah server Minecraft Indonesia yang didedikasikan untuk memberikan pengalaman bermain terbaik. Mengusung tema Anarchy, kami memastikan setiap pemain menemukan kebebasan mutlak dan tantangan sejati yang mereka cari.
-                </p>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="shield"></i>
-                    </div>
-                    <h3 class="feature-title">Fitur Keamanan</h3>
-                    <p class="feature-desc">Sistem keamanan menjaga server tetap stabil dan meminimalisir lag demi kenyamanan bertarung.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i data-lucide="zap"></i>
-                    </div>
-                    <h3 class="feature-title">Performa Maksimal</h3>
-                    <p class="feature-desc">Dioptimalkan khusus untuk mendukung pertempuran masif dan eksplorasi dunia tanpa kendala.</p>
-                </div>
-            </div>
-
-            <div class="user-badge">
-                Login sebagai: <strong id="displayUser" style="color:#ffffff;">Player</strong> (<span id="displayPlatform">JAVA</span>)
-            </div>
-        </div>
-
-        <!-- SEKSI SHOP -->
-        <div id="sectionShop">
-            <div class="shop-header-title">
-                <div class="section-tag">OFFICIAL STORE</div>
-                <h2>MineHera <span>Anarchy Shop</span></h2>
-            </div>
-
-            <div class="profile-check-card">
-                <div class="profile-avatar"><i data-lucide="user"></i></div>
-                <div style="font-size: 0.85rem;">
-                    <div style="color: #a78bfa; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">Penerima Item</div>
-                    <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff;"><span id="shopUsername">Player</span> <span id="shopPlatform" style="font-size:0.75rem; color:#8b5cf6; background: #23133d; padding: 2px 8px; border-radius: 6px; font-weight: 700; margin-left: 6px;">JAVA</span></div>
-                </div>
-            </div>
-
-            <div class="store-tab-group">
-                <button class="store-tab active" id="tabRanks" onclick="switchShopCategory('ranks')">
-                    <i data-lucide="crown" style="width: 18px; height: 18px;"></i> MineHera Ranks
-                </button>
-                <button class="store-tab" id="tabShards" onclick="switchShopCategory('shards')">
-                    <i data-lucide="gem" style="width: 18px; height: 18px;"></i> Top Up Shards
-                </button>
-            </div>
-
-            <!-- KATEGORI 1: RANKS -->
-            <div class="store-items-grid" id="gridRanks">
-                <div class="item-card card-stone">
+                <div class="dashboard-counter-box">
                     <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="stoneImg" alt="Stone Rank" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">Stone Rank</div>
-                                <div style="font-size: 0.72rem; color:#9ca3af; font-weight: 700;">Rank Starter Tier</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 10.000</div>
-                            <div class="price-alt">RM 3.50 &bull; $0.70 USD</div>
-                        </div>
-
-                        <ul class="item-benefits">
-                            <li><i data-lucide="check-circle-2"></i> Prefix Unique <strong>[Stone]</strong></li>
-                            <li><i data-lucide="check-circle-2"></i> Kit Starter Stone (CD 24 Jam)</li>
-                            <li><i data-lucide="check-circle-2"></i> Limit Max 2 Sethomes</li>
-                            <li><i data-lucide="check-circle-2"></i> Fitur `/hat` & `/workbench`</li>
-                        </ul>
+                        <div class="counter-info-title">Total Pemain Terdaftar</div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">Akun terverifikasi di database web</div>
                     </div>
-                    <button class="btn-buy-item" onclick="openPayment('Stone Rank', 10000)">Beli Rank Stone</button>
+                    <div class="counter-info-val" id="counterRegisteredPlayers">100+</div>
                 </div>
 
-                <div class="item-card card-copper">
+                <div class="server-ip-box">
                     <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="copperImg" alt="Copper Rank" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">Copper Rank</div>
-                                <div style="font-size: 0.72rem; color:#f97316; font-weight: 700;">Rank Fighter Tier</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 25.000</div>
-                            <div class="price-alt">RM 8.00 &bull; $1.70 USD</div>
-                        </div>
-
-                        <ul class="item-benefits">
-                            <li><i data-lucide="check-circle-2"></i> Semua Benefit Stone Rank</li>
-                            <li><i data-lucide="check-circle-2"></i> Prefix Unique <strong>[Copper]</strong></li>
-                            <li><i data-lucide="check-circle-2"></i> Kit Copper Harian</li>
-                            <li><i data-lucide="check-circle-2"></i> Limit Max 4 Sethomes</li>
-                            <li><i data-lucide="check-circle-2"></i> Akses Portal `/enderchest`</li>
-                        </ul>
+                        <div style="font-size:0.68rem; color:#94a3b8; font-weight:700;">IP SERVER JAVA & BEDROCK</div>
+                        <div class="ip-text">play.minehera.xyz:19155</div>
                     </div>
-                    <button class="btn-buy-item" onclick="openPayment('Copper Rank', 25000)">Beli Rank Copper</button>
+                    <button class="btn-copy" onclick="copyIp()">Salin IP</button>
                 </div>
 
-                <div class="item-card card-diamond">
-                    <span class="popular-badge">Paling Favorit</span>
-                    <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="diamondImg" alt="Diamond Rank" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">Diamond Rank</div>
-                                <div style="font-size: 0.72rem; color:#38bdf8; font-weight: 700;">Rank Sultan Tier</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 60.000</div>
-                            <div class="price-alt">RM 19.00 &bull; $4.00 USD</div>
-                        </div>
-
-                        <ul class="item-benefits">
-                            <li><i data-lucide="check-circle-2"></i> Semua Benefit Copper Rank</li>
-                            <li><i data-lucide="check-circle-2"></i> Prefix Glow <strong>[Diamond]</strong></li>
-                            <li><i data-lucide="check-circle-2"></i> Kit Diamond Armor & OP Tools</li>
-                            <li><i data-lucide="check-circle-2"></i> Limit Max 8 Sethomes</li>
-                            <li><i data-lucide="check-circle-2"></i> Akses Terbang `/fly` di Hub</li>
-                        </ul>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="users" style="width:18px;"></i></div>
+                        <div class="stat-value" id="valPlayers">0</div>
+                        <div class="stat-label">Pemain Online</div>
                     </div>
-                    <button class="btn-buy-item" onclick="openPayment('Diamond Rank', 60000)">Beli Rank Diamond</button>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="server" style="width:18px;"></i></div>
+                        <div class="stat-value" id="valVersion">1.21.x</div>
+                        <div class="stat-label">Versi Server</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="shield-check" style="width:18px;"></i></div>
+                        <div class="stat-value" id="valPing">Online</div>
+                        <div class="stat-label">Status Server</div>
+                    </div>
                 </div>
 
-                <div class="item-card card-amethyst">
-                    <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="amethystImg" alt="Amethyst Rank" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title" style="color: #e9d5ff;">Amethyst Rank</div>
-                                <div style="font-size: 0.72rem; color:#c084fc; font-weight: 700;">Rank Dominator Ultra</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main" style="color: #c084fc;">Rp 120.000</div>
-                            <div class="price-alt">RM 38.00 &bull; $8.50 USD</div>
-                        </div>
-
-                        <ul class="item-benefits">
-                            <li><i data-lucide="check-circle-2" style="color: #c084fc;"></i> Akses Seluruh Fitur Rank Bawah</li>
-                            <li><i data-lucide="check-circle-2" style="color: #c084fc;"></i> Prefix Animasi <strong>[Amethyst]</strong></li>
-                            <li><i data-lucide="check-circle-2" style="color: #c084fc;"></i> Kit God Ultra Amethyst Gear</li>
-                            <li><i data-lucide="check-circle-2" style="color: #c084fc;"></i> Unlimited Sethome Points</li>
-                            <li><i data-lucide="check-circle-2" style="color: #c084fc;"></i> Instant Bonus +10.000 Shards</li>
-                        </ul>
-                    </div>
-                    <button class="btn-buy-item" style="background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%);" onclick="openPayment('Amethyst Rank', 120000)">Beli Rank Amethyst</button>
-                </div>
-            </div>
-
-            <!-- KATEGORI 2: SHARDS -->
-            <div class="store-items-grid" id="gridShards" style="display: none;">
-                <div class="item-card card-shard">
-                    <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="shardImg1" alt="Shards Pack" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">10.000 Shards</div>
-                                <div style="font-size: 0.72rem; color:#a78bfa; font-weight: 700;">Paket Pemula</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 10.000</div>
-                            <div class="price-alt">Rate: Rp 1.000 = 1.000 Shards</div>
-                        </div>
-                    </div>
-                    <button class="btn-buy-item" onclick="openPayment('10.000 Shards', 10000)">Beli Shards</button>
-                </div>
-
-                <div class="item-card card-shard">
-                    <span class="bonus-badge">Bonus +2.000</span>
-                    <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="shardImg2" alt="Shards Pack" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">27.000 Shards</div>
-                                <div style="font-size: 0.72rem; color:#a78bfa; font-weight: 700;">Paket Medium</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 25.000</div>
-                            <div class="price-alt">Dapat 25.000 + Bonus Extra 2.000!</div>
-                        </div>
-                    </div>
-                    <button class="btn-buy-item" onclick="openPayment('27.000 Shards', 25000)">Beli Shards</button>
-                </div>
-
-                <div class="item-card card-shard">
-                    <span class="bonus-badge">Bonus +10.000</span>
-                    <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="shardImg3" alt="Shards Pack" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">60.000 Shards</div>
-                                <div style="font-size: 0.72rem; color:#a78bfa; font-weight: 700;">Paket Pro Fighter</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 50.000</div>
-                            <div class="price-alt">Dapat 50.000 + Bonus Extra 10.000!</div>
-                        </div>
-                    </div>
-                    <button class="btn-buy-item" onclick="openPayment('60.000 Shards', 50000)">Beli Shards</button>
-                </div>
-
-                <div class="item-card card-shard">
-                    <span class="bonus-badge">Bonus +30.000</span>
-                    <div>
-                        <div class="item-header">
-                            <div class="item-icon-box">
-                                <img id="shardImg4" alt="Shards Pack" class="mc-item-img">
-                            </div>
-                            <div>
-                                <div class="item-title">130.000 Shards</div>
-                                <div style="font-size: 0.72rem; color:#a78bfa; font-weight: 700;">Paket Sultan Anarchy</div>
-                            </div>
-                        </div>
-
-                        <div class="price-tag-container">
-                            <div class="price-main">Rp 100.000</div>
-                            <div class="price-alt">Dapat 100.000 + Bonus Extra 30.000!</div>
-                        </div>
-                    </div>
-                    <button class="btn-buy-item" onclick="openPayment('130.000 Shards', 100000)">Beli Shards</button>
+                <div class="dashboard-filler">
+                    <h3>Komunitas & Lifesteal</h3>
+                    <p>Di MineHera, setiap kali Anda mati terbunuh pemain lain, Anda akan kehilangan satu batas nyawa (heart), dan pembunuh Anda akan mendapatkannya! Bergabunglah di Discord untuk mencari clan atau melakukan jual beli aman.</p>
+                    <a href="https://discord.gg/6tjxvPUFBH" target="_blank" class="btn-discord-join"><i data-lucide="message-square"></i> Bergabung Ke Discord Server</a>
                 </div>
             </div>
         </div>
 
-        <!-- SEKSI FAQ ACCORDION -->
-        <div id="sectionFaq">
-            <div class="shop-header-title">
-                <div class="section-tag">HELP CENTER</div>
-                <h2>Pertanyaan <span>Sering Diajukan</span></h2>
-            </div>
+        <!-- RULES & FAQ SECTION -->
+        <div class="container" id="sectionRules">
+            <div class="section-tag">INFORMASI SERVER</div>
+            <h2 class="section-title">Rules & <span>FAQ</span></h2>
 
-            <div class="faq-group-title">GAMEPLAY & SERVER</div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Apakah MineHera gratis dimainkan?
-                    <span class="faq-accordion-toggle">+</span>
+            <div class="rules-grid" style="margin-bottom: 40px;">
+                <div class="rule-card green" style="background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-left: 4px solid #22c55e; padding: 20px; border-radius: 0 12px 12px 0; text-align: left;">
+                    <h4 style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:8px;"><i data-lucide="check-circle" style="color: #22c55e;"></i> Hal yang Diperbolehkan (Bebas)</h4>
+                    <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.6;">PvP di mana saja, membunuh pemain untuk mencuri Heart, melakukan Griefing, Scamming, dan Raid base musuh.</p>
                 </div>
-                <div class="faq-accordion-body">
-                    Ya! Semua mode permainan di server MineHera 100% gratis dimainkan. Seluruh pendaftaran akun dan akses ke server tidak dipungut biaya apapun.
+                <div class="rule-card" style="background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-left: 4px solid var(--primary-red); padding: 20px; border-radius: 0 12px 12px 0; margin-top: 15px; text-align: left;">
+                    <h4 style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:8px;"><i data-lucide="alert-triangle" style="color: var(--primary-red);"></i> DILARANG MENGGUNAKAN CHEAT</h4>
+                    <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.6;">Segala modifikasi klien ilegal (Hack Client, X-Ray, KillAura) berakibat Banned Permanen.</p>
                 </div>
             </div>
 
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Mode permainan apa saja yang tersedia?
-                    <span class="faq-accordion-toggle">+</span>
+            <div class="section-tag">PERTANYAAN UMUM</div>
+            <h2 class="section-title"><span>FAQ</span> MineHera</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)"><span>Berapa alamat IP server MineHera?</span><i data-lucide="chevron-down"></i></div>
+                    <div class="faq-answer">IP server MineHera adalah <b>play.minehera.xyz:19155</b> yang dapat digunakan untuk pemain Java maupun Bedrock Edition.</div>
                 </div>
-                <div class="faq-accordion-body">
-                    MineHera mengusung fokus utama pada **Anarchy Server** tanpa aturan berbelit, tempat pemain bebas bertahan hidup, bertarung (PvP), menyerang basis musuh, atau membangun aliansi rahasia.
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)"><span>Apakah MineHera gratis dimainkan?</span><i data-lucide="chevron-down"></i></div>
+                    <div class="faq-answer">Ya! Server MineHera 100% gratis untuk semua pemain baik yang menggunakan akun premium maupun cracked.</div>
                 </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Berapa batas ukuran peta/world di server?
-                    <span class="faq-accordion-toggle">+</span>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)"><span>Bagaimana cara mengamankan akun saya di server?</span><i data-lucide="chevron-down"></i></div>
+                    <div class="faq-answer">Gunakan command /register [password] [konfirmasi password] saat pertama kali masuk ke dalam game agar akun Anda aman dari pencurian.</div>
                 </div>
-                <div class="faq-accordion-body">
-                    World border kami diatur sangat luas untuk mendukung eksplorasi bebas, pembuatan basis tersembunyi berjarak jutaan blok, serta pertarungan jarak jauh tanpa rasa sesak.
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Apakah pemain Bedrock (PE/Win10/Console) bisa bergabung?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Ya, server kami mendukung cross-platform. Pemain Bedrock dapat masuk menggunakan IP `play.minehera.xyz` dan Port `19155`. Pastikan menggunakan titik (`.`) di awal username Anda.
-                </div>
-            </div>
-
-            <div class="faq-group-title">TOKO, RANKS & PAYMENT</div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Apa itu Shards dan bagaimana cara menggunakannya?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Shards adalah mata uang premium di MineHera. Shards dapat digunakan untuk membeli item kosmetik, kit khusus, serta upgrade langsung di dalam game melalui toko dalam game (`/shop`).
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Berapa lama proses aktivasi setelah saya membayar?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Sistem otomatis kami meneruskan bukti pembayaran ke Admin via Discord Webhook. Proses verifikasi dan pengiriman item biasanya memakan waktu 5–15 menit, atau maksimal 1x24 jam.
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Bagaimana jika rank/shards saya tidak masuk?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Jangan khawatir! Jika dalam 1x24 jam item belum diterima, silakan bergabung ke Server Discord Resmi MineHera dan buka **Support Ticket** dengan melampirkan foto bukti transaksi.
-                </div>
-            </div>
-
-            <div class="faq-group-title">AKUN & KEAMANAN</div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Bagaimana cara mengamankan akun Minecraft saya?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Saat pertama kali login di server, daftarkan akun Anda menggunakan perintah `/register [password] [password]`. Gunakan kombinasi kata sandi yang kuat dan jangan pernah membagikannya kepada siapa pun.
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Bagaimana jika saya lupa kata sandi akun game saya?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Gunakan saluran **Support Ticket** di Discord resmi kami untuk mengajukan permintaaan reset password akun. Tim Staff akan melakukan verifikasi kepemilikan akun sebelum meresetnya.
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <div class="faq-accordion-header" onclick="toggleFaq(this)">
-                    Apakah server menggunakan sistem Anti-Cheat?
-                    <span class="faq-accordion-toggle">+</span>
-                </div>
-                <div class="faq-accordion-body">
-                    Ya! Kami menerapkan sistem perlindungan khusus untuk mencegah ekploitasi ilegal yang dapat merusak stabilitas server atau merugikan koneksi seluruh pemain.
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)"><span>Apakah pemain Java dan Bedrock bisa bermain bersama?</span><i data-lucide="chevron-down"></i></div>
+                    <div class="faq-answer">Tentu saja! MineHera mendukung crossplay sehingga pemain dari perangkat seluler/konsol (Bedrock) dengan awalan titik (.) dapat bermain bersama PC (Java).</div>
                 </div>
             </div>
         </div>
 
-        <!-- SEKSI TIM MINEHERA -->
-        <div id="sectionTeam">
-            <div class="shop-header-title">
-                <div class="section-tag">LEADERSHIP & CREW</div>
-                <h2>Pengelola <span>MineHera</span></h2>
+        <!-- VOTE SECTION -->
+        <div class="container" id="sectionVote">
+            <div class="section-tag">DUKUNG SERVER</div>
+            <h2 class="section-title">Vote <span>MineHera</span></h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 500px; margin: 0 auto 30px; text-align: center;">Dukung server kami dengan memberikan vote setiap hari untuk mendapatkan reward in-game gratis!</p>
+            <div class="vote-grid">
+                <div class="vote-card">
+                    <div>
+                        <div class="vote-icon"><i data-lucide="external-link"></i></div>
+                        <h4 style="color:#fff; font-size:1rem; font-weight:800; margin-bottom:8px;">Vote Link</h4>
+                        <p style="color:var(--text-muted); font-size:0.8rem; line-height:1.5; margin-bottom:16px;">Dapatkan 1x Vote Crate Key dan Shards gratis.</p>
+                    </div>
+                    <a href="https://minecraft-mp.com/server-s358584" target="_blank" class="btn-submit" style="text-decoration:none; display:inline-block; padding:10px;">Vote Sekarang &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- GALLERY SECTION -->
+        <div class="container" id="sectionGallery">
+            <div class="section-tag">KOMUNITAS SERVER</div>
+            <h2 class="section-title">Galeri <span>Pemain</span></h2>
+            <div class="gallery-toolbar">
+                <input type="text" id="searchGalleryInput" class="search-gallery-input" placeholder="Cari uploader..." onkeyup="searchGallery()">
+                <label class="btn-upload">
+                    <i data-lucide="upload" style="width:16px;"></i> Upload Foto
+                    <input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="uploadGalleryPhoto(event)">
+                </label>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+
+        <!-- TOP DONATUR SECTION -->
+        <div class="container" id="sectionDonator">
+            <div class="section-tag">LEADERBOARD</div>
+            <h2 class="section-title">Top <span>Donatur</span></h2>
+            <div class="leaderboard-subnav">
+                <button class="subnav-btn active" id="btnTabBulanan" onclick="switchDonatorCategory('bulanan')">BULANAN</button>
+                <button class="subnav-btn" id="btnTabTahunan" onclick="switchDonatorCategory('tahunan')">TAHUNAN</button>
+                <button class="subnav-btn" id="btnTabAllTime" onclick="switchDonatorCategory('alltime')">SEPANJANG MASA</button>
+            </div>
+            <div class="podium-container">
+                <div class="podium-slot rank-2">
+                    <img id="top2-img" class="podium-avatar" src="https://visage.surgeplay.com/bust/256/MHF_Steve" alt="Rank 2" onerror="this.onerror=null; this.src='https://visage.surgeplay.com/bust/256/MHF_Steve'">
+                    <div><span class="badge-number">2</span></div>
+                    <div class="player-name-text" id="top2-name">Tomortus</div>
+                    <div class="player-amount-wrapper">
+                        <span class="player-rp-label">Rp</span>
+                        <span class="player-amount-val" id="top2-amount">500.000</span>
+                    </div>
+                </div>
+                <div class="podium-slot rank-1">
+                    <img id="top1-img" class="podium-avatar" src="https://visage.surgeplay.com/bust/256/MHF_Steve" alt="Rank 1" onerror="this.onerror=null; this.src='https://visage.surgeplay.com/bust/256/MHF_Steve'">
+                    <div><span class="badge-number">1</span></div>
+                    <div class="player-name-text" id="top1-name">Azyll_</div>
+                    <div class="player-amount-wrapper">
+                        <span class="player-rp-label" style="font-size:0.8rem;">Rp</span>
+                        <span class="player-amount-val" id="top1-amount" style="font-size:1.05rem;">1.000.000</span>
+                    </div>
+                </div>
+                <div class="podium-slot rank-3">
+                    <img id="top3-img" class="podium-avatar" src="https://visage.surgeplay.com/bust/256/MHF_Steve" alt="Rank 3" onerror="this.onerror=null; this.src='https://visage.surgeplay.com/bust/256/MHF_Steve'">
+                    <div><span class="badge-number">3</span></div>
+                    <div class="player-name-text" id="top3-name">Sun_Bloom</div>
+                    <div class="player-amount-wrapper">
+                        <span class="player-rp-label">Rp</span>
+                        <span class="player-amount-val" id="top3-amount">250.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STORE SECTION -->
+        <div class="container" id="sectionShop">
+            <div class="section-tag">PREMIUM STORE</div>
+            <h2 class="section-title">Pilih Paket <span>Donasi</span></h2>
+
+            <div class="store-tab-switch">
+                <button class="btn-store-tab active" id="btnStoreRank" onclick="switchStoreTab('rank')">Rank Paket</button>
+                <button class="btn-store-tab" id="btnStoreShards" onclick="switchStoreTab('shards')">Shards Topup</button>
             </div>
 
+            <div id="storeRankContent" class="store-items-grid">
+                <div class="item-card">
+                    <div>
+                        <div class="rank-icon-wrapper rank-stone"><i data-lucide="box"></i></div>
+                        <div style="font-weight:800; font-size:1.1rem; color:#94a3b8;">Stone Rank</div>
+                        <div class="price-tag">Rp 10.000</div>
+                        <ul class="item-benefits">
+                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> Prefix [Stone]</li>
+                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> /kit stone</li>
+                        </ul>
+                    </div>
+                    <button class="btn-submit" onclick="openPaymentGuide('Stone Rank', 'Rp 10.000')">Beli Rank</button>
+                </div>
+
+                <div class="item-card">
+                    <div>
+                        <div class="rank-icon-wrapper rank-copper"><i data-lucide="hexagon"></i></div>
+                        <div style="font-weight:800; font-size:1.1rem; color:#d97706;">Copper Rank</div>
+                        <div class="price-tag">Rp 25.000</div>
+                        <ul class="item-benefits">
+                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> Prefix [Copper]</li>
+                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> /kit copper</li>
+                        </ul>
+                    </div>
+                    <button class="btn-submit" onclick="openPaymentGuide('Copper Rank', 'Rp 25.000')">Beli Rank</button>
+                </div>
+
+                <div class="item-card">
+                    <div>
+                        <div class="rank-icon-wrapper rank-diamond"><i data-lucide="gem"></i></div>
+                        <div style="font-weight:800; font-size:1.1rem; color:#38bdf8;">Diamond Rank</div>
+                        <div class="price-tag">Rp 75.000</div>
+                        <ul class="item-benefits">
+                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> Prefix [Diamond]</li>
+                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> /kit diamond</li>
+                        </ul>
+                    </div>
+                    <button class="btn-submit" onclick="openPaymentGuide('Diamond Rank', 'Rp 75.000')">Beli Rank</button>
+                </div>
+
+                <div class="item-card">
+                    <div>
+                        <div class="rank-icon-wrapper rank-amethyst"><i data-lucide="sparkles"></i></div>
+                        <div style="font-weight:800; font-size:1.1rem; color:var(--amethyst);">Amethyst Rank</div>
+                        <div class="price-tag">Rp 150.000</div>
+                        <ul class="item-benefits">
+                            <li><i data-lucide="check" style="width:14px; color:var(--amethyst);"></i> Prefix Exclusive [AMETHYST]</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--amethyst);"></i> Full Akses & Prioritas</li>
+                        </ul>
+                    </div>
+                    <button class="btn-submit" onclick="openPaymentGuide('Amethyst Rank', 'Rp 150.000')">Beli Rank</button>
+                </div>
+            </div>
+
+            <div id="storeShardsContent" class="store-items-grid" style="display:none;">
+                <div class="item-card">
+                    <div>
+                        <div class="rank-icon-wrapper rank-amethyst"><i data-lucide="coins"></i></div>
+                        <div style="font-weight:800; font-size:1.1rem; color:var(--amethyst);">1.000 Shards</div>
+                        <div class="price-tag">Rp 1.000</div>
+                        <ul class="item-benefits">
+                            <li><i data-lucide="zap" style="width:14px; color:var(--amethyst);"></i> 1.000 In-Game Shards</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--primary-red);"></i> Untuk gacha / crate game</li>
+                        </ul>
+                    </div>
+                    <button class="btn-submit" onclick="openPaymentGuide('1.000 Shards', 'Rp 1.000')">Topup Shards</button>
+                </div>
+                <div class="item-card">
+                    <div>
+                        <div class="rank-icon-wrapper rank-amethyst"><i data-lucide="coins"></i></div>
+                        <div style="font-weight:800; font-size:1.1rem; color:var(--amethyst);">10.000 Shards</div>
+                        <div class="price-tag">Rp 10.000</div>
+                        <ul class="item-benefits">
+                            <li><i data-lucide="zap" style="width:14px; color:var(--amethyst);"></i> 10.000 In-Game Shards</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--primary-red);"></i> Bonus Spesial Shards</li>
+                        </ul>
+                    </div>
+                    <button class="btn-submit" onclick="openPaymentGuide('10.000 Shards', 'Rp 10.000')">Topup Shards</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAFF SECTION -->
+        <div class="container" id="sectionTeam">
+            <div class="section-tag">LEADERSHIP</div>
+            <h2 class="section-title">Tim Pengelola <span>MineHera</span></h2>
+            
             <div class="team-grid">
-                <!-- OWNER -->
-                <div class="team-card card-owner">
-                    <div class="team-avatar-wrapper">
-                        <div class="team-avatar-ring">
-                            <img id="ownerAvatar" class="team-head-img" alt="DrXuan_">
-                        </div>
-                        <span class="team-platform-tag">JAVA</span>
-                    </div>
+                <div class="team-card">
+                    <div class="team-role role-owner">OWNER</div>
                     <div class="team-name">DrXuan_</div>
-                    <div class="team-role-badge role-owner">
-                        <i data-lucide="crown" style="width:14px; height:14px;"></i> Server Owner
-                    </div>
-                    <div class="team-lore">
-                        Pemimpin utama MineHera. Memegang kendali penuh atas manajemen puncak, visi pengembangan server, stabilitas finansial, serta arah pertumbuhan komunitas.
-                    </div>
+                    <img class="team-head-img" src="https://mc-heads.net/avatar/DrXuan_/100" alt="Owner" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
                 </div>
 
-                <!-- DEVELOPER -->
-                <div class="team-card card-dev">
-                    <div class="team-avatar-wrapper">
-                        <div class="team-avatar-ring">
-                            <img id="devAvatar" class="team-head-img" alt="ItsMijee">
-                        </div>
-                        <span class="team-platform-tag">JAVA</span>
-                    </div>
-                    <div class="team-name">ItsMijee</div>
-                    <div class="team-role-badge role-dev">
-                        <i data-lucide="code-2" style="width:14px; height:14px;"></i> Lead Developer
-                    </div>
-                    <div class="team-lore">
-                        Arsitek teknis server. Bertanggung jawab atas kustomisasi plugin, optimasi database, keamanan backend, integrasi sistem pembayaran, dan web portal.
-                    </div>
+                <div class="team-card">
+                    <div class="team-role role-coowner">CO OWNER</div>
+                    <div class="team-name">Crist_Kagenou</div>
+                    <img class="team-head-img" src="https://mc-heads.net/avatar/Crist_Kagenou/100" alt="Co Owner" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
                 </div>
 
-                <!-- STAFF -->
-                <div class="team-card card-staff">
-                    <div class="team-avatar-wrapper">
-                        <div class="team-avatar-ring">
-                            <img id="staffAvatar" class="team-head-img" alt="FinzNerf">
-                        </div>
-                        <span class="team-platform-tag">JAVA</span>
-                    </div>
+                <div class="team-card">
+                    <div class="team-role role-headstaff">HEAD STAFF</div>
                     <div class="team-name">FinzNerf</div>
-                    <div class="team-role-badge role-staff">
-                        <i data-lucide="shield-check" style="width:14px; height:14px;"></i> Head Staff
-                    </div>
-                    <div class="team-lore">
-                        Garda terdepan pengayom komunitas. Bertugas menjaga ketertiban Discord, melayani tiket bantuan pemain, memoderasi game, dan membantu player baru.
-                    </div>
+                    <img class="team-head-img" src="https://mc-heads.net/avatar/FinzNerf/100" alt="Head Staff" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
+                </div>
+
+                <div class="team-card">
+                    <div class="team-role role-dev">DEVELOPER</div>
+                    <div class="team-name">ItsSijee</div>
+                    <img class="team-head-img" src="https://api.mineskin.org/render/head?id=1b0e0655159d4043b4481fca5dc04608" alt="Developer" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/ItsSijee/100'">
                 </div>
             </div>
         </div>
 
-        <footer class="footer">
-            <p class="footer-desc">
-                Server Minecraft Indonesia terbaik dengan komunitas yang solid dan gameplay tanpa aturan yang seru. Bergabung sekarang dan mulailah petualanganmu!
-            </p>
-
-            <div class="server-ip-box">
-                <div>
-                    <div class="ip-label">SERVER IP</div>
-                    <div class="ip-text">play.minehera.xyz:19155</div>
+        <!-- ADMIN PANEL SECTION -->
+        <div class="container" id="sectionAdmin">
+            <div class="section-tag">ADMINISTRATION</div>
+            <h2 class="section-title">Panel <span>Admin</span></h2>
+            
+            <div class="admin-box">
+                <h3 style="color: var(--primary-red); margin-bottom: 12px; font-size: 0.95rem;">Database Akun Terdaftar</h3>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <input type="text" class="input-field" id="searchAccountInput" placeholder="Cari username terdaftar..." onkeyup="filterRegisteredAccounts()">
                 </div>
-                <button class="btn-copy" onclick="copyIp()">
-                    <i data-lucide="copy"></i>
-                </button>
+                <div class="account-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Password Web</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registeredAccountsTableBody"></tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="footer-links-title">Quick Links</div>
-            <div class="footer-links">
-                <a onclick="showDashboardHome()">Beranda</a>
-                <a onclick="showDashboardHome()" href="#about">Tentang</a>
-                <a onclick="openTeamSection()">Tim MineHera</a>
-                <a onclick="openFaqSection()">FAQ</a>
-                <a onclick="openShopSection()">Ranks & Toko</a>
+            <div class="admin-box">
+                <h3 style="color: var(--primary-red); margin-bottom: 12px; font-size: 0.95rem;">Edit Top Donatur Podium</h3>
+                <div style="display:flex; gap:8px; margin-bottom: 12px;">
+                    <button class="subnav-btn active" id="adminTabBulanan" onclick="switchAdminCategory('bulanan')">Bulanan</button>
+                    <button class="subnav-btn" id="adminTabTahunan" onclick="switchAdminCategory('tahunan')">Tahunan</button>
+                    <button class="subnav-btn" id="adminTabAllTime" onclick="switchAdminCategory('alltime')">Sepanjang Masa</button>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-field" id="adminTop1User" placeholder="User Top 1" style="margin-bottom:6px;">
+                    <input type="text" class="input-field" id="adminTop1Amt" placeholder="Amount Top 1">
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-field" id="adminTop2User" placeholder="User Top 2" style="margin-bottom:6px;">
+                    <input type="text" class="input-field" id="adminTop2Amt" placeholder="Amount Top 2">
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-field" id="adminTop3User" placeholder="User Top 3" style="margin-bottom:6px;">
+                    <input type="text" class="input-field" id="adminTop3Amt" placeholder="Amount Top 3">
+                </div>
+                <button class="btn-submit" onclick="saveDonatorData()">Simpan Perubahan</button>
             </div>
+        </div>
 
-            <div class="footer-links-title">Sosial Media</div>
-            <div class="social-icons">
-                <a href="https://discord.gg/Y43puy3BSp" target="_blank" class="social-btn">
-                    <i data-lucide="message-square"></i>
-                </a>
-                <a href="#" class="social-btn">
-                    <i data-lucide="video"></i>
-                </a>
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Tentang MineHera</h4>
+                    <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.6;">MineHera adalah server Minecraft Semi-Anarchy Lifesteal terkemuka. Nikmati pengalaman bertahan hidup paling seru bersama komunitas kami.</p>
+                    <p style="color: var(--text-muted); font-size: 0.80rem; margin-top: 10px;">Email Admin: <a href="mailto:sijekece30@gmail.com" style="color:var(--primary-red); text-decoration:none;">sijekece30@gmail.com</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>Komunitas</h4>
+                    <a href="https://discord.gg/6tjxvPUFBH" target="_blank" class="footer-link"><i data-lucide="message-square" style="width:16px;"></i> Discord Community</a>
+                    <a href="https://www.tiktok.com/@minehera.ofc?_r=1&_t=ZS-9A7JachPMSv" target="_blank" class="footer-link"><i data-lucide="video" style="width:16px;"></i> TikTok Official</a>
+                </div>
             </div>
-
             <div class="footer-bottom">
-                <p>&copy; 2026 MineHera. All rights reserved.</p>
-                <p style="margin-top: 4px; font-size: 0.68rem; color: #4c3b63;">Not affiliated with Mojang Studios or Microsoft</p>
+                &copy; 2026 MineHera. All rights reserved.
             </div>
         </footer>
     </div>
 
-    <!-- MODAL PEMBAYARAN -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closePayment()"><i data-lucide="x"></i></button>
-            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 4px;">Konfirmasi Pembayaran</h3>
-            <p style="font-size: 0.8rem; color: #a78bfa; margin-bottom: 16px;">Scan QRIS dan unggah foto/screenshot bukti transfer di bawah ini.</p>
-
-            <div class="qris-container" id="qrisContainer">
-                <img id="qrisImg" alt="QRIS MineHera" class="qris-img">
-
-                <div style="background: #0b0712; padding: 12px; border-radius: 12px; font-size: 0.8rem; text-align: left; margin-bottom: 12px; border: 1px solid #2a1b40;">
-                    <div>Item / Rank: <strong id="modalItemName" style="color:#ffffff;">-</strong></div>
-                    <div>Username MC: <strong id="modalUsername" style="color:#a78bfa;">-</strong></div>
-                    <div style="margin-top: 4px;">Total Bayar: <strong id="modalItemPrice" style="color:#22c55e;">-</strong></div>
-                </div>
-
-                <div class="warning-rules">
-                    <strong>⚠️ KETENTUAN PENGIRIMAN BUKTI TRANSFER:</strong><br>
-                    1. Wajib mengunggah bukti/screenshot pembayaran asli dari e-Wallet / m-Banking.<br>
-                    2. <strong>HINDARI PERILAKU MENIPU</strong>: Mengirimkan gambar tidak jelas, gambar palsu, atau bukti transfer bekas akan langsung berakibat <strong>PERMANENT BAN ACCOUNT</strong>.<br>
-                    3. Bukti pembayaran ini akan langsung dikirimkan ke Discord Admin MineHera.<br>
-                    4. Jika dalam <strong>1x24 jam</strong> item/rank belum diproses/masuk ke akun Anda, silakan buat laporan dengan cara <strong>open ticket support</strong> di Server Discord Resmi MineHera.
-                </div>
-
-                <div id="fileErrorNotice" style="display: none; color: #f43f5e; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; text-align: center;">
-                    ❌ Harap pilih file foto bukti transfer terlebih dahulu!
-                </div>
-
-                <input type="file" id="proofInput" accept="image/*" class="upload-field" onchange="clearFileError()">
-
-                <button class="btn-submit" onclick="confirmPayment()">Kirim Bukti Transfer & Konfirmasi</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL CUSTOM STATUS ALERT -->
-    <div class="modal-overlay" id="statusModal">
-        <div class="modal-card">
-            <div class="status-modal-content">
-                <div id="statusIconContainer" class="status-icon-box loading">
-                    <div class="spinner" id="statusSpinner"></div>
-                    <i data-lucide="check" id="statusCheckIcon" style="display: none;"></i>
-                    <i data-lucide="alert-circle" id="statusErrorIcon" style="display: none;"></i>
-                </div>
-                <h3 id="statusTitle" style="font-size: 1.15rem; font-weight: 800;">Memproses...</h3>
-                <p id="statusMessage" style="font-size: 0.82rem; color: #a78bfa; line-height: 1.5;"></p>
-                <button class="btn-submit" id="statusCloseBtn" style="display: none; margin-top: 12px;" onclick="closeStatusModal()">Tutup</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        var DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1547126288945520640/OIgsQmFbf13m2RhNSwRGa1iCMol98BbDxFENNfWimglUizF0Gz0FsDj9QeJtDnS62BXy';
-
         var selectedPlatform = 'java';
-        var serverIP = 'play.minehera.xyz:19155';
-        var currentPriceRaw = 0;
+        var isAdminMode = false;
+        var currentAuthMode = 'login';
+        var currentDonatorCategory = 'bulanan';
+        var currentAdminCategory = 'bulanan';
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // MEMAKAI LINK URL CDN BARU
-            setImageSrc('navLogoImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325943167852584/logo.png?ex=6aa30314&is=6aa1b194&hm=a38ffa6408d097fe4af9e056b1803272b9114a6788caa7a5cb0b46ccb3deddd7&');
-            setImageSrc('stoneImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325873202667651/stone.png?ex=6aa30304&is=6aa1b184&hm=dfd7a713a198469e161658d983a4ecd8df8d9692606e51484947a9de5f60bc07&');
-            setImageSrc('copperImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325907625185381/images.png?ex=6aa3030c&is=6aa1b18c&hm=b4c439ca652c26d4bba3d7f3d60030dd42c4422ee0522a4c40dc217e36d022ac&'); 
-            setImageSrc('diamondImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325809453170718/diamond.png?ex=6aa302f4&is=6aa1b174&hm=ec36c297d422ef591be2f5e84c262bd46758520eedf83c9dfe4cdf1d774358d5&');
-            setImageSrc('amethystImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325840386433215/amethys.png?ex=6aa302fc&is=6aa1b17c&hm=710b2ab0810495d7a55ab2aa0bbd5e0c64e6cf9572a746c6fa384ec648431c7e&');
-            
-            var shardUrl = 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325777954086982/shards.png?ex=6aa302ed&is=6aa1b16d&hm=096a1109824d5ee3dec0a743e9b7fef33ca8d16e992237057142233a68184849&';
-            setImageSrc('shardImg1', shardUrl);
-            setImageSrc('shardImg2', shardUrl);
-            setImageSrc('shardImg3', shardUrl);
-            setImageSrc('shardImg4', shardUrl);
-
-            // Avatar Tim tetap menggunakan API external dinamis (mc-heads)
-            setImageSrc('ownerAvatar', 'https://mc-heads.net/avatar/DrXuan_/80');
-            setImageSrc('devAvatar', 'https://mc-heads.net/avatar/ItsMijee/80');
-            setImageSrc('staffAvatar', 'https://mc-heads.net/avatar/FinzNerf/80');
-
-            // MEMAKAI LINK URL CDN BARU
-            setImageSrc('qrisImg', 'https://cdn.discordapp.com/attachments/1499481645756055582/1547325755506294794/qris.png?ex=6aa302e8&is=6aa1b168&hm=7d9e42df9d2f570db154b8d253f23a050c71960f9e097f9da9e35c0f867313f7&');
-
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-            checkAutoLogin();
-            fetchServerStatus();
-        });
-
-        /**
-         * @param {string} elementId
-         * @param {string} url
-         */
-        function setImageSrc(elementId, url) {
-            var el = document.getElementById(elementId);
-            if (el && el instanceof HTMLImageElement) el.src = url;
+        function showCustomAlert(msg) {
+            var alertBox = document.getElementById('customAlert');
+            var textEl = document.getElementById('customAlertText');
+            if (alertBox && textEl) {
+                textEl.innerText = msg;
+                alertBox.classList.add('show');
+                setTimeout(function() { alertBox.classList.remove('show'); }, 3000);
+            }
         }
 
-        /**
-         * @param {HTMLElement} element
-         */
-        function toggleFaq(element) {
-            var item = element.parentElement;
-            if (!item) return;
-
-            var isActive = item.classList.contains('active');
-            var allItems = document.querySelectorAll('.faq-accordion-item');
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            loadDonatorData('bulanan');
+            loadGlobalGallery();
+            checkAutoLogin();
+            checkServerStatus();
+            animatePlayerCounter();
+            loadAdminAccountTable();
             
-            allItems.forEach(function(el) {
-                el.classList.remove('active');
-                var toggle = el.querySelector('.faq-accordion-toggle');
-                if(toggle) toggle.textContent = '+';
+            document.addEventListener('click', function(event) {
+                var isClickInside = document.querySelector('.profile-container').contains(event.target);
+                if (!isClickInside) { document.getElementById('profileDropdown').classList.remove('active'); }
             });
+        });
 
-            if (!isActive) {
-                item.classList.add('active');
-                var toggle = item.querySelector('.faq-accordion-toggle');
-                if(toggle) toggle.textContent = '−';
+        function animatePlayerCounter() {
+            var counterEl = document.getElementById('counterRegisteredPlayers');
+            if (!counterEl) return;
+            var startVal = 100;
+            var targetVal = 1054;
+            var duration = 1500;
+            var startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var current = Math.floor(progress * (targetVal - startVal) + startVal);
+                counterEl.innerText = current.toLocaleString() + '+';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
+
+        function checkServerStatus() {
+            fetch('https://api.mcsrvstat.us/2/play.minehera.xyz:19155')
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    var statusDot = document.getElementById('statusDot');
+                    var statusText = document.getElementById('statusText');
+                    var valPlayers = document.getElementById('valPlayers');
+                    var valVersion = document.getElementById('valVersion');
+                    var valPing = document.getElementById('valPing');
+
+                    if (data.online) {
+                        if (statusDot) statusDot.classList.add('online');
+                        if (statusText) statusText.innerText = "Server Online - Ayo Bergabung!";
+                        if (valPlayers) valPlayers.innerText = data.players.online;
+                        if (valVersion) valVersion.innerText = data.version || "1.21.x";
+                        if (valPing) valPing.innerText = "Online";
+                    } else {
+                        if (statusText) statusText.innerText = "Server Offline / Maintenance";
+                        if (valPing) valPing.innerText = "Offline";
+                    }
+                })
+                .catch(function() {
+                    var statusText = document.getElementById('statusText');
+                    if (statusText) statusText.innerText = "Server Active (Port 19155)";
+                });
+        }
+
+        function getSkinHeadUrl(username, platform) {
+            var cleanUser = (username || '').trim();
+            if (!cleanUser || cleanUser.startsWith('.')) return 'https://mc-heads.net/avatar/MHF_Steve/64';
+            return 'https://mc-heads.net/avatar/' + cleanUser + '/64';
+        }
+
+        function getBustUrl(username) {
+            var cleanUser = (username || '').trim();
+            if (!cleanUser || cleanUser.startsWith('.')) return 'https://visage.surgeplay.com/bust/256/MHF_Steve';
+            return 'https://visage.surgeplay.com/bust/256/' + cleanUser;
+        }
+
+        function updateLoginSkinPreview() {
+            var input = document.getElementById('usernameInput');
+            var img = document.getElementById('loginHeadImg');
+            if (img && input) img.src = getSkinHeadUrl(input.value, selectedPlatform);
+        }
+
+        function switchPlatform(platform) {
+            selectedPlatform = platform;
+            document.getElementById('btnJava').classList.toggle('active', platform === 'java');
+            document.getElementById('btnBedrock').classList.toggle('active', platform === 'bedrock');
+            var input = document.getElementById('usernameInput');
+            if (platform === 'bedrock' && input && !input.value.startsWith('.')) {
+                input.value = '.' + input.value;
+            } else if (platform === 'java' && input && input.value.startsWith('.')) {
+                input.value = input.value.replace(/^\.+/, '');
+            }
+            updateLoginSkinPreview();
+        }
+
+        function switchAuthMode(mode) {
+            currentAuthMode = mode;
+            document.getElementById('btnSwitchLogin').classList.toggle('active', mode === 'login');
+            document.getElementById('btnSwitchRegister').classList.toggle('active', mode === 'register');
+            document.getElementById('authSubtitle').innerText = mode === 'login' ? 'Silahkan Login akun Anda' : 'Buat Password Baru untuk Register';
+            document.getElementById('authSubmitBtn').innerText = mode === 'login' ? 'Masuk Ke Web \u2192' : 'Register Akun \u2192';
+            document.getElementById('adminToggleContainer').style.display = mode === 'login' ? 'flex' : 'none';
+        }
+
+        function toggleAdminField() {
+            var check = document.getElementById('isAdminCheck');
+            var group = document.getElementById('adminCodeGroup');
+            if (group && check) group.style.display = check.checked ? 'block' : 'none';
+        }
+
+        /* 
+         * LOGIKA AUTH TELAH DIPERBAIKI: 
+         * - Mengharuskan mendaftar sebelum bisa login. 
+         * - Membatasi maksimal pembuatan 2 akun pada 1 device. 
+         * - Pesan notifikasi sesuai permintaan.
+         */
+        function prosesAuth() {
+            var username = document.getElementById('usernameInput').value.trim();
+            var password = document.getElementById('passwordInput').value.trim();
+            var errorBox = document.getElementById('errorBox');
+            
+            // Database Sementara
+            var registeredUsers = JSON.parse(localStorage.getItem('registeredUsersDB') || '{"DrXuan_":"admin123", "Crist_Kagenou":"admin123"}');
+            var deviceAccountCreated = parseInt(localStorage.getItem('deviceAccountCount') || '0');
+
+            if (!username) {
+                if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Masukan Username Minecraft Anda!'; }
+                return;
+            }
+            if (!password) {
+                if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Masukan Password Akun Anda!'; }
+                return;
+            }
+
+            if (currentAuthMode === 'register') {
+                if (registeredUsers[username]) {
+                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Akun sudah terdaftar, silahkan login!'; }
+                    return;
+                }
+                if (deviceAccountCreated >= 2) {
+                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Gagal! Batas maksimal pembuatan 2 akun per perangkat telah tercapai.'; }
+                    return;
+                }
+
+                registeredUsers[username] = password;
+                localStorage.setItem('registeredUsersDB', JSON.stringify(registeredUsers));
+                localStorage.setItem('deviceAccountCount', (deviceAccountCreated + 1).toString());
+                
+                showCustomAlert('Registrasi Berhasil! Silahkan Login.');
+                switchAuthMode('login');
+                if (errorBox) errorBox.style.display = 'none';
+                loadAdminAccountTable();
+                return;
+
+            } else {
+                
+                if (!registeredUsers[username]) {
+                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Akun tidak terdaftar, silahkan register!'; }
+                    return;
+                }
+                if (registeredUsers[username] !== password) {
+                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Password salah!'; }
+                    return;
+                }
+
+                var isCheckAdmin = document.getElementById('isAdminCheck').checked;
+                var adminCode = document.getElementById('adminCodeInput').value;
+
+                if (isCheckAdmin) {
+                    if (adminCode !== 'MineHera2026') {
+                        if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Kode Akses Admin Salah!'; }
+                        return;
+                    }
+                    isAdminMode = true;
+                    localStorage.setItem('isAdmin', 'true');
+                } else {
+                    isAdminMode = false;
+                    localStorage.setItem('isAdmin', 'false');
+                }
+
+                if (errorBox) errorBox.style.display = 'none';
+                localStorage.setItem('savedUsername', username);
+                localStorage.setItem('savedPlatform', selectedPlatform);
+                showHubScreen(username, selectedPlatform);
             }
         }
 
         function checkAutoLogin() {
             var savedUser = localStorage.getItem('savedUsername');
-            var savedPlatform = localStorage.getItem('savedPlatform');
-
+            var savedPlat = localStorage.getItem('savedPlatform');
+            var savedAdmin = localStorage.getItem('isAdmin');
             if (savedUser) {
-                showHubScreen(savedUser, savedPlatform || 'java');
+                isAdminMode = (savedAdmin === 'true');
+                showHubScreen(savedUser, savedPlat || 'java');
             }
         }
 
-        /**
-         * @param {string} platformType
-         */
-        function switchPlatform(platformType) {
-            selectedPlatform = platformType;
-            var btnJava = document.getElementById('btnJava');
-            var btnBedrock = document.getElementById('btnBedrock');
-            var input = document.querySelector('#usernameInput');
-
-            if (btnJava) btnJava.classList.toggle('active', platformType === 'java');
-            if (btnBedrock) btnBedrock.classList.toggle('active', platformType === 'bedrock');
-            
-            if (input && input instanceof HTMLInputElement) {
-                if (platformType === 'bedrock') {
-                    if (!input.value.startsWith('.')) {
-                        input.value = '.' + input.value;
-                    }
-                } else {
-                    if (input.value.startsWith('.')) {
-                        input.value = input.value.substring(1);
-                    }
-                }
-            }
-        }
-
-        function handleBedrockPrefix() {
-            var input = document.querySelector('#usernameInput');
-            if (input && input instanceof HTMLInputElement && selectedPlatform === 'bedrock') {
-                if (!input.value.startsWith('.')) {
-                    input.value = '.' + input.value.replace(/^\.+/, '');
-                }
-            }
-        }
-
-        function prosesLogin() {
-            var input = document.querySelector('#usernameInput');
-            var usernameInput = (input && input instanceof HTMLInputElement) ? input.value.trim() : '';
-            var errorBox = document.getElementById('errorBox');
-
-            if (!usernameInput || (selectedPlatform === 'bedrock' && usernameInput === '.')) {
-                if (errorBox) {
-                    errorBox.style.display = 'block';
-                    errorBox.innerHTML = '<strong>Peringatan!</strong> Masukkan username Minecraft Anda dengan benar.';
-                }
-                return;
-            }
-
-            if (errorBox) errorBox.style.display = 'none';
-
-            localStorage.setItem('savedUsername', usernameInput);
-            localStorage.setItem('savedPlatform', selectedPlatform);
-
-            showHubScreen(usernameInput, selectedPlatform);
-        }
-
-        /**
-         * @param {string} username
-         * @param {string} platform
-         */
         function showHubScreen(username, platform) {
-            var elUser = document.getElementById('displayUser');
-            var elPlat = document.getElementById('displayPlatform');
-            var elShopUser = document.getElementById('shopUsername');
-            var elShopPlat = document.getElementById('shopPlatform');
-
-            if(elUser) elUser.innerText = username;
-            if(elPlat) elPlat.innerText = platform.toUpperCase();
-            if(elShopUser) elShopUser.innerText = username;
-            if(elShopPlat) elShopPlat.innerText = platform.toUpperCase();
-
-            var pageLogin = document.getElementById('page-login');
-            var pageHub = document.getElementById('page-hub');
-            if(pageLogin) pageLogin.style.display = 'none';
-            if(pageHub) pageHub.style.display = 'block';
-
-            showDashboardHome();
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            document.getElementById('navLogoImg').src = getSkinHeadUrl(username, platform);
+            document.getElementById('dropdownUsernameText').innerText = username;
+            var platText = (platform === 'bedrock') ? 'Platform: Bedrock / PE' : 'Platform: Java Edition';
+            document.getElementById('dropdownPlatformText').innerText = platText;
+            
+            document.getElementById('page-login').style.display = 'none';
+            document.getElementById('page-hub').style.display = 'block';
+            document.getElementById('navAdminBtn').style.display = isAdminMode ? 'flex' : 'none';
+            showSection('sectionHome');
         }
 
-        function hideAllSections() {
-            var home = document.getElementById('sectionHome');
-            var shop = document.getElementById('sectionShop');
-            var faq = document.getElementById('sectionFaq');
-            var team = document.getElementById('sectionTeam');
-
-            if(home) home.style.display = 'none';
-            if(shop) shop.style.display = 'none';
-            if(faq) faq.style.display = 'none';
-            if(team) team.style.display = 'none';
+        var sectionsList = ['sectionHome', 'sectionShop', 'sectionTeam', 'sectionDonator', 'sectionAdmin', 'sectionGallery', 'sectionRules', 'sectionVote'];
+        function showSection(targetId) {
+            sectionsList.forEach(function(s) {
+                var el = document.getElementById(s);
+                if (el) el.style.display = (s === targetId) ? 'block' : 'none';
+            });
+            window.scrollTo(0,0);
         }
 
-        function showDashboardHome() {
-            hideAllSections();
-            var home = document.getElementById('sectionHome');
-            if(home) home.style.display = 'block';
-        }
-
-        function openShopSection() {
-            hideAllSections();
-            var shop = document.getElementById('sectionShop');
-            if(shop) shop.style.display = 'block';
-        }
-
-        function openFaqSection() {
-            hideAllSections();
-            var faq = document.getElementById('sectionFaq');
-            if(faq) faq.style.display = 'block';
-        }
-
-        function openTeamSection() {
-            hideAllSections();
-            var team = document.getElementById('sectionTeam');
-            if(team) team.style.display = 'block';
-        }
+        function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+        function toggleProfileMenu() { document.getElementById('profileDropdown').classList.toggle('active'); }
 
         function prosesLogout() {
             localStorage.removeItem('savedUsername');
             localStorage.removeItem('savedPlatform');
-
-            var pageLogin = document.getElementById('page-login');
-            var pageHub = document.getElementById('page-hub');
-            var input = document.getElementById('usernameInput');
-
-            if(pageHub) pageHub.style.display = 'none';
-            if(pageLogin) pageLogin.style.display = 'flex';
-            if(input && input instanceof HTMLInputElement) input.value = '';
-
-            var errorBox = document.getElementById('errorBox');
-            if(errorBox) errorBox.style.display = 'none';
-        }
-
-        function toggleMenu() {
-            var menu = document.getElementById('navMenu');
-            if(menu) menu.classList.toggle('active');
-        }
-
-        /**
-         * @param {string} category
-         */
-        function switchShopCategory(category) {
-            var tabRanks = document.getElementById('tabRanks');
-            var tabShards = document.getElementById('tabShards');
-            var gridRanks = document.getElementById('gridRanks');
-            var gridShards = document.getElementById('gridShards');
-
-            if (category === 'ranks') {
-                if(tabRanks) tabRanks.classList.add('active');
-                if(tabShards) tabShards.classList.remove('active');
-                if(gridRanks) gridRanks.style.display = 'grid';
-                if(gridShards) gridShards.style.display = 'none';
-            } else {
-                if(tabShards) tabShards.classList.add('active');
-                if(tabRanks) tabRanks.classList.remove('active');
-                if(gridShards) gridShards.style.display = 'grid';
-                if(gridRanks) gridRanks.style.display = 'none';
-            }
+            localStorage.removeItem('isAdmin');
+            location.reload();
         }
 
         function copyIp() {
-            navigator.clipboard.writeText(serverIP).then(function() {
-                var el = document.getElementById('ipText');
-                if(!el) return;
-                var old = el.innerText;
-                el.innerText = 'IP TERSALIN!';
-                setTimeout(function() { el.innerText = old; }, 2000);
+            navigator.clipboard.writeText("play.minehera.xyz:19155");
+            showCustomAlert("IP Server Berhasil Disalin!");
+        }
+
+        function switchStoreTab(tab) {
+            document.getElementById('btnStoreRank').classList.toggle('active', tab === 'rank');
+            document.getElementById('btnStoreShards').classList.toggle('active', tab === 'shards');
+            document.getElementById('storeRankContent').style.display = (tab === 'rank') ? 'grid' : 'none';
+            document.getElementById('storeShardsContent').style.display = (tab === 'shards') ? 'grid' : 'none';
+        }
+
+        function openPaymentGuide(title, price) {
+            document.getElementById('modalItemTitle').innerText = title;
+            document.getElementById('modalItemPrice').innerText = price;
+            document.getElementById('buyModal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('buyModal').style.display = 'none'; }
+
+        function toggleFaq(el) {
+            var parent = el.parentElement;
+            parent.classList.toggle('active');
+        }
+
+        function loadGlobalGallery() {
+            var grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+            var savedPhotos = JSON.parse(localStorage.getItem('globalGalleryPhotos') || '[]');
+            
+            if (savedPhotos.length === 0) {
+                savedPhotos = [
+                    { id: 1, uploader: "DrXuan_", img: "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/gui/title/background/panorama_1.png" },
+                    { id: 2, uploader: "Crist_Kagenou", img: "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/gui/title/background/panorama_2.png" }
+                ];
+                localStorage.setItem('globalGalleryPhotos', JSON.stringify(savedPhotos));
+            }
+            renderGalleryItems(savedPhotos);
+        }
+
+        function renderGalleryItems(photos) {
+            var grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+            var currentUser = (localStorage.getItem('savedUsername') || '').toLowerCase();
+            photos.forEach(function(item) {
+                var itemDiv = document.createElement('div');
+                itemDiv.className = 'gallery-item';
+                itemDiv.setAttribute('data-uploader', item.uploader.toLowerCase());
+                var showDelete = (isAdminMode || currentUser === item.uploader.toLowerCase());
+                itemDiv.innerHTML = `
+                    <img src="${item.img}" alt="SS" onclick="openImgModal('${item.img}')">
+                    <div class="gallery-info">
+                        <div class="uploader-name" onclick="openImgModal('${item.img}')"><i data-lucide="user" style="width:12px;"></i> ${item.uploader}</div>
+                        ${showDelete ? `<button style="background: rgba(225, 29, 72, 0.85); border: none; color: #fff; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 0.65rem;" onclick="deleteGalleryPhoto(${item.id})">Hapus</button>` : ''}
+                    </div>
+                `;
+                grid.appendChild(itemDiv);
+            });
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function openImgModal(src) {
+            document.getElementById('imgModalSrc').src = src;
+            document.getElementById('imgModal').style.display = 'flex';
+        }
+
+        function closeImgModal() {
+            document.getElementById('imgModal').style.display = 'none';
+        }
+
+        function uploadGalleryPhoto(e) {
+            var file = e.target.files[0];
+            var username = localStorage.getItem('savedUsername') || 'Player';
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var savedPhotos = JSON.parse(localStorage.getItem('globalGalleryPhotos') || '[]');
+                savedPhotos.unshift({ id: Date.now(), uploader: username, img: event.target.result });
+                localStorage.setItem('globalGalleryPhotos', JSON.stringify(savedPhotos));
+                loadGlobalGallery();
+                showCustomAlert("Foto Berhasil Diupload!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function deleteGalleryPhoto(id) {
+            var savedPhotos = JSON.parse(localStorage.getItem('globalGalleryPhotos') || '[]');
+            savedPhotos = savedPhotos.filter(function(p) { return p.id !== id; });
+            localStorage.setItem('globalGalleryPhotos', JSON.stringify(savedPhotos));
+            loadGlobalGallery();
+            showCustomAlert("Foto Dihapus!");
+        }
+
+        function searchGallery() {
+            var term = document.getElementById('searchGalleryInput').value.toLowerCase();
+            document.querySelectorAll('.gallery-item').forEach(function(item) {
+                var uploader = item.getAttribute('data-uploader');
+                item.style.display = uploader.includes(term) ? 'block' : 'none';
             });
         }
 
-        async function fetchServerStatus() {
-            try {
-                var res = await fetch('https://api.mcsrvstat.us/2/play.minehera.xyz:19155');
-                var data = await res.json();
-                
-                var statusText = document.getElementById('statusText');
-                var statusDot = document.getElementById('statusDot');
-                var onlinePlayers = document.getElementById('onlinePlayers');
-
-                if (data.online) {
-                    if(statusText) statusText.innerText = 'Server Online';
-                    if(statusDot) statusDot.style.backgroundColor = '#22c55e';
-                    if(statusDot) statusDot.style.boxShadow = '0 0 8px #22c55e';
-                    if(onlinePlayers) onlinePlayers.innerText = data.players.online;
-                } else {
-                    if(statusText) statusText.innerText = 'Server Offline';
-                    if(statusDot) statusDot.style.backgroundColor = '#f43f5e';
-                    if(statusDot) statusDot.style.boxShadow = '0 0 8px #f43f5e';
-                    if(onlinePlayers) onlinePlayers.innerText = '0';
-                }
-            } catch (err) {
-                var statusText = document.getElementById('statusText');
-                var statusDot = document.getElementById('statusDot');
-                if(statusText) statusText.innerText = 'Gagal Cek Status';
-                if(statusDot) statusDot.style.backgroundColor = '#6d5b88';
-                if(statusDot) statusDot.style.boxShadow = 'none';
-            }
+        function switchDonatorCategory(cat) {
+            currentDonatorCategory = cat;
+            document.getElementById('btnTabBulanan').classList.toggle('active', cat === 'bulanan');
+            document.getElementById('btnTabTahunan').classList.toggle('active', cat === 'tahunan');
+            document.getElementById('btnTabAllTime').classList.toggle('active', cat === 'alltime');
+            loadDonatorData(cat);
         }
 
-        /**
-         * @param {string} title
-         * @param {number} price
-         */
-        function openPayment(title, price) {
-            currentPriceRaw = price;
-            var username = localStorage.getItem('savedUsername') || '-';
-
-            var modalItemName = document.getElementById('modalItemName');
-            var modalUsername = document.getElementById('modalUsername');
-            var modalItemPrice = document.getElementById('modalItemPrice');
-
-            if(modalItemName) modalItemName.innerText = title;
-            if(modalUsername) modalUsername.innerText = username;
-            if(modalItemPrice) modalItemPrice.innerText = 'Rp ' + price.toLocaleString('id-ID');
-
-            clearFileError();
-            var input = document.getElementById('proofInput');
-            if(input && input instanceof HTMLInputElement) input.value = '';
-
-            var modal = document.getElementById('paymentModal');
-            if(modal) modal.style.display = 'flex';
+        function switchAdminCategory(cat) {
+            currentAdminCategory = cat;
+            document.getElementById('adminTabBulanan').classList.toggle('active', cat === 'bulanan');
+            document.getElementById('adminTabTahunan').classList.toggle('active', cat === 'tahunan');
+            document.getElementById('adminTabAllTime').classList.toggle('active', cat === 'alltime');
+            loadAdminDataFields(cat);
         }
 
-        function closePayment() {
-            var modal = document.getElementById('paymentModal');
-            if(modal) modal.style.display = 'none';
-        }
-
-        function clearFileError() {
-            var notice = document.getElementById('fileErrorNotice');
-            if(notice) notice.style.display = 'none';
-        }
-
-        /**
-         * @param {string} type
-         * @param {string} title
-         * @param {string} message
-         */
-        function showStatusModal(type, title, message) {
-            var modal = document.getElementById('statusModal');
-            var iconBox = document.getElementById('statusIconContainer');
-            var spinner = document.getElementById('statusSpinner');
-            var checkIcon = document.getElementById('statusCheckIcon');
-            var errorIcon = document.getElementById('statusErrorIcon');
-            var titleEl = document.getElementById('statusTitle');
-            var msgEl = document.getElementById('statusMessage');
-            var closeBtn = document.getElementById('statusCloseBtn');
-
-            if(!modal || !iconBox || !spinner || !checkIcon || !errorIcon || !titleEl || !msgEl || !closeBtn) return;
-
-            iconBox.className = 'status-icon-box ' + type;
-            titleEl.innerText = title;
-            msgEl.innerText = message;
-
-            if (type === 'loading') {
-                spinner.style.display = 'block';
-                checkIcon.style.display = 'none';
-                errorIcon.style.display = 'none';
-                closeBtn.style.display = 'none';
-            } else if (type === 'success') {
-                spinner.style.display = 'none';
-                checkIcon.style.display = 'block';
-                errorIcon.style.display = 'none';
-                closeBtn.style.display = 'block';
-            } else {
-                spinner.style.display = 'none';
-                checkIcon.style.display = 'none';
-                errorIcon.style.display = 'block';
-                closeBtn.style.display = 'block';
-            }
-
-            modal.style.display = 'flex';
-        }
-
-        function closeStatusModal() {
-            var modal = document.getElementById('statusModal');
-            if(modal) modal.style.display = 'none';
-        }
-
-        async function confirmPayment() {
-            var proofInput = document.getElementById('proofInput');
-            var imageFile = (proofInput && proofInput instanceof HTMLInputElement && proofInput.files) ? proofInput.files[0] : null;
-            
-            if (!imageFile) {
-                var notice = document.getElementById('fileErrorNotice');
-                if(notice) notice.style.display = 'block';
-                return;
-            }
-
-            closePayment();
-
-            showStatusModal('loading', 'Mengirim Bukti...', 'Mohon tunggu sebentar, sedang mengunggah bukti ke server Discord MineHera.');
-
-            var itemNameEl = document.getElementById('modalItemName');
-            var itemName = itemNameEl ? itemNameEl.innerText : 'Item';
-            var username = localStorage.getItem('savedUsername') || 'Unknown';
-            var platform = localStorage.getItem('savedPlatform') || 'Java';
-
-            var formData = new FormData();
-            formData.append('file', imageFile, imageFile.name);
-
-            var payload = {
-                username: "MineHera Payment Bot",
-                avatar_url: "https://cdn.discordapp.com/attachments/1499481645756055582/1546838729984053299/20260818_120544.png",
-                embeds: [{
-                    title: "🛒 TRANSAKSI MINEHERA STORE BARU!",
-                    color: 9133302, 
-                    fields: [
-                        { name: "👤 Username MC", value: "```" + username + "```", inline: true },
-                        { name: "📱 Platform", value: "```" + platform.toUpperCase() + "```", inline: true },
-                        { name: "💎 Item / Rank", value: "```" + itemName + "```", inline: false },
-                        { name: "💰 Total Bayar", value: "```Rp " + currentPriceRaw.toLocaleString('id-ID') + "```", inline: true },
-                        { name: "⏰ Waktu Transaksi", value: "<t:" + Math.floor(Date.now() / 1000) + ":F>", inline: false }
-                    ],
-                    image: {
-                        url: "attachment://" + imageFile.name
-                    },
-                    footer: { text: "MineHera Automated Web System" }
-                }]
+        /* Menambahkan properti error handling fallback secara dinamis */
+        function loadDonatorData(category) {
+            var cat = category || currentDonatorCategory;
+            var defaultData = {
+                bulanan: [{user: "Azyll_", amt: "1.000.000"}, {user: "Tomortus", amt: "500.000"}, {user: "Sun_Bloom", amt: "250.000"}],
+                tahunan: [{user: "Moon_Ti...", amt: "940.000"}, {user: "Tomortus", amt: "900.000"}, {user: "Sun_Bloom", amt: "800.000"}],
+                alltime: [{user: "LuuXuan", amt: "5.000.000"}, {user: "Azyll_", amt: "3.500.000"}, {user: "Crist_K", amt: "2.000.000"}]
             };
+            var activeSet = defaultData[cat];
 
-            formData.append('payload_json', JSON.stringify(payload));
-
-            try {
-                var response = await fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    showStatusModal('success', 'Transaksi Terkirim!', 'Bukti pembayaran telah berhasil dikirim. Item kamu akan masuk maksimal dalam 1x24 jam.');
-                } else {
-                    showStatusModal('error', 'Gagal Mengirim', 'Terjadi kesalahan sistem saat mengirim bukti. Silakan hubungi staff di Discord.');
+            for (var i = 1; i <= 3; i++) {
+                var u = localStorage.getItem('top' + i + 'User_' + cat) || activeSet[i-1].user;
+                var a = localStorage.getItem('top' + i + 'Amt_' + cat) || activeSet[i-1].amt;
+                var nameEl = document.getElementById('top' + i + '-name');
+                var amtEl = document.getElementById('top' + i + '-amount');
+                var imgEl = document.getElementById('top' + i + '-img');
+                if (nameEl) nameEl.innerText = u;
+                if (amtEl) amtEl.innerText = a;
+                if (imgEl) {
+                    imgEl.onerror = function() {
+                        this.onerror = null; 
+                        this.src = 'https://visage.surgeplay.com/bust/256/MHF_Steve'; 
+                    };
+                    imgEl.src = getBustUrl(u);
                 }
-            } catch (error) {
-                showStatusModal('error', 'Koneksi Error', 'Gagal terhubung ke jaringan Discord. Pastikan internetmu stabil lalu coba lagi.');
+            }
+            loadAdminDataFields(currentAdminCategory);
+        }
+
+        function loadAdminDataFields(cat) {
+            var defaultData = {
+                bulanan: [{user: "Azyll_", amt: "1.000.000"}, {user: "Tomortus", amt: "500.000"}, {user: "Sun_Bloom", amt: "250.000"}],
+                tahunan: [{user: "Moon_Ti...", amt: "940.000"}, {user: "Tomortus", amt: "900.000"}, {user: "Sun_Bloom", amt: "800.000"}],
+                alltime: [{user: "LuuXuan", amt: "5.000.000"}, {user: "Azyll_", amt: "3.500.000"}, {user: "Crist_K", amt: "2.000.000"}]
+            };
+            var activeSet = defaultData[cat];
+            for (var i = 1; i <= 3; i++) {
+                var u = localStorage.getItem('top' + i + 'User_' + cat) || activeSet[i-1].user;
+                var a = localStorage.getItem('top' + i + 'Amt_' + cat) || activeSet[i-1].amt;
+                var inUser = document.getElementById('adminTop' + i + 'User');
+                var inAmt = document.getElementById('adminTop' + i + 'Amt');
+                if (inUser) inUser.value = u;
+                if (inAmt) inAmt.value = a;
+            }
+        }
+
+        function saveDonatorData() {
+            var cat = currentAdminCategory;
+            for (var i = 1; i <= 3; i++) {
+                var inUser = document.getElementById('adminTop' + i + 'User');
+                var inAmt = document.getElementById('adminTop' + i + 'Amt');
+                var u = inUser ? (inUser.value || 'Player' + i) : 'Player' + i;
+                var a = inAmt ? (inAmt.value || '0') : '0';
+                localStorage.setItem('top' + i + 'User_' + cat, u);
+                localStorage.setItem('top' + i + 'Amt_' + cat, a);
+            }
+            loadDonatorData(currentDonatorCategory);
+            showCustomAlert("Data Top Donatur Disimpan!");
+            showSection('sectionDonator');
+        }
+
+        function loadAdminAccountTable() {
+            var tbody = document.getElementById('registeredAccountsTableBody');
+            if (!tbody) return;
+            var users = JSON.parse(localStorage.getItem('registeredUsersDB') || '{"DrXuan_":"admin123", "Crist_Kagenou":"admin123"}');
+            tbody.innerHTML = '';
+            
+            for (var username in users) {
+                var password = users[username];
+                var tr = document.createElement('tr');
+                tr.setAttribute('data-username', username.toLowerCase());
+                tr.innerHTML = `
+                    <td style="font-weight:700;">${username}</td>
+                    <td><code style="background:#000; padding:4px 8px; border-radius:4px; color:var(--gold);">${password}</code></td>
+                    <td><button style="background:rgba(225,29,72,0.2); border:1px solid var(--primary-red); color:#fff; padding:4px 8px; border-radius:6px; cursor:pointer; font-size:0.75rem;" onclick="deleteRegisteredUser('${username}')">Hapus</button></td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        function filterRegisteredAccounts() {
+            var term = document.getElementById('searchAccountInput').value.toLowerCase();
+            var rows = document.querySelectorAll('#registeredAccountsTableBody tr');
+            rows.forEach(function(row) {
+                var uname = row.getAttribute('data-username');
+                row.style.display = uname.includes(term) ? '' : 'none';
+            });
+        }
+
+        function deleteRegisteredUser(username) {
+            var users = JSON.parse(localStorage.getItem('registeredUsersDB') || '{}');
+            if (users[username]) {
+                delete users[username];
+                localStorage.setItem('registeredUsersDB', JSON.stringify(users));
+                loadAdminAccountTable();
+                showCustomAlert("Akun " + username + " berhasil dihapus!");
             }
         }
     </script>
