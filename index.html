@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MineHera - Premium Anarchy Server</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>MineHera - Official Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-dark: #080406;
-            --card-bg: rgba(20, 10, 14, 0.7);
-            --card-border: rgba(225, 29, 72, 0.2);
+            --bg-dark: #060204;
+            --card-bg: rgba(18, 8, 12, 0.85);
+            --card-border: rgba(225, 29, 72, 0.25);
+            --card-border-glow: rgba(225, 29, 72, 0.5);
             --primary-red: #e11d48;
             --primary-hover: #be123c;
+            --primary-glow: rgba(225, 29, 72, 0.4);
             --gold: #fbbf24;
             --silver: #cbd5e1;
             --bronze: #d97706;
             --amethyst: #c084fc;
             --text-main: #fecdd3;
             --text-muted: #94a3b8;
+            --discord-color: #5865F2;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -29,214 +32,647 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(136, 19, 55, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.18) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(136, 19, 55, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 10% 50%, rgba(88, 101, 242, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        /* AUTH PAGE (LOGIN & REGISTER) */
-        #page-login { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .card-login { background: #12070a; border: 1px solid var(--card-border); border-radius: 20px; padding: 32px 24px; width: 100%; max-width: 420px; box-shadow: 0 15px 35px rgba(225, 29, 72, 0.15); text-align: center; }
-        .login-head-preview { width: 72px; height: 72px; margin: 0 auto 16px; border-radius: 16px; background: #000; border: 2px solid var(--primary-red); padding: 4px; box-shadow: 0 0 15px rgba(225, 29, 72, 0.3); display: flex; align-items: center; justify-content: center; }
-        .login-head-preview img { width: 100%; height: 100%; border-radius: 10px; image-rendering: pixelated; object-fit: contain; }
-        .title { font-size: 1.4rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
-        .subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
-        .alert-error { display: none; background: rgba(225, 29, 72, 0.1); border: 1px solid var(--primary-red); color: #ffe4e6; padding: 12px; border-radius: 12px; font-size: 0.78rem; margin-bottom: 16px; text-align: left; }
-        
-        .platform-switch { background: #080304; padding: 4px; border-radius: 12px; display: flex; gap: 4px; margin-bottom: 16px; border: 1px solid var(--card-border); }
-        .btn-tab { flex: 1; padding: 10px 0; border: none; background: transparent; color: var(--text-muted); font-weight: 700; font-size: 0.85rem; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
-        .btn-tab.active { background: var(--primary-red); color: #ffffff; }
-        
-        .input-group { margin-bottom: 16px; text-align: left; }
-        .input-field { width: 100%; background: #080304; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #ffffff; font-size: 0.9rem; outline: none; transition: 0.2s; }
-        .input-field:focus { border-color: var(--primary-red); }
-        
-        .admin-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; justify-content: center;}
-        .admin-toggle input { accent-color: var(--primary-red); width: 16px; height: 16px; cursor: pointer;}
-        
-        .btn-submit { width: 100%; background: linear-gradient(135deg, var(--primary-red) 0%, #9f1239 100%); color: #ffffff; border: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3); }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5); }
+        /* AUTH PAGE */
+        #page-login { 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 24px 16px; 
+            position: relative;
+        }
 
-        .auth-switch-row { display: flex; gap: 10px; margin-bottom: 16px; }
-        .auth-switch-row button { flex: 1; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: 1px solid var(--card-border); background: #080304; color: var(--text-muted); }
-        .auth-switch-row button.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
+        .auth-glow-bg {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: var(--primary-red);
+            filter: blur(140px);
+            opacity: 0.25;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-        /* NAVBAR & HUB */
+        .card-login { 
+            position: relative;
+            z-index: 1;
+            background: rgba(15, 6, 9, 0.85); 
+            border: 1px solid var(--card-border-glow); 
+            border-radius: 24px; 
+            padding: 40px 28px; 
+            width: 100%; 
+            max-width: 440px; 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(225, 29, 72, 0.2); 
+            text-align: center; 
+            backdrop-filter: blur(16px);
+        }
+
+        .login-head-preview { 
+            width: 100px; 
+            height: 100px; 
+            margin: 0 auto 18px; 
+            border-radius: 20px; 
+            background: #000; 
+            border: 2px solid var(--primary-red); 
+            padding: 6px; 
+            box-shadow: 0 0 25px var(--primary-glow); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: transform 0.3s ease;
+        }
+        .login-head-preview:hover { transform: scale(1.05) rotate(3deg); }
+        .login-head-preview img { width: 100%; height: 100%; border-radius: 14px; image-rendering: pixelated; object-fit: contain; }
+        
+        .title { font-size: 1.6rem; font-weight: 900; color: #ffffff; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .subtitle { font-size: 0.84rem; color: var(--text-muted); margin-bottom: 20px; }
+        
+        .alert-error { 
+            display: none; 
+            background: rgba(225, 29, 72, 0.15); 
+            border: 1px solid var(--primary-red); 
+            color: #ffe4e6; 
+            padding: 12px 14px; 
+            border-radius: 12px; 
+            font-size: 0.8rem; 
+            margin-bottom: 18px; 
+            text-align: left; 
+            font-weight: 600;
+        }
+
+        .auth-switch-row { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 20px; 
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .auth-switch-row button { 
+            flex: 1; 
+            padding: 10px; 
+            border-radius: 10px; 
+            font-weight: 800; 
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            border: none; 
+            background: transparent; 
+            color: var(--text-muted); 
+            transition: all 0.25s ease;
+        }
+        .auth-switch-row button.active { 
+            background: var(--primary-red); 
+            color: #fff; 
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .platform-switch { 
+            background: rgba(0, 0, 0, 0.4); 
+            padding: 4px; 
+            border-radius: 12px; 
+            display: flex; 
+            gap: 4px; 
+            margin-bottom: 18px; 
+            border: 1px solid var(--card-border); 
+        }
+        .btn-tab { 
+            flex: 1; 
+            padding: 9px 0; 
+            border: none; 
+            background: transparent; 
+            color: var(--text-muted); 
+            font-weight: 700; 
+            font-size: 0.82rem; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: all 0.25s ease; 
+        }
+        .btn-tab.active { background: rgba(225, 29, 72, 0.2); color: #ffffff; border: 1px solid var(--primary-red); }
+
+        .input-group { margin-bottom: 14px; text-align: left; }
+        .input-field, .select-field, .textarea-field { 
+            width: 100%; 
+            background: rgba(5, 2, 4, 0.8); 
+            border: 1px solid var(--card-border); 
+            border-radius: 12px; 
+            padding: 14px 16px; 
+            color: #ffffff; 
+            font-size: 0.88rem; 
+            outline: none; 
+            transition: all 0.25s; 
+        }
+        .input-field:focus, .select-field:focus, .textarea-field:focus { border-color: var(--primary-red); box-shadow: 0 0 15px rgba(225, 29, 72, 0.25); }
+
+        .admin-toggle { display: flex; align-items: center; gap: 8px; margin: 16px 0; font-size: 0.82rem; color: var(--text-muted); cursor: pointer; justify-content: center; }
+        .admin-toggle input { accent-color: var(--primary-red); width: 16px; height: 16px; cursor: pointer; }
+
+        .btn-submit { 
+            width: 100%; 
+            background: linear-gradient(135deg, var(--primary-red) 0%, #9f1239 100%); 
+            color: #ffffff; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 12px; 
+            font-weight: 800; 
+            font-size: 0.92rem; 
+            cursor: pointer; 
+            transition: all 0.25s ease; 
+            box-shadow: 0 6px 20px var(--primary-glow); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(225, 29, 72, 0.6); }
+
+        /* NAVBAR & HEADER */
         #page-hub { display: none; }
-        .navbar { background: rgba(12, 5, 8, 0.95); border-bottom: 1px solid var(--card-border); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+        .navbar { 
+            background: rgba(10, 4, 7, 0.92); 
+            border-bottom: 1px solid var(--card-border); 
+            padding: 14px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            backdrop-filter: blur(16px); 
+        }
         .navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
-        .brand-text { font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+        .brand-text { font-size: 1.3rem; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; }
         .brand-text span { color: var(--primary-red); }
-        
+
         .nav-right-actions { display: flex; align-items: center; gap: 15px; }
-        
         .profile-container { position: relative; }
         .profile-btn { display: flex; align-items: center; gap: 8px; background: transparent; border: none; cursor: pointer; }
         .player-head-nav { width: 38px; height: 38px; border-radius: 10px; border: 2px solid var(--primary-red); background: #000; image-rendering: pixelated; }
         
-        .profile-dropdown { display: none; position: absolute; right: 0; top: 50px; background: #12070a; border: 1px solid var(--card-border); border-radius: 12px; width: 200px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); flex-direction: column; overflow: hidden; z-index: 200; }
+        .profile-dropdown { display: none; position: absolute; right: 0; top: 50px; background: #12070a; border: 1px solid var(--card-border); border-radius: 14px; width: 220px; box-shadow: 0 10px 30px rgba(0,0,0,0.9); flex-direction: column; overflow: hidden; z-index: 200; }
         .profile-dropdown.active { display: flex; }
         .profile-dropdown-item { padding: 12px 16px; color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.2s; }
-        .profile-dropdown-item:hover { background: rgba(225, 29, 72, 0.1); color: var(--primary-red); }
+        .profile-dropdown-item:hover { background: rgba(225, 29, 72, 0.15); color: var(--primary-red); }
         .profile-dropdown-item.logout { color: #f87171; border-bottom: none; }
 
         .menu-btn { background: transparent; border: none; color: #fff; cursor: pointer; padding: 6px; display: flex; }
-        
-        .nav-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #0e0508; border-bottom: 1px solid var(--card-border); flex-direction: column; box-shadow: 0 15px 30px rgba(0,0,0,0.9); }
+        .nav-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #0b0407; border-bottom: 1px solid var(--card-border); flex-direction: column; box-shadow: 0 15px 30px rgba(0,0,0,0.9); }
         .nav-menu.active { display: flex; }
         .nav-item { padding: 16px 20px; color: #e2e8f0; text-decoration: none; font-weight: 600; font-size: 0.92rem; display: flex; align-items: center; gap: 14px; transition: all 0.2s; cursor: pointer; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
-        .nav-item:hover { background: rgba(225, 29, 72, 0.1); color: var(--primary-red); }
+        .nav-item:hover { background: rgba(225, 29, 72, 0.12); color: var(--primary-red); }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 25px 16px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 16px; }
         .section-tag { color: var(--primary-red); font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; text-align: center; }
-        .section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 24px; text-align: center; }
+        .section-title { font-size: 1.9rem; font-weight: 900; margin-bottom: 24px; text-align: center; letter-spacing: -0.5px; }
         .section-title span { color: var(--primary-red); }
 
-        /* HERO SECTION */
+        /* HERO & DASHBOARD */
         .hero-section { text-align: center; padding: 10px 0; }
-        .server-status-pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(225, 29, 72, 0.08); border: 1px solid rgba(225, 29, 72, 0.25); padding: 8px 18px; border-radius: 30px; font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 20px; }
+        .server-status-pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(225, 29, 72, 0.08); border: 1px solid rgba(225, 29, 72, 0.3); padding: 8px 20px; border-radius: 30px; font-size: 0.82rem; font-weight: 800; color: #fff; margin-bottom: 20px; box-shadow: 0 0 15px rgba(225, 29, 72, 0.1); }
         .status-dot { width: 9px; height: 9px; background-color: #ef4444; border-radius: 50%; box-shadow: 0 0 10px #ef4444; }
         .status-dot.online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
         
-        .hero-title { font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; }
-        .hero-title span { color: var(--primary-red); }
-        .hero-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.6; max-width: 600px; margin: 0 auto 24px; }
+        .hero-title { font-size: 2.3rem; font-weight: 900; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.8px; }
+        .hero-title span { color: var(--primary-red); text-shadow: 0 0 20px var(--primary-glow); }
+        .hero-desc { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; max-width: 620px; margin: 0 auto 26px; }
 
-        .server-ip-box { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; max-width: 450px; margin: 0 auto 30px; }
-        .ip-text { font-size: 1rem; font-weight: 800; color: #ffffff; }
-        .btn-copy { background: var(--primary-red); border: none; color: #ffffff; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.82rem; transition: 0.2s; }
-        .btn-copy:hover { background: var(--primary-hover); }
+        .server-ip-box { 
+            background: rgba(18, 8, 12, 0.9); 
+            border: 1px solid var(--card-border-glow); 
+            border-radius: 20px; 
+            padding: 18px 24px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            max-width: 520px; 
+            margin: 0 auto 30px; 
+            backdrop-filter: blur(12px); 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+            gap: 16px;
+        }
+        .ip-info-wrapper { text-align: left; overflow: hidden; flex: 1; }
+        .ip-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; }
+        .ip-text { font-size: 1.05rem; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-copy { 
+            background: linear-gradient(135deg, var(--primary-red) 0%, #9f1239 100%); 
+            border: none; 
+            color: #ffffff; 
+            padding: 12px 22px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: 800; 
+            font-size: 0.85rem; 
+            transition: 0.25s; 
+            box-shadow: 0 4px 15px var(--primary-glow); 
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .btn-copy:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(225, 29, 72, 0.6); }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
-        .stat-card { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 8px; text-align: center; }
-        .stat-icon { width: 34px; height: 34px; background: rgba(225, 29, 72, 0.15); color: var(--primary-red); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
-        .stat-value { font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 2px; }
-        .stat-label { font-size: 0.7rem; color: #94a3b8; font-weight: 600; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        .stat-card { background: rgba(18, 8, 12, 0.65); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 10px; text-align: center; }
+        .stat-icon { width: 36px; height: 36px; background: rgba(225, 29, 72, 0.15); color: var(--primary-red); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+        .stat-value { font-size: 1.25rem; font-weight: 900; color: #ffffff; margin-bottom: 2px; }
+        .stat-label { font-size: 0.72rem; color: #94a3b8; font-weight: 700; }
 
-        /* DASHBOARD COUNTER REGISTERED PLAYERS */
-        .dashboard-counter-box { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto 30px; text-align: left; }
-        .counter-info-title { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .counter-info-val { font-size: 1.4rem; font-weight: 800; color: #4ade80; }
+        .dashboard-counter-box { background: rgba(18, 8, 12, 0.85); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; max-width: 620px; margin: 0 auto 30px; text-align: left; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .counter-info-title { font-size: 0.8rem; color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .counter-info-val { font-size: 1.8rem; font-weight: 900; color: #4ade80; text-shadow: 0 0 15px rgba(74, 222, 128, 0.3); }
 
-        .dashboard-filler { background: linear-gradient(180deg, rgba(20, 10, 14, 0.8) 0%, #080304 100%); border: 1px solid var(--card-border); border-radius: 16px; padding: 30px 20px; text-align: center; margin-bottom: 20px; }
-        .dashboard-filler h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
-        .dashboard-filler p { font-size: 0.85rem; color: #94a3b8; max-width: 500px; margin: 0 auto 20px; line-height: 1.6; }
-        .btn-discord-join { display: inline-flex; align-items: center; gap: 8px; background: #5865F2; color: #fff; padding: 12px 24px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-        .btn-discord-join:hover { background: #4752C4; transform: translateY(-2px); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 30px; }
+        .feature-box { background: rgba(18, 8, 12, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 22px 18px; text-align: center; transition: 0.3s; }
+        .feature-box:hover { background: rgba(225, 29, 72, 0.1); border-color: var(--card-border-glow); transform: translateY(-4px); }
+        .feature-icon { color: var(--primary-red); margin-bottom: 12px; display: flex; justify-content: center; }
+        .feature-title { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .feature-desc { font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
 
-        #sectionShop, #sectionTeam, #sectionDonator, #sectionAdmin, #sectionGallery, #sectionRules, #sectionVote { display: none; }
+        .dashboard-filler { background: linear-gradient(180deg, rgba(22, 10, 15, 0.85) 0%, rgba(8, 3, 5, 0.95) 100%); border: 1px solid var(--card-border-glow); border-radius: 20px; padding: 35px 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+        .dashboard-filler h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 10px; color: #fff; }
+        .dashboard-filler p { font-size: 0.88rem; color: #94a3b8; max-width: 540px; margin: 0 auto 22px; line-height: 1.6; }
+        .btn-discord-join { display: inline-flex; align-items: center; gap: 10px; background: var(--discord-color); color: #fff; padding: 13px 26px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 0.92rem; transition: 0.25s; box-shadow: 0 6px 20px rgba(88, 101, 242, 0.3); }
+        .btn-discord-join:hover { background: #4752C4; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5); }
 
-        /* ACCORDION FAQ */
-        .faq-container { display: flex; flex-direction: column; gap: 12px; max-width: 700px; margin: 0 auto; }
-        .faq-item { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; }
-        .faq-question { padding: 16px 20px; font-weight: 700; font-size: 0.92rem; color: #fff; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        #sectionShop, #sectionTeam, #sectionDonator, #sectionAdmin, #sectionGallery, #sectionRules, #sectionVote, #sectionStash { display: none; }
+
+        /* STASH BUILD SECTION */
+        .stash-toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+        .stash-search-input { flex: 1; min-width: 200px; background: rgba(5, 2, 4, 0.8); border: 1px solid var(--card-border); color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; outline: none; }
+        .stash-filter-select { background: rgba(18, 8, 12, 0.9); border: 1px solid var(--card-border); color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; outline: none; font-weight: 700; }
+        .stash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        
+        .stash-card { 
+            background: rgba(18, 8, 12, 0.85); 
+            border: 1px solid var(--card-border); 
+            border-radius: 18px; 
+            overflow: hidden; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+        .stash-card:hover { border-color: var(--primary-red); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(225, 29, 72, 0.25); }
+        .stash-img-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; }
+        .stash-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .stash-card:hover .stash-img-wrapper img { transform: scale(1.05); }
+        .stash-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); border: 1px solid var(--primary-red); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; backdrop-filter: blur(4px); }
+        
+        .stash-body { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .stash-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .stash-owner { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+        .stash-owner img { width: 18px; height: 18px; border-radius: 4px; image-rendering: pixelated; }
+        .stash-desc-preview { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .stash-cost { font-size: 0.82rem; font-weight: 800; color: var(--gold); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .stash-build-time { font-size: 0.78rem; font-weight: 700; color: #38bdf8; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+
+        .stash-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; }
+        .stash-stats { display: flex; gap: 14px; font-size: 0.78rem; color: var(--text-muted); font-weight: 700; }
+        .stash-stat-item { display: flex; align-items: center; gap: 4px; }
+        .btn-like { background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 4px; font-weight: 800; font-size: 0.8rem; transition: 0.2s; }
+        .btn-like.liked { color: var(--primary-red); }
+        .btn-like:hover { color: var(--primary-red); }
+
+        .action-btn-row { display: flex; gap: 6px; margin-top: 10px; }
+        .btn-action-small { padding: 6px 12px; border-radius: 8px; font-size: 0.72rem; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-edit { background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; color: #38bdf8; }
+        .btn-edit:hover { background: #38bdf8; color: #000; }
+        .btn-delete { background: rgba(225, 29, 72, 0.15); border: 1px solid var(--primary-red); color: #f87171; }
+        .btn-delete:hover { background: var(--primary-red); color: #fff; }
+
+        .image-preview-container {
+            width: 100%;
+            height: 160px;
+            border: 2px dashed var(--card-border);
+            border-radius: 12px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .image-preview-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* SHOP / STORE SECTION */
+        .store-tab-switch { display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; }
+        .btn-store-tab { background: rgba(18, 8, 12, 0.8); border: 1px solid var(--card-border); color: var(--text-muted); padding: 12px 28px; border-radius: 14px; font-weight: 800; font-size: 0.92rem; cursor: pointer; transition: 0.25s; }
+        .btn-store-tab.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); box-shadow: 0 6px 20px var(--primary-glow); }
+
+        .store-items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+        .item-card { 
+            background: linear-gradient(145deg, rgba(28, 12, 19, 0.9) 0%, rgba(12, 4, 8, 0.95) 100%); 
+            border: 1px solid var(--card-border); 
+            border-radius: 22px; 
+            padding: 26px 22px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: all 0.35s ease; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6); 
+        }
+        .item-card:hover { border-color: var(--primary-red); transform: translateY(-6px); box-shadow: 0 18px 40px rgba(225,29,72,0.3); }
+        
+        .item-badge { position: absolute; top: 16px; right: -32px; transform: rotate(45deg); background: var(--primary-red); color: #fff; font-size: 0.62rem; font-weight: 900; padding: 4px 34px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+        .item-badge.gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #000; }
+        .item-badge.amethyst { background: linear-gradient(90deg, #9333ea, #c084fc); color: #fff; }
+
+        .rank-icon-wrapper { width: 62px; height: 62px; margin: 0 auto 16px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: inset 0 0 15px rgba(255,255,255,0.08); }
+        .rank-stone { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+        .rank-copper { background: rgba(217, 119, 6, 0.15); color: #d97706; border: 1px solid rgba(217, 119, 6, 0.3); }
+        .rank-diamond { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .rank-amethyst { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
+        
+        .price-tag { font-size: 1.4rem; font-weight: 900; color: #4ade80; margin: 12px 0 18px 0; text-shadow: 0 0 12px rgba(74,222,128,0.25); }
+        .item-benefits { list-style: none; margin-bottom: 22px; font-size: 0.82rem; color: #cbd5e1; text-align: left; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 16px; }
+        .item-benefits li { margin-bottom: 9px; display: flex; align-items: center; gap: 10px; }
+
+        /* LEADERSHIP / STAFF SECTION */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; max-width: 850px; margin: 0 auto; }
+        .team-card { 
+            background: linear-gradient(145deg, rgba(22, 10, 16, 0.92) 0%, rgba(10, 4, 7, 0.98) 100%); 
+            border: 1px solid var(--card-border); 
+            border-radius: 26px; 
+            padding: 0; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.7); 
+            position: relative; 
+            overflow: hidden; 
+            transition: all 0.4s ease; 
+        }
+        .team-card:hover { transform: translateY(-6px); border-color: var(--card-border-glow); box-shadow: 0 18px 45px rgba(225, 29, 72, 0.25); }
+        .team-banner { height: 90px; width: 100%; background: linear-gradient(90deg, var(--primary-red), #581c25); position: absolute; top: 0; left: 0; z-index: 0; opacity: 0.35; }
+        .team-head-img { width: 95px; height: 95px; border-radius: 50%; margin: 32px auto 12px auto; image-rendering: pixelated; border: 3px solid #1a080d; padding: 0; background: #000; box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35); position: relative; z-index: 1; object-fit: cover; }
+        
+        .team-content { position: relative; z-index: 1; padding: 0 22px 22px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .team-name { font-size: 1.35rem; font-weight: 900; color: #fff; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .team-role { display: inline-block; font-size: 0.72rem; font-weight: 800; padding: 6px 18px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+        
+        .role-owner { border: 1px solid #f43f5e; color: #f43f5e; background: rgba(244, 63, 94, 0.12); }
+        .role-coowner { border: 1px solid var(--gold); color: var(--gold); background: rgba(251, 191, 36, 0.12); }
+        .role-headstaff { border: 1px solid #60a5fa; color: #60a5fa; background: rgba(96, 165, 250, 0.12); }
+        .role-dev { border: 1px solid var(--amethyst); color: var(--amethyst); background: rgba(192, 132, 252, 0.12); }
+
+        .staff-bio { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 18px; }
+        
+        .staff-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: auto; }
+        .btn-staff-act { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border-radius: 14px; 
+            font-size: 0.82rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            text-align: center; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            transition: all 0.3s ease; 
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-copy-id { 
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 101, 52, 0.25) 100%); 
+            border: 1px solid rgba(34, 197, 94, 0.6); 
+            color: #4ade80; 
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.12);
+        }
+        .btn-copy-id:hover { 
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); 
+            color: #000; 
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-copy-usn { 
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(49, 58, 150, 0.25) 100%); 
+            border: 1px solid rgba(88, 101, 242, 0.6); 
+            color: #a5b4fc; 
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.12);
+        }
+        .btn-copy-usn:hover { 
+            background: linear-gradient(135deg, #5865F2 0%, #3b429f 100%); 
+            color: #fff; 
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* RULES, FAQ, VOTE, GALLERY & DONATOR */
+        .faq-container { display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; }
+        .faq-item { background: rgba(18, 8, 12, 0.65); border: 1px solid var(--card-border); border-radius: 14px; overflow: hidden; }
+        .faq-question { padding: 18px 22px; font-weight: 800; font-size: 0.95rem; color: #fff; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .faq-question i { transition: transform 0.3s ease; color: var(--primary-red); }
-        .faq-answer { padding: 0 20px 16px 20px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; display: none; }
+        .faq-answer { padding: 0 22px 18px 22px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; display: none; }
         .faq-item.active .faq-answer { display: block; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        /* VOTE SECTION */
-        .vote-grid { display: flex; justify-content: center; max-width: 400px; margin: 0 auto; }
-        .vote-card { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; width: 100%; }
-        .vote-card:hover { border-color: var(--primary-red); transform: translateY(-3px); }
-        .vote-icon { width: 48px; height: 48px; background: rgba(225, 29, 72, 0.15); color: var(--primary-red); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 20px; }
+        .vote-grid { display: flex; justify-content: center; max-width: 420px; margin: 0 auto; }
+        .vote-card { background: rgba(18, 8, 12, 0.65); border: 1px solid var(--card-border); border-radius: 18px; padding: 26px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; width: 100%; }
+        .vote-card:hover { border-color: var(--primary-red); transform: translateY(-4px); }
+        .vote-icon { width: 50px; height: 50px; background: rgba(225, 29, 72, 0.15); color: var(--primary-red); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; }
 
-        /* TOP DONATUR */
         .leaderboard-subnav { display: flex; gap: 8px; margin-bottom: 35px; justify-content: center; }
-        .subnav-btn { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); color: #94a3b8; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: 0.2s; }
+        .subnav-btn { background: rgba(18, 8, 12, 0.85); border: 1px solid var(--card-border); color: #94a3b8; padding: 9px 18px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
         .subnav-btn.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
 
-        .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 10px; margin: 40px 0; width: 100%; }
+        .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 12px; margin: 40px 0; width: 100%; }
         .podium-slot { flex: 1; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; }
         .podium-avatar { height: 140px; width: auto; max-width: 100%; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); margin-bottom: 12px; }
         .podium-slot.rank-1 { transform: translateY(-20px); }
         .podium-slot.rank-1 .podium-avatar { height: 175px; }
-        .badge-number { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; color: #000; margin-bottom: 8px; }
+        .badge-number { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; color: #000; margin-bottom: 8px; }
         .rank-1 .badge-number { background: var(--gold); }
         .rank-2 .badge-number { background: var(--silver); }
         .rank-3 .badge-number { background: var(--bronze); color: #fff; }
-        .player-name-text { font-weight: 800; font-size: 0.88rem; color: #ffffff; white-space: nowrap; }
+        .player-name-text { font-weight: 800; font-size: 0.9rem; color: #ffffff; white-space: nowrap; }
         
         .player-amount-wrapper { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin-top: 4px; width: 100%; }
-        .player-rp-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); }
-        .player-amount-val { font-weight: 800; font-size: 0.8rem; }
-        .rank-1 .player-amount-val { color: var(--gold); font-size: 0.95rem; }
+        .player-rp-label { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); }
+        .player-amount-val { font-weight: 800; font-size: 0.85rem; }
+        .rank-1 .player-amount-val { color: var(--gold); font-size: 1rem; }
         .rank-2 .player-amount-val { color: var(--silver); }
         .rank-3 .player-amount-val { color: var(--bronze); }
 
-        /* STORE SECTION */
-        .store-tab-switch { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
-        .btn-store-tab { background: rgba(20, 10, 14, 0.8); border: 1px solid var(--card-border); color: var(--text-muted); padding: 10px 24px; border-radius: 12px; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: 0.25s; }
-        .btn-store-tab.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); box-shadow: 0 4px 15px rgba(225,29,72,0.3); }
-
-        .store-items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-        .item-card { background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; text-align: center; }
-        .item-card:hover { border-color: var(--primary-red); transform: translateY(-3px); }
-        .rank-icon-wrapper { width: 50px; height: 50px; margin: 0 auto 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .rank-stone { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
-        .rank-copper { background: rgba(217, 119, 6, 0.1); color: #d97706; }
-        .rank-diamond { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
-        .rank-amethyst { background: rgba(192, 132, 252, 0.1); color: #c084fc; }
-        
-        .price-tag { font-size: 1.15rem; font-weight: 800; color: #4ade80; margin: 10px 0; }
-        .item-benefits { list-style: none; margin-bottom: 16px; font-size: 0.78rem; color: #cbd5e1; text-align: left; }
-        .item-benefits li { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-
-        /* GALERI */
-        .gallery-toolbar { display: flex; gap: 10px; margin-bottom: 20px; }
-        .search-gallery-input { flex: 1; background: #080304; border: 1px solid var(--card-border); color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; outline: none; }
-        .btn-upload { background: var(--primary-red); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-        .gallery-item { background: #000; border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; position: relative; aspect-ratio: 1; cursor: pointer; }
+        .gallery-toolbar { display: flex; gap: 10px; margin-bottom: 22px; }
+        .search-gallery-input { flex: 1; background: rgba(5, 2, 4, 0.8); border: 1px solid var(--card-border); color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; outline: none; }
+        .btn-upload { background: var(--primary-red); color: #fff; padding: 12px 18px; border-radius: 12px; font-weight: 800; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 8px; border: none; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+        .gallery-item { background: #000; border: 1px solid var(--card-border); border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 1; cursor: pointer; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-        .gallery-item:hover img { transform: scale(1.05); }
-        .gallery-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); padding: 15px 8px 8px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .uploader-name { font-size: 0.72rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .gallery-item:hover img { transform: scale(1.06); }
+        .gallery-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); padding: 18px 10px 10px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .uploader-name { font-size: 0.75rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        /* FULLSCREEN MODAL */
-        .img-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
-        .img-modal-content { max-width: 90%; max-height: 90%; border-radius: 12px; border: 1px solid var(--primary-red); object-fit: contain; }
+        .img-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+        .img-modal-content { max-width: 90%; max-height: 90%; border-radius: 14px; border: 1px solid var(--primary-red); object-fit: contain; }
 
-        /* STAFF SECTION */
-        .team-grid { display: flex; flex-direction: column; gap: 16px; max-width: 400px; margin: 0 auto; }
-        .team-card { background: #0a0406; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .team-head-img { width: 85px; height: 85px; border-radius: 20px; margin: 16px auto 0 auto; image-rendering: pixelated; border: 2px solid var(--primary-red); padding: 2px; background: #000; box-shadow: 0 4px 15px rgba(225, 29, 72, 0.2); }
-        .team-name { font-size: 1.25rem; font-weight: 800; color: #fff; margin-top: 12px; order: 2; letter-spacing: 0.5px; }
-        .team-role { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; letter-spacing: 1px; order: 1; }
-        
-        .role-owner { border: 1px solid #f43f5e; color: #f43f5e; }
-        .role-coowner { border: 1px solid var(--gold); color: var(--gold); }
-        .role-headstaff { border: 1px solid #60a5fa; color: #60a5fa; }
-        .role-dev { border: 1px solid var(--amethyst); color: var(--amethyst); }
+        /* ADMIN PANEL & PRIVACY */
+        .admin-box { background: rgba(18, 8, 12, 0.85); border: 1px dashed var(--primary-red); padding: 20px; border-radius: 16px; margin-bottom: 22px; text-align: left; }
+        .account-table-container { width: 100%; overflow-x: auto; margin-top: 12px; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left; }
+        .admin-table th, .admin-table td { padding: 12px 14px; border-bottom: 1px solid var(--card-border); color: #fff; }
+        .admin-table th { color: var(--primary-red); font-weight: 800; background: rgba(225,29,72,0.06); }
 
-        /* ADMIN PANEL */
-        .admin-box { background: rgba(20, 10, 14, 0.8); border: 1px dashed var(--primary-red); padding: 18px; border-radius: 14px; margin-bottom: 20px; text-align: left; }
-        .account-table-container { width: 100%; overflow-x: auto; margin-top: 10px; }
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; }
-        .admin-table th, .admin-table td { padding: 10px 12px; border-bottom: 1px solid var(--card-border); color: #fff; }
-        .admin-table th { color: var(--primary-red); font-weight: 700; background: rgba(225,29,72,0.05); }
+        .privacy-terms-box {
+            background: rgba(225, 29, 72, 0.08);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            font-size: 0.76rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            text-align: left;
+        }
 
-        /* MODAL PEMBELIAN */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-card { background: #12070a; border: 1px solid var(--primary-red); border-radius: 20px; padding: 24px; max-width: 420px; width: 100%; text-align: center; position: relative; }
-        .modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; }
+        /* CUSTOM MODALS & OVERLAYS */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.88); 
+            backdrop-filter: blur(12px); 
+            z-index: 1000; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            overflow-y: auto; 
+        }
+        .modal-card { 
+            background: rgba(18, 7, 10, 0.95); 
+            border: 1px solid var(--primary-red); 
+            border-radius: 22px; 
+            padding: 28px; 
+            max-width: 500px; 
+            width: 100%; 
+            text-align: center; 
+            position: relative; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 30px rgba(225, 29, 72, 0.3); 
+            margin: auto; 
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-close { 
+            position: absolute; 
+            top: 16px; 
+            right: 16px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            color: var(--text-muted); 
+            cursor: pointer; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: 0.2s;
+        }
+        .modal-close:hover { background: var(--primary-red); color: #fff; }
 
-        /* NOTIF ALERT */
-        .custom-alert { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px); background: #12070a; border: 1px solid #22c55e; color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px; z-index: 9999; opacity: 0; transition: all 0.3s ease; pointer-events: none; }
+        /* CUSTOM CONFIRMATION DIALOG */
+        .confirm-dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .confirm-dialog-card {
+            background: #12070a;
+            border: 1px solid var(--primary-red);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(225,29,72,0.3);
+        }
+        .confirm-dialog-title { font-size: 1.15rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+        .confirm-dialog-msg { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+        .confirm-btn-group { display: flex; gap: 10px; }
+        .btn-confirm-yes { flex: 1; background: var(--primary-red); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+        .btn-confirm-yes:hover { background: var(--primary-hover); }
+        .btn-confirm-no { flex: 1; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+        .btn-confirm-no:hover { background: rgba(255,255,255,0.2); }
+
+        /* CUSTOM ALERT NOTIFICATION */
+        .custom-alert { 
+            position: fixed; 
+            bottom: 30px; 
+            left: 50%; 
+            transform: translateX(-50%) translateY(100px); 
+            background: #12070a; 
+            border: 1px solid #22c55e; 
+            color: #fff; 
+            padding: 12px 24px; 
+            border-radius: 30px; 
+            font-size: 0.88rem; 
+            font-weight: 800; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            z-index: 9999; 
+            opacity: 0; 
+            transition: all 0.3s ease; 
+            pointer-events: none; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8); 
+        }
         .custom-alert.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         /* FOOTER */
-        footer { border-top: 1px solid var(--card-border); background: #050203; padding: 40px 20px 24px; margin-top: 60px; }
-        .footer-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
-        .footer-col h4 { color: #fff; font-size: 0.95rem; font-weight: 800; margin-bottom: 14px; }
-        .footer-link { display: flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.82rem; margin-bottom: 10px; transition: 0.2s; }
+        footer { border-top: 1px solid var(--card-border); background: #040102; padding: 45px 20px 26px; margin-top: 70px; }
+        .footer-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-bottom: 32px; }
+        .footer-col h4 { color: #fff; font-size: 1rem; font-weight: 900; margin-bottom: 16px; }
+        .footer-link { display: flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; transition: 0.2s; }
         .footer-link:hover { color: var(--primary-red); }
-        .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 18px; font-size: 0.75rem; color: #64748b; }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; font-size: 0.78rem; color: #64748b; }
     </style>
 </head>
 <body>
 
     <div class="custom-alert" id="customAlert">
-        <i data-lucide="check-circle" style="color:#22c55e; width:18px;"></i> <span id="customAlertText">Berhasil!</span>
+        <i data-lucide="check-circle" id="customAlertIcon" style="color:#22c55e; width:20px;"></i> <span id="customAlertText">Berhasil!</span>
+    </div>
+
+    <!-- DIALOG KONFIRMASI CUSTOM -->
+    <div class="confirm-dialog-overlay" id="confirmDialog">
+        <div class="confirm-dialog-card">
+            <div class="confirm-dialog-title" id="confirmTitle">Konfirmasi</div>
+            <div class="confirm-dialog-msg" id="confirmMsg">Apakah Anda yakin ingin melakukan aksi ini?</div>
+            <div class="confirm-btn-group">
+                <button class="btn-confirm-no" onclick="closeConfirmDialog(false)">Batal</button>
+                <button class="btn-confirm-yes" id="btnConfirmYes" onclick="closeConfirmDialog(true)">Ya, Lanjutkan</button>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL GAMBAR GALERI -->
@@ -244,37 +680,140 @@
         <img class="img-modal-content" id="imgModalSrc" src="" alt="Fullscreen">
     </div>
 
+    <!-- MODAL FORM UPLOAD STASH -->
+    <div class="modal-overlay" id="uploadStashModal" onclick="handleOutsideClick(event, 'uploadStashModal')">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeUploadStashModal()"><i data-lucide="x"></i></button>
+            <h3 style="color:#fff; font-size:1.3rem; font-weight:900; margin-bottom:16px;" id="stashModalHeaderTitle">Upload Stash / Base Build</h3>
+            
+            <form id="stashForm" onsubmit="saveStashBuild(event)">
+                <input type="hidden" id="editStashId" value="">
+                <div class="input-group">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; display: block;">Judul Stash Build</label>
+                    <input type="text" id="stashTitleInput" class="input-field" placeholder="Contoh: Secret Underground Stash v2" required>
+                </div>
+                <div class="input-group">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; display: block;">Ukuran & Tingkat Kesulitan</label>
+                    <select id="stashDifficultyInput" class="select-field" required>
+                        <option value="Easy - Small">Easy - Small Base</option>
+                        <option value="Medium - Standard">Medium - Standard Base</option>
+                        <option value="Hard - Advanced">Hard - Advanced Base</option>
+                        <option value="Massive - Mega Stash">Massive - Mega Stash</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; display: block;">Estimasi Biaya Pembangunan (In-Game Money / Shards)</label>
+                    <input type="text" id="stashCostInput" class="input-field" placeholder="$ 10.000.000 / Shards" oninput="formatCurrencyInput(this)" required>
+                </div>
+
+                <div class="input-group">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; display: block;">Estimasi Waktu Pembangunan</label>
+                    <div style="display: flex; gap: 8px;">
+                        <select id="stashTimeUnit" class="select-field" style="flex: 1;" required>
+                            <option value="Hari">Hari</option>
+                            <option value="Minggu">Minggu</option>
+                            <option value="Bulan">Bulan</option>
+                            <option value="Tahun">Tahun</option>
+                        </select>
+                        <input type="number" id="stashTimeValue" class="input-field" placeholder="Masukkan angka..." min="1" style="flex: 1;" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; display: block;">Deskripsi Base / Stash</label>
+                    <textarea id="stashDescInput" class="textarea-field" rows="3" placeholder="Tuliskan detail tempat penyimpanan, pertahanan, atau struktur..." required></textarea>
+                </div>
+                <div class="input-group" id="stashImageInputGroup">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; display: block;">Foto Screenshot Base</label>
+                    <input type="file" id="stashImageInput" class="input-field" accept="image/*" onchange="previewUploadImage(event)">
+                    <div class="image-preview-container" id="uploadPreviewBox" style="display:none;">
+                        <img id="uploadPreviewImg" src="" alt="Preview Image">
+                    </div>
+                </div>
+
+                <div class="privacy-terms-box">
+                    <strong style="color:var(--primary-red);"> Kebijakan Upload Stash Build:</strong><br>
+                    Dilarang mengunggah gambar vulgar, SARA, atau promosi RMT/Transaksional Uang Asli. Jika terbukti melakukan transaksi akun/base dengan uang asli, akun website akan **di-banned permanen** dan akun di-banned dari server Minecraft!
+                </div>
+
+                <button type="submit" class="btn-submit" style="margin-top: 10px;" id="btnSubmitStash">Upload Stash Build &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL PREVIEW DETAIL STASH BUILD -->
+    <div class="modal-overlay" id="previewStashModal" onclick="handleOutsideClick(event, 'previewStashModal')">
+        <div class="modal-card" style="max-width: 600px; text-align: left;">
+            <button class="modal-close" onclick="closePreviewStashModal()"><i data-lucide="x"></i></button>
+            <img id="stashPreviewImg" src="" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 14px; border: 1px solid var(--card-border); margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 id="stashPreviewTitle" style="color:#fff; font-size:1.4rem; font-weight:900;">-</h3>
+                <span id="stashPreviewBadge" class="stash-badge" style="position: static;">-</span>
+            </div>
+            
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                <img id="stashPreviewOwnerHead" src="https://mc-heads.net/avatar/MHF_Steve/64" style="width: 22px; height: 22px; border-radius: 6px; image-rendering: pixelated;">
+                <span>Pemilik Base: <strong id="stashPreviewOwner" style="color:#fff;">-</strong></span>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 16px;">
+                <div style="background: rgba(225, 29, 72, 0.08); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px;">
+                    <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;">Estimasi Biaya:</div>
+                    <div id="stashPreviewCost" style="font-size: 1.05rem; font-weight: 900; color: var(--gold); margin-top: 2px;">-</div>
+                </div>
+                <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 12px;">
+                    <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;">Waktu Pembangunan:</div>
+                    <div id="stashPreviewBuildTime" style="font-size: 1.05rem; font-weight: 900; color: #38bdf8; margin-top: 2px;">-</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="font-size: 0.9rem; color: #fff; font-weight: 800; margin-bottom: 6px;">Deskripsi Base:</h4>
+                <p id="stashPreviewDesc" style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; white-space: pre-line;">-</p>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;">
+                <div style="display: flex; gap: 16px; font-size: 0.82rem; color: var(--text-muted); font-weight: 700;">
+                    <span><i data-lucide="eye" style="width:16px; vertical-align:middle;"></i> <span id="stashPreviewViews">0</span> View</span>
+                    <span><i data-lucide="heart" style="width:16px; vertical-align:middle;"></i> <span id="stashPreviewLikes">0</span> Like</span>
+                </div>
+                <button id="stashPreviewLikeBtn" class="btn-submit" style="width: auto; padding: 8px 16px; font-size: 0.8rem;" onclick="toggleLikeActiveStash()">Beri Like</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL PEMBELIAN -->
-    <div class="modal-overlay" id="buyModal">
+    <div class="modal-overlay" id="buyModal" onclick="handleOutsideClick(event, 'buyModal')">
         <div class="modal-card">
             <button class="modal-close" onclick="closeModal()"><i data-lucide="x"></i></button>
-            <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:8px;" id="modalItemTitle">Detail Pembelian</h3>
+            <h3 style="color:#fff; font-size:1.3rem; font-weight:900; margin-bottom:8px;" id="modalItemTitle">Detail Pembelian</h3>
             
-            <div style="background:#080304; padding:12px; border-radius:12px; border:1px solid var(--card-border); margin-bottom:16px; text-align:left;">
-                <div style="font-size:0.75rem; color:var(--text-muted);">Total Tagihan:</div>
-                <div style="font-size:1.2rem; font-weight:800; color:#4ade80;" id="modalItemPrice">Rp 0</div>
+            <div style="background:#080304; padding:14px; border-radius:14px; border:1px solid var(--card-border); margin-bottom:18px; text-align:left;">
+                <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Total Tagihan:</div>
+                <div style="font-size:1.3rem; font-weight:900; color:#4ade80;" id="modalItemPrice">Rp 0</div>
             </div>
 
-            <div style="font-size:0.8rem; color:#e2e8f0; line-height:1.6; margin-bottom:20px; text-align:left; background: rgba(225, 29, 72, 0.1); padding: 12px; border-radius: 12px;">
-                <strong style="color:var(--primary-red);">ALUR PEMBELIAN:</strong><br>
-                1. Klik tombol Discord di bawah untuk bergabung.<br>
-                2. Pergi ke channel <b>#create-ticket</b> atau hubungi Admin.<br>
-                3. Kirim pesan dengan format:<br>
-                <code style="background:#000; padding:6px; border-radius:6px; color:var(--gold); display:block; margin-top:8px;">Order: [Nama Paket]<br>IGN Kamu: [Username]</code>
+            <div style="font-size:0.82rem; color:#e2e8f0; line-height:1.6; margin-bottom:22px; text-align:left; background: rgba(225, 29, 72, 0.12); padding: 14px; border-radius: 14px; border: 1px solid var(--card-border);">
+                <strong style="color:var(--primary-red); font-size:0.88rem;">ALUR PEMBELIAN DI DISCORD:</strong><br>
+                1. Klik tombol di bawah untuk masuk ke Server Discord.<br>
+                2. Cari & masuk ke channel <b># Ticket-Support</b>.<br>
+                3. Buka tiket baru dan kirim format berikut:<br>
+                <code style="background:#000; padding:8px 10px; border-radius:8px; color:var(--gold); display:block; margin-top:8px; font-weight:700; border: 1px solid rgba(255,255,255,0.1);">Order: [Nama Paket]<br>IGN Minecraft: [Username]</code>
             </div>
 
-            <a href="https://discord.gg/6tjxvPUFBH" target="_blank" class="btn-submit" style="text-decoration:none; display:inline-block;">Join Discord & Buka Tiket &rarr;</a>
+            <a href="https://discord.gg/6tjxvPUFBH" target="_blank" class="btn-submit" style="text-decoration:none;">Buka # Ticket-Support &rarr;</a>
         </div>
     </div>
 
     <!-- LOGIN & REGISTER PAGE -->
     <div id="page-login">
+        <div class="auth-glow-bg"></div>
         <div class="card-login">
             <div class="login-head-preview">
                 <img id="loginHeadImg" src="https://mc-heads.net/avatar/MHF_Steve/64" alt="Skin Head" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/64'">
             </div>
             <h2 class="title">MineHera</h2>
-            <p class="subtitle" id="authSubtitle">Silahkan Register atau Login akun Anda</p>
+            <p class="subtitle" id="authSubtitle">Silahkan Login akun Anda</p>
             <div class="alert-error" id="errorBox"></div>
 
             <div class="auth-switch-row">
@@ -288,18 +827,22 @@
             </div>
 
             <div class="input-group">
-                <input type="text" class="input-field" id="usernameInput" placeholder="Username Minecraft (Bedrock pakai titik)..." oninput="updateLoginSkinPreview()">
+                <input type="text" class="input-field" id="usernameInput" placeholder="Username Minecraft..." oninput="handleUsernameInput()">
             </div>
             <div class="input-group">
                 <input type="password" class="input-field" id="passwordInput" placeholder="Password Web Akun...">
             </div>
+            
+            <div class="input-group" id="confirmPasswordGroup" style="display: none;">
+                <input type="password" class="input-field" id="confirmPasswordInput" placeholder="Konfirmasi Password Web...">
+            </div>
 
-            <div class="admin-toggle" id="adminToggleContainer">
+            <div class="admin-toggle" id="adminToggleContainer" style="display: none;">
                 <input type="checkbox" id="isAdminCheck" onchange="toggleAdminField()">
-                <label for="isAdminCheck">Apakah anda admin?</label>
+                <label for="isAdminCheck">Daftar / Masuk Sebagai Admin</label>
             </div>
             <div class="input-group" id="adminCodeGroup" style="display: none;">
-                <input type="password" class="input-field" id="adminCodeInput" placeholder="Masukan Kode Akses Admin...">
+                <input type="password" class="input-field" id="adminCodeInput" placeholder="Kode Akses Admin (MineHera2026)">
             </div>
 
             <button class="btn-submit" id="authSubmitBtn" onclick="prosesAuth()">Masuk Ke Web &rarr;</button>
@@ -319,10 +862,10 @@
                         <img id="navLogoImg" class="player-head-nav" src="https://mc-heads.net/avatar/MHF_Steve/64" alt="Profil" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/64'">
                     </button>
                     <div class="profile-dropdown" id="profileDropdown">
-                        <div style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <div style="font-size: 0.7rem; color: var(--text-muted);">Masuk Sebagai:</div>
-                            <div id="dropdownUsernameText" style="font-weight: 800; font-size: 0.9rem; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Player</div>
-                            <div id="dropdownPlatformText" style="font-size: 0.72rem; font-weight: 700; color: var(--primary-red); margin-top: 2px;">Platform: Java</div>
+                        <div style="padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-weight:700;">Masuk Sebagai:</div>
+                            <div id="dropdownUsernameText" style="font-weight: 800; font-size: 0.95rem; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Player</div>
+                            <div id="dropdownPlatformText" style="font-size: 0.75rem; font-weight: 800; color: var(--primary-red); margin-top: 2px;">Platform: Java</div>
                         </div>
                         <a onclick="showSection('sectionHome'); toggleProfileMenu();" class="profile-dropdown-item"><i data-lucide="user" style="width:16px;"></i> Akun Saya</a>
                         <a onclick="prosesLogout()" class="profile-dropdown-item logout"><i data-lucide="log-out" style="width:16px;"></i> Keluar Akun</a>
@@ -336,6 +879,7 @@
 
             <nav class="nav-menu" id="navMenu">
                 <a onclick="showSection('sectionHome'); toggleMenu();" class="nav-item"><i data-lucide="home"></i> Beranda</a>
+                <a onclick="showSection('sectionStash'); toggleMenu();" class="nav-item"><i data-lucide="box"></i> Stash Build</a>
                 <a onclick="showSection('sectionRules'); toggleMenu();" class="nav-item"><i data-lucide="book-open"></i> Rules & FAQ</a>
                 <a onclick="showSection('sectionVote'); toggleMenu();" class="nav-item"><i data-lucide="thumbs-up"></i> Vote Server</a>
                 <a onclick="showSection('sectionDonator'); toggleMenu();" class="nav-item"><i data-lucide="award"></i> Top Donatur</a>
@@ -359,15 +903,15 @@
 
                 <div class="dashboard-counter-box">
                     <div>
-                        <div class="counter-info-title">Total Pemain Terdaftar</div>
-                        <div style="font-size: 0.78rem; color: var(--text-muted);">Akun terverifikasi di database web</div>
+                        <div class="counter-info-title">Total Akun Terdaftar</div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">Dari seluruh pendaftaran website</div>
                     </div>
-                    <div class="counter-info-val" id="counterRegisteredPlayers">100+</div>
+                    <div class="counter-info-val" id="counterRegisteredPlayers">0</div>
                 </div>
 
                 <div class="server-ip-box">
-                    <div>
-                        <div style="font-size:0.68rem; color:#94a3b8; font-weight:700;">IP SERVER JAVA & BEDROCK</div>
+                    <div class="ip-info-wrapper">
+                        <div class="ip-label">IP SERVER JAVA & BEDROCK</div>
                         <div class="ip-text">play.minehera.xyz:19155</div>
                     </div>
                     <button class="btn-copy" onclick="copyIp()">Salin IP</button>
@@ -391,12 +935,53 @@
                     </div>
                 </div>
 
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon"><i data-lucide="heart" style="width: 28px; height: 28px;"></i></div>
+                        <div class="feature-title">Lifesteal Core</div>
+                        <div class="feature-desc">Bunuh pemain lain untuk mencuri heart (nyawa) mereka dan dominasi server.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon"><i data-lucide="swords" style="width: 28px; height: 28px;"></i></div>
+                        <div class="feature-title">Pure Anarchy</div>
+                        <div class="feature-desc">Griefing, Raiding, dan Scamming sepenuhnya dibolehkan. Bertahan dengan caramu.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon"><i data-lucide="zap" style="width: 28px; height: 28px;"></i></div>
+                        <div class="feature-title">Crossplay Support</div>
+                        <div class="feature-desc">Bermain bersama dari device Java (PC) maupun Bedrock Edition (HP/Console).</div>
+                    </div>
+                </div>
+
                 <div class="dashboard-filler">
                     <h3>Komunitas & Lifesteal</h3>
-                    <p>Di MineHera, setiap kali Anda mati terbunuh pemain lain, Anda akan kehilangan satu batas nyawa (heart), dan pembunuh Anda akan mendapatkannya! Bergabunglah di Discord untuk mencari clan atau melakukan jual beli aman.</p>
+                    <p>Di MineHera, setiap kali Anda mati terbunuh pemain lain, Anda akan kehilangan satu batas nyawa (heart), dan pembunuh Anda akan mendapatkan! Bergabunglah di Discord untuk mencari clan atau melakukan jual beli aman.</p>
                     <a href="https://discord.gg/6tjxvPUFBH" target="_blank" class="btn-discord-join"><i data-lucide="message-square"></i> Bergabung Ke Discord Server</a>
                 </div>
             </div>
+        </div>
+
+        <!-- STASH BUILD SECTION -->
+        <div class="container" id="sectionStash">
+            <div class="section-tag">DATABASE BASE & REFRENSIONS</div>
+            <h2 class="section-title">Stash <span>Build Showcase</span></h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-top: -15px; margin-bottom: 22px;">Bagikan dan jelajahi desain base stash terkuat pemain MineHera! (Limit: Maksimal 3 Base Per Akun)</p>
+
+            <div class="stash-toolbar">
+                <input type="text" id="searchStashInput" class="stash-search-input" placeholder="Cari judul stash / nama pemilik..." onkeyup="filterStashBuilds()">
+                <select id="filterDifficultySelect" class="stash-filter-select" onchange="filterStashBuilds()">
+                    <option value="ALL">Semua Ukuran & Difficulty</option>
+                    <option value="Easy">Easy - Small</option>
+                    <option value="Medium">Medium - Standard</option>
+                    <option value="Hard">Hard - Advanced</option>
+                    <option value="Massive">Massive - Mega Stash</option>
+                </select>
+                <button class="btn-upload" onclick="openUploadStashModal()">
+                    <i data-lucide="plus-circle" style="width:16px;"></i> Upload Stash Build
+                </button>
+            </div>
+
+            <div class="stash-grid" id="stashGrid"></div>
         </div>
 
         <!-- RULES & FAQ SECTION -->
@@ -404,14 +989,14 @@
             <div class="section-tag">INFORMASI SERVER</div>
             <h2 class="section-title">Rules & <span>FAQ</span></h2>
 
-            <div class="rules-grid" style="margin-bottom: 40px;">
-                <div class="rule-card green" style="background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-left: 4px solid #22c55e; padding: 20px; border-radius: 0 12px 12px 0; text-align: left;">
+            <div style="margin-bottom: 40px;">
+                <div style="background: rgba(18, 8, 12, 0.65); border: 1px solid var(--card-border); border-left: 4px solid #22c55e; padding: 22px; border-radius: 0 14px 14px 0; text-align: left;">
                     <h4 style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:8px;"><i data-lucide="check-circle" style="color: #22c55e;"></i> Hal yang Diperbolehkan (Bebas)</h4>
-                    <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.6;">PvP di mana saja, membunuh pemain untuk mencuri Heart, melakukan Griefing, Scamming, dan Raid base musuh.</p>
+                    <p style="font-size:0.88rem; color:#cbd5e1; line-height:1.6;">PvP di mana saja, membunuh pemain untuk mencuri Heart, melakukan Griefing, Scamming, dan Raid base musuh.</p>
                 </div>
-                <div class="rule-card" style="background: rgba(20, 10, 14, 0.6); border: 1px solid var(--card-border); border-left: 4px solid var(--primary-red); padding: 20px; border-radius: 0 12px 12px 0; margin-top: 15px; text-align: left;">
-                    <h4 style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:8px;"><i data-lucide="alert-triangle" style="color: var(--primary-red);"></i> DILARANG MENGGUNAKAN CHEAT</h4>
-                    <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.6;">Segala modifikasi klien ilegal (Hack Client, X-Ray, KillAura) berakibat Banned Permanen.</p>
+                <div style="background: rgba(18, 8, 12, 0.65); border: 1px solid var(--card-border); border-left: 4px solid var(--primary-red); padding: 22px; border-radius: 0 14px 14px 0; margin-top: 16px; text-align: left;">
+                    <h4 style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:8px;"><i data-lucide="alert-triangle" style="color: var(--primary-red);"></i> DILARANG MENGGUNAKAN CHEAT & RMT ILLEGAL</h4>
+                    <p style="font-size:0.88rem; color:#cbd5e1; line-height:1.6;">Segala modifikasi klien ilegal (Hack Client, X-Ray, KillAura) serta penjualan base/item menggunakan Uang Asli (RMT) di luar sistem resmi berakibat **Banned Permanen dari Web dan Server**.</p>
                 </div>
             </div>
 
@@ -441,15 +1026,15 @@
         <div class="container" id="sectionVote">
             <div class="section-tag">DUKUNG SERVER</div>
             <h2 class="section-title">Vote <span>MineHera</span></h2>
-            <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 500px; margin: 0 auto 30px; text-align: center;">Dukung server kami dengan memberikan vote setiap hari untuk mendapatkan reward in-game gratis!</p>
+            <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 500px; margin: 0 auto 30px; text-align: center;">Dukung server kami dengan memberikan vote setiap hari!</p>
             <div class="vote-grid">
                 <div class="vote-card">
                     <div>
                         <div class="vote-icon"><i data-lucide="external-link"></i></div>
-                        <h4 style="color:#fff; font-size:1rem; font-weight:800; margin-bottom:8px;">Vote Link</h4>
-                        <p style="color:var(--text-muted); font-size:0.8rem; line-height:1.5; margin-bottom:16px;">Dapatkan 1x Vote Crate Key dan Shards gratis.</p>
+                        <h4 style="color:#fff; font-size:1.05rem; font-weight:800; margin-bottom:8px;">Bantu Server Berkembang</h4>
+                        <p style="color:var(--text-muted); font-size:0.82rem; line-height:1.5; margin-bottom:18px;">Luangkan waktu Anda untuk vote server ini agar kami dapat terus berkembang dan menjadi lebih besar lagi.</p>
                     </div>
-                    <a href="https://minecraft-mp.com/server-s358584" target="_blank" class="btn-submit" style="text-decoration:none; display:inline-block; padding:10px;">Vote Sekarang &rarr;</a>
+                    <a href="https://minecraft-mp.com/server-s358584" target="_blank" class="btn-submit" style="text-decoration:none;">Vote Sekarang &rarr;</a>
                 </div>
             </div>
         </div>
@@ -458,6 +1043,12 @@
         <div class="container" id="sectionGallery">
             <div class="section-tag">KOMUNITAS SERVER</div>
             <h2 class="section-title">Galeri <span>Pemain</span></h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-top: -15px; margin-bottom: 22px;">Total Foto Terunggah: <span id="totalGalleryPhotos" style="font-weight: 800; color: var(--primary-red);">0</span> (Batas Limit: Maksimal 7 Foto Per Akun)</p>
+
+            <div class="privacy-terms-box" style="max-width: 700px; margin: 0 auto 20px auto;">
+                <strong style="color:var(--primary-red);"> Ketentuan Upload Galeri:</strong> Dilarang mengunggah gambar NSFW/vulgar, SARA, atau promosi RMT/Uang Asli. Pelanggaran berat berakibat Banned Permanen Website dan Server.
+            </div>
+
             <div class="gallery-toolbar">
                 <input type="text" id="searchGalleryInput" class="search-gallery-input" placeholder="Cari uploader..." onkeyup="searchGallery()">
                 <label class="btn-upload">
@@ -492,8 +1083,8 @@
                     <div><span class="badge-number">1</span></div>
                     <div class="player-name-text" id="top1-name">Azyll_</div>
                     <div class="player-amount-wrapper">
-                        <span class="player-rp-label" style="font-size:0.8rem;">Rp</span>
-                        <span class="player-amount-val" id="top1-amount" style="font-size:1.05rem;">1.000.000</span>
+                        <span class="player-rp-label" style="font-size:0.82rem;">Rp</span>
+                        <span class="player-amount-val" id="top1-amount" style="font-size:1.1rem;">1.000.000</span>
                     </div>
                 </div>
                 <div class="podium-slot rank-3">
@@ -522,50 +1113,57 @@
                 <div class="item-card">
                     <div>
                         <div class="rank-icon-wrapper rank-stone"><i data-lucide="box"></i></div>
-                        <div style="font-weight:800; font-size:1.1rem; color:#94a3b8;">Stone Rank</div>
+                        <div style="font-weight:900; font-size:1.15rem; color:#94a3b8;">Stone Rank</div>
                         <div class="price-tag">Rp 10.000</div>
                         <ul class="item-benefits">
-                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> Prefix [Stone]</li>
-                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> /kit stone</li>
+                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> Prefix [Stone] Eksklusif</li>
+                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> Akses Command /kit stone</li>
+                            <li><i data-lucide="check" style="width:14px; color:#94a3b8;"></i> Priority Slot Masuk Server</li>
                         </ul>
                     </div>
                     <button class="btn-submit" onclick="openPaymentGuide('Stone Rank', 'Rp 10.000')">Beli Rank</button>
                 </div>
 
                 <div class="item-card">
+                    <div class="item-badge">POPULER</div>
                     <div>
                         <div class="rank-icon-wrapper rank-copper"><i data-lucide="hexagon"></i></div>
-                        <div style="font-weight:800; font-size:1.1rem; color:#d97706;">Copper Rank</div>
+                        <div style="font-weight:900; font-size:1.15rem; color:#d97706;">Copper Rank</div>
                         <div class="price-tag">Rp 25.000</div>
                         <ul class="item-benefits">
-                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> Prefix [Copper]</li>
-                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> /kit copper</li>
+                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> Prefix [Copper] Keren</li>
+                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> Akses Command /kit copper</li>
+                            <li><i data-lucide="check" style="width:14px; color:#d97706;"></i> Bonus 500 In-Game Shards</li>
                         </ul>
                     </div>
                     <button class="btn-submit" onclick="openPaymentGuide('Copper Rank', 'Rp 25.000')">Beli Rank</button>
                 </div>
 
                 <div class="item-card">
+                    <div class="item-badge gold">BEST VALUE</div>
                     <div>
                         <div class="rank-icon-wrapper rank-diamond"><i data-lucide="gem"></i></div>
-                        <div style="font-weight:800; font-size:1.1rem; color:#38bdf8;">Diamond Rank</div>
+                        <div style="font-weight:900; font-size:1.15rem; color:#38bdf8;">Diamond Rank</div>
                         <div class="price-tag">Rp 75.000</div>
                         <ul class="item-benefits">
-                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> Prefix [Diamond]</li>
-                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> /kit diamond</li>
+                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> Prefix Glow [Diamond]</li>
+                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> Akses /kit diamond & /enderchest</li>
+                            <li><i data-lucide="check" style="width:14px; color:#38bdf8;"></i> Bonus 2.000 Shards</li>
                         </ul>
                     </div>
                     <button class="btn-submit" onclick="openPaymentGuide('Diamond Rank', 'Rp 75.000')">Beli Rank</button>
                 </div>
 
                 <div class="item-card">
+                    <div class="item-badge amethyst">EXCLUSIVE</div>
                     <div>
                         <div class="rank-icon-wrapper rank-amethyst"><i data-lucide="sparkles"></i></div>
-                        <div style="font-weight:800; font-size:1.1rem; color:var(--amethyst);">Amethyst Rank</div>
+                        <div style="font-weight:900; font-size:1.15rem; color:var(--amethyst);">Amethyst Rank</div>
                         <div class="price-tag">Rp 150.000</div>
                         <ul class="item-benefits">
                             <li><i data-lucide="check" style="width:14px; color:var(--amethyst);"></i> Prefix Exclusive [AMETHYST]</li>
-                            <li><i data-lucide="check" style="width:14px; color:var(--amethyst);"></i> Full Akses & Prioritas</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--amethyst);"></i> Akses /fly di Hub & VIP Kits</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--amethyst);"></i> Full Akses Prioritas & Discord Role</li>
                         </ul>
                     </div>
                     <button class="btn-submit" onclick="openPaymentGuide('Amethyst Rank', 'Rp 150.000')">Beli Rank</button>
@@ -576,23 +1174,24 @@
                 <div class="item-card">
                     <div>
                         <div class="rank-icon-wrapper rank-amethyst"><i data-lucide="coins"></i></div>
-                        <div style="font-weight:800; font-size:1.1rem; color:var(--amethyst);">1.000 Shards</div>
+                        <div style="font-weight:900; font-size:1.15rem; color:var(--amethyst);">1.000 Shards</div>
                         <div class="price-tag">Rp 1.000</div>
                         <ul class="item-benefits">
                             <li><i data-lucide="zap" style="width:14px; color:var(--amethyst);"></i> 1.000 In-Game Shards</li>
-                            <li><i data-lucide="check" style="width:14px; color:var(--primary-red);"></i> Untuk gacha / crate game</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--primary-red);"></i> Untuk beli item / spawner</li>
                         </ul>
                     </div>
                     <button class="btn-submit" onclick="openPaymentGuide('1.000 Shards', 'Rp 1.000')">Topup Shards</button>
                 </div>
                 <div class="item-card">
+                    <div class="item-badge gold">BEST DEAL</div>
                     <div>
                         <div class="rank-icon-wrapper rank-amethyst"><i data-lucide="coins"></i></div>
-                        <div style="font-weight:800; font-size:1.1rem; color:var(--amethyst);">10.000 Shards</div>
+                        <div style="font-weight:900; font-size:1.15rem; color:var(--amethyst);">10.000 Shards</div>
                         <div class="price-tag">Rp 10.000</div>
                         <ul class="item-benefits">
                             <li><i data-lucide="zap" style="width:14px; color:var(--amethyst);"></i> 10.000 In-Game Shards</li>
-                            <li><i data-lucide="check" style="width:14px; color:var(--primary-red);"></i> Bonus Spesial Shards</li>
+                            <li><i data-lucide="check" style="width:14px; color:var(--primary-red);"></i> Dapatkan item premium</li>
                         </ul>
                     </div>
                     <button class="btn-submit" onclick="openPaymentGuide('10.000 Shards', 'Rp 10.000')">Topup Shards</button>
@@ -600,34 +1199,70 @@
             </div>
         </div>
 
-        <!-- STAFF SECTION -->
+        <!-- LEADERSHIP / STAFF SECTION -->
         <div class="container" id="sectionTeam">
             <div class="section-tag">LEADERSHIP</div>
             <h2 class="section-title">Tim Pengelola <span>MineHera</span></h2>
             
             <div class="team-grid">
                 <div class="team-card">
-                    <div class="team-role role-owner">OWNER</div>
-                    <div class="team-name">DrXuan_</div>
+                    <div class="team-banner"></div>
                     <img class="team-head-img" src="https://mc-heads.net/avatar/DrXuan_/100" alt="Owner" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
+                    <div class="team-content">
+                        <div class="team-name">DrXuan_</div>
+                        <div class="team-role role-owner">OWNER</div>
+                        <div class="staff-bio">Pendiri utama MineHera. Memastikan stabilitas server dan manajemen gameplay Lifesteal secara keseluruhan.</div>
+                        
+                        <div class="staff-actions">
+                            <button class="btn-staff-act btn-copy-id" onclick="copyDiscordId('1284413138120212506')"><i data-lucide="copy" style="width:16px;"></i> Salin ID Discord</button>
+                            <button class="btn-staff-act btn-copy-usn" onclick="copyDiscordUsername('luuxuanhuydinh')"><i data-lucide="at-sign" style="width:16px;"></i> Salin Username Discord</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="team-card">
-                    <div class="team-role role-coowner">CO OWNER</div>
-                    <div class="team-name">Crist_Kagenou</div>
+                    <div class="team-banner"></div>
                     <img class="team-head-img" src="https://mc-heads.net/avatar/Crist_Kagenou/100" alt="Co Owner" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
+                    <div class="team-content">
+                        <div class="team-name">Crist_Kagenou</div>
+                        <div class="team-role role-coowner">CO OWNER</div>
+                        <div class="staff-bio">Penanggung jawab keuangan, event komunitas, dan membantu pengelolaan operasional harian server.</div>
+                        
+                        <div class="staff-actions">
+                            <button class="btn-staff-act btn-copy-id" onclick="copyDiscordId('1512769012533301250')"><i data-lucide="copy" style="width:16px;"></i> Salin ID Discord</button>
+                            <button class="btn-staff-act btn-copy-usn" onclick="copyDiscordUsername('crist_kagenou_64003')"><i data-lucide="at-sign" style="width:16px;"></i> Salin Username Discord</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="team-card">
-                    <div class="team-role role-headstaff">HEAD STAFF</div>
-                    <div class="team-name">FinzNerf</div>
-                    <img class="team-head-img" src="https://mc-heads.net/avatar/FinzNerf/100" alt="Head Staff" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
+                    <div class="team-banner"></div>
+                    <img class="team-head-img" src="https://mc-heads.net/avatar/Yoshida_kuze/100" alt="Head Staff" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
+                    <div class="team-content">
+                        <div class="team-name">Yoshida_kuze</div>
+                        <div class="team-role role-headstaff">HEAD STAFF</div>
+                        <div class="staff-bio">Koordinator moderator server, menangani laporan pemain, tiket kendala, dan menjaga keamanan game.</div>
+                        
+                        <div class="staff-actions">
+                            <button class="btn-staff-act btn-copy-id" onclick="copyDiscordId('1505767439177220237')"><i data-lucide="copy" style="width:16px;"></i> Salin ID Discord</button>
+                            <button class="btn-staff-act btn-copy-usn" onclick="copyDiscordUsername('vickyadelia')"><i data-lucide="at-sign" style="width:16px;"></i> Salin Username Discord</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="team-card">
-                    <div class="team-role role-dev">DEVELOPER</div>
-                    <div class="team-name">ItsSijee</div>
-                    <img class="team-head-img" src="https://api.mineskin.org/render/head?id=1b0e0655159d4043b4481fca5dc04608" alt="Developer" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/ItsSijee/100'">
+                    <div class="team-banner"></div>
+                    <img class="team-head-img" src="https://mc-heads.net/avatar/ItsSijee/100" alt="Developer" onerror="this.onerror=null; this.src='https://mc-heads.net/avatar/MHF_Steve/100'">
+                    <div class="team-content">
+                        <div class="team-name">ItsSijee</div>
+                        <div class="team-role role-dev">DEVELOPER</div>
+                        <div class="staff-bio">Pengembang sistem plugin, konfigurasi server, integrasi crossplay, dan pemeliharaan website.</div>
+                        
+                        <div class="staff-actions">
+                            <button class="btn-staff-act btn-copy-id" onclick="copyDiscordId('1459813944066572425')"><i data-lucide="copy" style="width:16px;"></i> Salin ID Discord</button>
+                            <button class="btn-staff-act btn-copy-usn" onclick="copyDiscordUsername('jeekece')"><i data-lucide="at-sign" style="width:16px;"></i> Salin Username Discord</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -638,7 +1273,12 @@
             <h2 class="section-title">Panel <span>Admin</span></h2>
             
             <div class="admin-box">
-                <h3 style="color: var(--primary-red); margin-bottom: 12px; font-size: 0.95rem;">Database Akun Terdaftar</h3>
+                <h3 style="color: var(--primary-red); margin-bottom: 12px; font-size: 0.95rem;">Database Akun Terdaftar & Management</h3>
+                <div style="display:flex; gap:10px; margin-bottom: 12px;">
+                    <input type="text" class="input-field" id="adminBanUsernameInput" placeholder="Masukkan Username yang ingin di-banned...">
+                    <button class="btn-submit" style="width: auto; min-width: 140px;" onclick="banUserByAdmin()">Banned User</button>
+                </div>
+
                 <div class="input-group" style="margin-bottom: 10px;">
                     <input type="text" class="input-field" id="searchAccountInput" placeholder="Cari username terdaftar..." onkeyup="filterRegisteredAccounts()">
                 </div>
@@ -647,8 +1287,10 @@
                         <thead>
                             <tr>
                                 <th>Username</th>
-                                <th>Password Web</th>
-                                <th>Aksi</th>
+                                <th>Platform</th>
+                                <th>Status</th>
+                                <th>Aksi Reset / Hapus</th>
+                                <th>Aksi Admin</th>
                             </tr>
                         </thead>
                         <tbody id="registeredAccountsTableBody"></tbody>
@@ -699,55 +1341,132 @@
     </div>
 
     <script>
+        // VARIABLE SISTEM UTAMA
         var selectedPlatform = 'java';
         var isAdminMode = false;
         var currentAuthMode = 'login';
         var currentDonatorCategory = 'bulanan';
         var currentAdminCategory = 'bulanan';
+        var activePreviewStashId = null;
+        var confirmCallback = null;
+        var currentUser = null;
 
-        function showCustomAlert(msg) {
+        // DIALOG ALERT & CONFIRMATION
+        function showCustomAlert(msg, type) {
             var alertBox = document.getElementById('customAlert');
             var textEl = document.getElementById('customAlertText');
+            var iconEl = document.getElementById('customAlertIcon');
+            
             if (alertBox && textEl) {
                 textEl.innerText = msg;
+                if (type === 'error') {
+                    alertBox.style.borderColor = '#ef4444';
+                    if (iconEl) { iconEl.style.color = '#ef4444'; iconEl.setAttribute('data-lucide', 'alert-circle'); }
+                } else {
+                    alertBox.style.borderColor = '#22c55e';
+                    if (iconEl) { iconEl.style.color = '#22c55e'; iconEl.setAttribute('data-lucide', 'check-circle'); }
+                }
+                if (typeof lucide !== 'undefined') lucide.createIcons();
                 alertBox.classList.add('show');
                 setTimeout(function() { alertBox.classList.remove('show'); }, 3000);
             }
         }
 
+        function openCustomConfirm(title, msg, callback) {
+            document.getElementById('confirmTitle').innerText = title;
+            document.getElementById('confirmMsg').innerText = msg;
+            confirmCallback = callback;
+            document.getElementById('confirmDialog').style.display = 'flex';
+        }
+
+        function closeConfirmDialog(result) {
+            document.getElementById('confirmDialog').style.display = 'none';
+            if (result && typeof confirmCallback === 'function') {
+                confirmCallback();
+            }
+            confirmCallback = null;
+        }
+
+        // INIT SAAT PERTAMA KALI HALAMAN DIBUKA
         document.addEventListener("DOMContentLoaded", function() {
+            clearLegacyData(); 
             if (typeof lucide !== 'undefined') lucide.createIcons();
             loadDonatorData('bulanan');
             loadGlobalGallery();
+            loadStashBuilds();
             checkAutoLogin();
             checkServerStatus();
-            animatePlayerCounter();
+            updateTotalRegisteredCounter();
             loadAdminAccountTable();
             
             document.addEventListener('click', function(event) {
-                var isClickInside = document.querySelector('.profile-container').contains(event.target);
-                if (!isClickInside) { document.getElementById('profileDropdown').classList.remove('active'); }
+                var container = document.querySelector('.profile-container');
+                if (container && !container.contains(event.target)) {
+                    var dropdown = document.getElementById('profileDropdown');
+                    if (dropdown) dropdown.classList.remove('active');
+                }
             });
         });
 
-        function animatePlayerCounter() {
-            var counterEl = document.getElementById('counterRegisteredPlayers');
-            if (!counterEl) return;
-            var startVal = 100;
-            var targetVal = 1054;
-            var duration = 1500;
-            var startTime = null;
-
-            function step(timestamp) {
-                if (!startTime) startTime = timestamp;
-                var progress = Math.min((timestamp - startTime) / duration, 1);
-                var current = Math.floor(progress * (targetVal - startVal) + startVal);
-                counterEl.innerText = current.toLocaleString() + '+';
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
+        function clearLegacyData() {
+            if (!localStorage.getItem('minehera_v3_initialized')) {
+                localStorage.removeItem('registeredUsersDB_v2');
+                localStorage.removeItem('deviceAccountsMap_v1');
+                localStorage.removeItem('minehera_active_user');
+                localStorage.setItem('minehera_v3_initialized', 'true');
             }
-            window.requestAnimationFrame(step);
+        }
+
+        function getAccountsDatabase() {
+            var stored = localStorage.getItem('minehera_accounts_v3');
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function saveAccountsDatabase(db) {
+            localStorage.setItem('minehera_accounts_v3', JSON.stringify(db));
+            updateTotalRegisteredCounter();
+            loadAdminAccountTable();
+        }
+
+        function getBannedList() {
+            var stored = localStorage.getItem('minehera_banned_v3');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveBannedList(list) {
+            localStorage.setItem('minehera_banned_v3', JSON.stringify(list));
+        }
+
+        function getDeviceMap() {
+            var stored = localStorage.getItem('minehera_device_map_v3');
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function saveDeviceMap(map) {
+            localStorage.setItem('minehera_device_map_v3', JSON.stringify(map));
+        }
+
+        function getDeviceId() {
+            var deviceId = localStorage.getItem('minehera_device_id_v3');
+            if (!deviceId) {
+                deviceId = 'dev_' + Math.random().toString(36).substring(2, 11) + Date.now().toString(36);
+                localStorage.setItem('minehera_device_id_v3', deviceId);
+            }
+            return deviceId;
+        }
+
+        function formatCurrencyInput(input) {
+            var value = input.value.replace(/[^0-9]/g, '');
+            if (value === '') { input.value = ''; return; }
+            var formatted = parseInt(value, 10).toLocaleString('de-DE');
+            input.value = '$ ' + formatted;
+        }
+
+        function updateTotalRegisteredCounter() {
+            var db = getAccountsDatabase();
+            var count = Object.keys(db).length; 
+            var el = document.getElementById('counterRegisteredPlayers');
+            if (el) el.innerText = count.toLocaleString();
         }
 
         function checkServerStatus() {
@@ -777,384 +1496,995 @@
                 });
         }
 
+        function isCrackedOrBedrock(username, platform) {
+            var clean = (username || '').trim();
+            if (platform === 'bedrock' || clean.startsWith('.') || clean.length < 3 || clean.includes(' ') || !/^[a-zA-Z0-9_.]+$/.test(clean)) {
+                return true;
+            }
+            return false;
+        }
+
         function getSkinHeadUrl(username, platform) {
             var cleanUser = (username || '').trim();
-            if (!cleanUser || cleanUser.startsWith('.')) return 'https://mc-heads.net/avatar/MHF_Steve/64';
+            if (!cleanUser || cleanUser === '.') return 'https://mc-heads.net/avatar/MHF_Steve/64';
+            if (isCrackedOrBedrock(cleanUser, platform)) {
+                return 'https://mc-heads.net/avatar/MHF_Steve/64';
+            }
+            if (cleanUser.startsWith('.')) cleanUser = cleanUser.substring(1);
             return 'https://mc-heads.net/avatar/' + cleanUser + '/64';
         }
 
         function getBustUrl(username) {
             var cleanUser = (username || '').trim();
-            if (!cleanUser || cleanUser.startsWith('.')) return 'https://visage.surgeplay.com/bust/256/MHF_Steve';
+            if (!cleanUser || cleanUser === '.' || isCrackedOrBedrock(cleanUser, cleanUser.startsWith('.') ? 'bedrock' : 'java')) {
+                return 'https://visage.surgeplay.com/bust/256/MHF_Steve';
+            }
+            if (cleanUser.startsWith('.')) cleanUser = cleanUser.substring(1);
             return 'https://visage.surgeplay.com/bust/256/' + cleanUser;
         }
 
-        function updateLoginSkinPreview() {
+        function handleUsernameInput() {
             var input = document.getElementById('usernameInput');
+            if (!input) return;
+
+            if (selectedPlatform === 'bedrock') {
+                if (!input.value.startsWith('.')) {
+                    input.value = '.' + input.value.replace(/^\.+/, '');
+                }
+            }
+            
             var img = document.getElementById('loginHeadImg');
-            if (img && input) img.src = getSkinHeadUrl(input.value, selectedPlatform);
+            if (img) img.src = getSkinHeadUrl(input.value, selectedPlatform);
         }
 
         function switchPlatform(platform) {
             selectedPlatform = platform;
-            document.getElementById('btnJava').classList.toggle('active', platform === 'java');
-            document.getElementById('btnBedrock').classList.toggle('active', platform === 'bedrock');
+            var btnJava = document.getElementById('btnJava');
+            var btnBedrock = document.getElementById('btnBedrock');
             var input = document.getElementById('usernameInput');
-            if (platform === 'bedrock' && input && !input.value.startsWith('.')) {
-                input.value = '.' + input.value;
-            } else if (platform === 'java' && input && input.value.startsWith('.')) {
-                input.value = input.value.replace(/^\.+/, '');
+
+            if (platform === 'java') {
+                if (btnJava) btnJava.classList.add('active');
+                if (btnBedrock) btnBedrock.classList.remove('active');
+                if (input && input.value.startsWith('.')) {
+                    input.value = input.value.substring(1);
+                }
+            } else {
+                if (btnBedrock) btnBedrock.classList.add('active');
+                if (btnJava) btnJava.classList.remove('active');
+                if (input && !input.value.startsWith('.')) {
+                    input.value = '.' + input.value;
+                }
             }
-            updateLoginSkinPreview();
+            handleUsernameInput();
         }
 
         function switchAuthMode(mode) {
             currentAuthMode = mode;
-            document.getElementById('btnSwitchLogin').classList.toggle('active', mode === 'login');
-            document.getElementById('btnSwitchRegister').classList.toggle('active', mode === 'register');
-            document.getElementById('authSubtitle').innerText = mode === 'login' ? 'Silahkan Login akun Anda' : 'Buat Password Baru untuk Register';
-            document.getElementById('authSubmitBtn').innerText = mode === 'login' ? 'Masuk Ke Web \u2192' : 'Register Akun \u2192';
-            document.getElementById('adminToggleContainer').style.display = mode === 'login' ? 'flex' : 'none';
+            var btnLogin = document.getElementById('btnSwitchLogin');
+            var btnReg = document.getElementById('btnSwitchRegister');
+            var subtitle = document.getElementById('authSubtitle');
+            var confirmGroup = document.getElementById('confirmPasswordGroup');
+            var adminToggle = document.getElementById('adminToggleContainer');
+            var submitBtn = document.getElementById('authSubmitBtn');
+            var errorBox = document.getElementById('errorBox');
+
+            if (errorBox) errorBox.style.display = 'none';
+
+            if (mode === 'login') {
+                if (btnLogin) btnLogin.classList.add('active');
+                if (btnReg) btnReg.classList.remove('active');
+                if (subtitle) subtitle.innerText = "Silahkan Login akun Anda";
+                if (confirmGroup) confirmGroup.style.display = 'none';
+                if (adminToggle) adminToggle.style.display = 'flex';
+                if (submitBtn) submitBtn.innerHTML = "Masuk Ke Web &rarr;";
+            } else {
+                if (btnReg) btnReg.classList.add('active');
+                if (btnLogin) btnLogin.classList.remove('active');
+                if (subtitle) subtitle.innerText = "Daftar Akun Baru (Limit Maksimal 2 Akun Per Device)";
+                if (confirmGroup) confirmGroup.style.display = 'block';
+                if (adminToggle) adminToggle.style.display = 'none';
+                if (submitBtn) submitBtn.innerHTML = "Daftar Akun &rarr;";
+                var adminCheck = document.getElementById('isAdminCheck');
+                if (adminCheck) adminCheck.checked = false;
+                toggleAdminField();
+            }
         }
 
         function toggleAdminField() {
-            var check = document.getElementById('isAdminCheck');
-            var group = document.getElementById('adminCodeGroup');
-            if (group && check) group.style.display = check.checked ? 'block' : 'none';
+            var isAdminCheck = document.getElementById('isAdminCheck');
+            var adminGroup = document.getElementById('adminCodeGroup');
+            if (isAdminCheck && adminGroup) {
+                isAdminMode = isAdminCheck.checked;
+                adminGroup.style.display = isAdminMode ? 'block' : 'none';
+            }
         }
 
-        /* 
-         * LOGIKA AUTH TELAH DIPERBAIKI: 
-         * - Mengharuskan mendaftar sebelum bisa login. 
-         * - Membatasi maksimal pembuatan 2 akun pada 1 device. 
-         * - Pesan notifikasi sesuai permintaan.
-         */
         function prosesAuth() {
-            var username = document.getElementById('usernameInput').value.trim();
-            var password = document.getElementById('passwordInput').value.trim();
+            var usernameInput = document.getElementById('usernameInput');
+            var passwordInput = document.getElementById('passwordInput');
+            var confirmPasswordInput = document.getElementById('confirmPasswordInput');
+            var adminCodeInput = document.getElementById('adminCodeInput');
             var errorBox = document.getElementById('errorBox');
-            
-            // Database Sementara
-            var registeredUsers = JSON.parse(localStorage.getItem('registeredUsersDB') || '{"DrXuan_":"admin123", "Crist_Kagenou":"admin123"}');
-            var deviceAccountCreated = parseInt(localStorage.getItem('deviceAccountCount') || '0');
 
-            if (!username) {
-                if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Masukan Username Minecraft Anda!'; }
+            var username = usernameInput ? usernameInput.value.trim() : '';
+            var password = passwordInput ? passwordInput.value : '';
+
+            if (!username || !password) {
+                showError("Username dan Password wajib diisi!");
                 return;
             }
-            if (!password) {
-                if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Masukan Password Akun Anda!'; }
+
+            var bannedList = getBannedList();
+            if (bannedList.includes(username.toLowerCase())) {
+                showError("Akun ini telah di-banned dari server MineHera!");
                 return;
             }
+
+            var db = getAccountsDatabase();
 
             if (currentAuthMode === 'register') {
-                if (registeredUsers[username]) {
-                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Akun sudah terdaftar, silahkan login!'; }
-                    return;
-                }
-                if (deviceAccountCreated >= 2) {
-                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Gagal! Batas maksimal pembuatan 2 akun per perangkat telah tercapai.'; }
+                var confirmPass = confirmPasswordInput ? confirmPasswordInput.value : '';
+                if (password !== confirmPass) {
+                    showError("Konfirmasi password tidak cocok!");
                     return;
                 }
 
-                registeredUsers[username] = password;
-                localStorage.setItem('registeredUsersDB', JSON.stringify(registeredUsers));
-                localStorage.setItem('deviceAccountCount', (deviceAccountCreated + 1).toString());
+                // Check device account limit (Max 2 accounts per device)
+                var deviceMap = getDeviceMap();
+                var deviceId = getDeviceId();
+                if (!deviceMap[deviceId]) {
+                    deviceMap[deviceId] = [];
+                }
                 
-                showCustomAlert('Registrasi Berhasil! Silahkan Login.');
+                // Clean up non-existent accounts from device map
+                deviceMap[deviceId] = deviceMap[deviceId].filter(function(u) { return db[u]; });
+
+                if (deviceMap[deviceId].length >= 2) {
+                    showError("Batas limit registrasi tercapai! Maksimal 2 akun per perangkat.");
+                    return;
+                }
+
+                if (db[username.toLowerCase()]) {
+                    showError("Username tersebut sudah terdaftar! Gunakan username lain.");
+                    return;
+                }
+
+                db[username.toLowerCase()] = {
+                    username: username,
+                    password: password,
+                    platform: selectedPlatform,
+                    isAdmin: false,
+                    deviceId: deviceId,
+                    createdAt: Date.now()
+                };
+
+                deviceMap[deviceId].push(username.toLowerCase());
+                saveDeviceMap(deviceMap);
+                saveAccountsDatabase(db);
+
+                showCustomAlert("Registrasi Berhasil! Silahkan Login.", "success");
                 switchAuthMode('login');
-                if (errorBox) errorBox.style.display = 'none';
-                loadAdminAccountTable();
+                if (usernameInput) usernameInput.value = username;
+                if (passwordInput) passwordInput.value = '';
                 return;
-
-            } else {
-                
-                if (!registeredUsers[username]) {
-                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Akun tidak terdaftar, silahkan register!'; }
-                    return;
-                }
-                if (registeredUsers[username] !== password) {
-                    if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Password salah!'; }
-                    return;
-                }
-
-                var isCheckAdmin = document.getElementById('isAdminCheck').checked;
-                var adminCode = document.getElementById('adminCodeInput').value;
-
-                if (isCheckAdmin) {
-                    if (adminCode !== 'MineHera2026') {
-                        if (errorBox) { errorBox.style.display = 'block'; errorBox.innerText = 'Kode Akses Admin Salah!'; }
-                        return;
-                    }
-                    isAdminMode = true;
-                    localStorage.setItem('isAdmin', 'true');
-                } else {
-                    isAdminMode = false;
-                    localStorage.setItem('isAdmin', 'false');
-                }
-
-                if (errorBox) errorBox.style.display = 'none';
-                localStorage.setItem('savedUsername', username);
-                localStorage.setItem('savedPlatform', selectedPlatform);
-                showHubScreen(username, selectedPlatform);
             }
+
+            // Login Mode
+            if (isAdminMode) {
+                var adminCode = adminCodeInput ? adminCodeInput.value : '';
+                if (adminCode !== 'MineHera2026') {
+                    showError("Kode Akses Admin Salah!");
+                    return;
+                }
+                currentUser = {
+                    username: username || 'Admin',
+                    platform: selectedPlatform,
+                    isAdmin: true
+                };
+                finishLogin();
+                return;
+            }
+
+            var acc = db[username.toLowerCase()];
+            if (!acc || acc.password !== password) {
+                showError("Username atau Password salah!");
+                return;
+            }
+
+            currentUser = {
+                username: acc.username,
+                platform: acc.platform,
+                isAdmin: !!acc.isAdmin
+            };
+            finishLogin();
+        }
+
+        function showError(msg) {
+            var errorBox = document.getElementById('errorBox');
+            if (errorBox) {
+                errorBox.innerText = msg;
+                errorBox.style.display = 'block';
+            } else {
+                showCustomAlert(msg, 'error');
+            }
+        }
+
+        function finishLogin() {
+            var loginPage = document.getElementById('page-login');
+            var hubPage = document.getElementById('page-hub');
+            if (loginPage) loginPage.style.display = 'none';
+            if (hubPage) hubPage.style.display = 'block';
+
+            localStorage.setItem('minehera_active_user', JSON.stringify(currentUser));
+
+            var dropdownUsn = document.getElementById('dropdownUsernameText');
+            var dropdownPlat = document.getElementById('dropdownPlatformText');
+            var navLogo = document.getElementById('navLogoImg');
+
+            if (dropdownUsn) dropdownUsn.innerText = currentUser.username;
+            if (dropdownPlat) dropdownPlat.innerText = "Platform: " + (currentUser.platform === 'bedrock' ? 'Bedrock' : 'Java');
+            if (navLogo) navLogo.src = getSkinHeadUrl(currentUser.username, currentUser.platform);
+
+            var adminBtn = document.getElementById('navAdminBtn');
+            if (adminBtn) {
+                adminBtn.style.display = currentUser.isAdmin ? 'flex' : 'none';
+            }
+
+            showSection('sectionHome');
+            showCustomAlert("Berhasil Masuk ke Akun!", "success");
         }
 
         function checkAutoLogin() {
-            var savedUser = localStorage.getItem('savedUsername');
-            var savedPlat = localStorage.getItem('savedPlatform');
-            var savedAdmin = localStorage.getItem('isAdmin');
-            if (savedUser) {
-                isAdminMode = (savedAdmin === 'true');
-                showHubScreen(savedUser, savedPlat || 'java');
+            var stored = localStorage.getItem('minehera_active_user');
+            if (stored) {
+                try {
+                    currentUser = JSON.parse(stored);
+                    if (currentUser && currentUser.username) {
+                        finishLogin();
+                    }
+                } catch(e) {}
             }
         }
 
-        function showHubScreen(username, platform) {
-            document.getElementById('navLogoImg').src = getSkinHeadUrl(username, platform);
-            document.getElementById('dropdownUsernameText').innerText = username;
-            var platText = (platform === 'bedrock') ? 'Platform: Bedrock / PE' : 'Platform: Java Edition';
-            document.getElementById('dropdownPlatformText').innerText = platText;
-            
-            document.getElementById('page-login').style.display = 'none';
-            document.getElementById('page-hub').style.display = 'block';
-            document.getElementById('navAdminBtn').style.display = isAdminMode ? 'flex' : 'none';
-            showSection('sectionHome');
-        }
-
-        var sectionsList = ['sectionHome', 'sectionShop', 'sectionTeam', 'sectionDonator', 'sectionAdmin', 'sectionGallery', 'sectionRules', 'sectionVote'];
-        function showSection(targetId) {
-            sectionsList.forEach(function(s) {
-                var el = document.getElementById(s);
-                if (el) el.style.display = (s === targetId) ? 'block' : 'none';
-            });
-            window.scrollTo(0,0);
-        }
-
-        function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
-        function toggleProfileMenu() { document.getElementById('profileDropdown').classList.toggle('active'); }
-
         function prosesLogout() {
-            localStorage.removeItem('savedUsername');
-            localStorage.removeItem('savedPlatform');
-            localStorage.removeItem('isAdmin');
-            location.reload();
+            openCustomConfirm("Konfirmasi Keluar", "Apakah Anda yakin ingin keluar dari akun?", function() {
+                localStorage.removeItem('minehera_active_user');
+                currentUser = null;
+                var loginPage = document.getElementById('page-login');
+                var hubPage = document.getElementById('page-hub');
+                if (loginPage) loginPage.style.display = 'flex';
+                if (hubPage) hubPage.style.display = 'none';
+                showCustomAlert("Berhasil Keluar Akun", "success");
+            });
+        }
+
+        function showSection(sectionId) {
+            var sections = ['sectionHome', 'sectionStash', 'sectionRules', 'sectionVote', 'sectionDonator', 'sectionGallery', 'sectionShop', 'sectionTeam', 'sectionAdmin'];
+            for (var i = 0; i < sections.length; i++) {
+                var el = document.getElementById(sections[i]);
+                if (el) {
+                    el.style.display = (sections[i] === sectionId) ? 'block' : 'none';
+                }
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById('navMenu');
+            if (menu) menu.classList.toggle('active');
+        }
+
+        function toggleProfileMenu() {
+            var dropdown = document.getElementById('profileDropdown');
+            if (dropdown) dropdown.classList.toggle('active');
         }
 
         function copyIp() {
-            navigator.clipboard.writeText("play.minehera.xyz:19155");
-            showCustomAlert("IP Server Berhasil Disalin!");
+            navigator.clipboard.writeText('play.minehera.xyz:19155');
+            showCustomAlert("IP Server berhasil disalin: play.minehera.xyz:19155", "success");
         }
 
-        function switchStoreTab(tab) {
-            document.getElementById('btnStoreRank').classList.toggle('active', tab === 'rank');
-            document.getElementById('btnStoreShards').classList.toggle('active', tab === 'shards');
-            document.getElementById('storeRankContent').style.display = (tab === 'rank') ? 'grid' : 'none';
-            document.getElementById('storeShardsContent').style.display = (tab === 'shards') ? 'grid' : 'none';
-        }
-
-        function openPaymentGuide(title, price) {
-            document.getElementById('modalItemTitle').innerText = title;
-            document.getElementById('modalItemPrice').innerText = price;
-            document.getElementById('buyModal').style.display = 'flex';
-        }
-
-        function closeModal() { document.getElementById('buyModal').style.display = 'none'; }
-
+        // TOGGLE FAQ
         function toggleFaq(el) {
             var parent = el.parentElement;
             parent.classList.toggle('active');
         }
 
-        function loadGlobalGallery() {
-            var grid = document.getElementById('galleryGrid');
-            if (!grid) return;
-            var savedPhotos = JSON.parse(localStorage.getItem('globalGalleryPhotos') || '[]');
-            
-            if (savedPhotos.length === 0) {
-                savedPhotos = [
-                    { id: 1, uploader: "DrXuan_", img: "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/gui/title/background/panorama_1.png" },
-                    { id: 2, uploader: "Crist_Kagenou", img: "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/gui/title/background/panorama_2.png" }
-                ];
-                localStorage.setItem('globalGalleryPhotos', JSON.stringify(savedPhotos));
+        // STORE TABS
+        function switchStoreTab(tab) {
+            var btnRank = document.getElementById('btnStoreRank');
+            var btnShards = document.getElementById('btnStoreShards');
+            var contentRank = document.getElementById('storeRankContent');
+            var contentShards = document.getElementById('storeShardsContent');
+
+            if (tab === 'rank') {
+                if (btnRank) btnRank.classList.add('active');
+                if (btnShards) btnShards.classList.remove('active');
+                if (contentRank) contentRank.style.display = 'grid';
+                if (contentShards) contentShards.style.display = 'none';
+            } else {
+                if (btnShards) btnShards.classList.add('active');
+                if (btnRank) btnRank.classList.remove('active');
+                if (contentShards) contentShards.style.display = 'grid';
+                if (contentRank) contentRank.style.display = 'none';
             }
-            renderGalleryItems(savedPhotos);
         }
 
-        function renderGalleryItems(photos) {
-            var grid = document.getElementById('galleryGrid');
-            grid.innerHTML = '';
-            var currentUser = (localStorage.getItem('savedUsername') || '').toLowerCase();
-            photos.forEach(function(item) {
-                var itemDiv = document.createElement('div');
-                itemDiv.className = 'gallery-item';
-                itemDiv.setAttribute('data-uploader', item.uploader.toLowerCase());
-                var showDelete = (isAdminMode || currentUser === item.uploader.toLowerCase());
-                itemDiv.innerHTML = `
-                    <img src="${item.img}" alt="SS" onclick="openImgModal('${item.img}')">
-                    <div class="gallery-info">
-                        <div class="uploader-name" onclick="openImgModal('${item.img}')"><i data-lucide="user" style="width:12px;"></i> ${item.uploader}</div>
-                        ${showDelete ? `<button style="background: rgba(225, 29, 72, 0.85); border: none; color: #fff; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 0.65rem;" onclick="deleteGalleryPhoto(${item.id})">Hapus</button>` : ''}
-                    </div>
-                `;
-                grid.appendChild(itemDiv);
-            });
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+        function openPaymentGuide(packageName, price) {
+            var modal = document.getElementById('buyModal');
+            var title = document.getElementById('modalItemTitle');
+            var itemPrice = document.getElementById('modalItemPrice');
+
+            if (title) title.innerText = "Pembelian: " + packageName;
+            if (itemPrice) itemPrice.innerText = price;
+            if (modal) modal.style.display = 'flex';
         }
 
-        function openImgModal(src) {
-            document.getElementById('imgModalSrc').src = src;
-            document.getElementById('imgModal').style.display = 'flex';
+        function closeModal() {
+            var modal = document.getElementById('buyModal');
+            if (modal) modal.style.display = 'none';
         }
 
-        function closeImgModal() {
-            document.getElementById('imgModal').style.display = 'none';
+        function handleOutsideClick(event, modalId) {
+            var modal = document.getElementById(modalId);
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
         }
 
-        function uploadGalleryPhoto(e) {
-            var file = e.target.files[0];
-            var username = localStorage.getItem('savedUsername') || 'Player';
-            if (!file) return;
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var savedPhotos = JSON.parse(localStorage.getItem('globalGalleryPhotos') || '[]');
-                savedPhotos.unshift({ id: Date.now(), uploader: username, img: event.target.result });
-                localStorage.setItem('globalGalleryPhotos', JSON.stringify(savedPhotos));
-                loadGlobalGallery();
-                showCustomAlert("Foto Berhasil Diupload!");
+        // TOP DONATUR & ADMIN PODIUM
+        function getDonatorDB() {
+            var stored = localStorage.getItem('minehera_donators_v3');
+            if (stored) {
+                try { return JSON.parse(stored); } catch(e) {}
+            }
+            return {
+                bulanan: {
+                    top1: { name: 'Azyll_', amount: '1.000.000' },
+                    top2: { name: 'Tomortus', amount: '500.000' },
+                    top3: { name: 'Sun_Bloom', amount: '250.000' }
+                },
+                tahunan: {
+                    top1: { name: 'DrXuan_', amount: '5.000.000' },
+                    top2: { name: 'Crist_Kagenou', amount: '3.000.000' },
+                    top3: { name: 'ItsSijee', amount: '1.500.000' }
+                },
+                alltime: {
+                    top1: { name: 'MineHeraKing', amount: '12.000.000' },
+                    top2: { name: 'Azyll_', amount: '8.500.000' },
+                    top3: { name: 'DrXuan_', amount: '5.000.000' }
+                }
             };
-            reader.readAsDataURL(file);
         }
 
-        function deleteGalleryPhoto(id) {
-            var savedPhotos = JSON.parse(localStorage.getItem('globalGalleryPhotos') || '[]');
-            savedPhotos = savedPhotos.filter(function(p) { return p.id !== id; });
-            localStorage.setItem('globalGalleryPhotos', JSON.stringify(savedPhotos));
-            loadGlobalGallery();
-            showCustomAlert("Foto Dihapus!");
-        }
-
-        function searchGallery() {
-            var term = document.getElementById('searchGalleryInput').value.toLowerCase();
-            document.querySelectorAll('.gallery-item').forEach(function(item) {
-                var uploader = item.getAttribute('data-uploader');
-                item.style.display = uploader.includes(term) ? 'block' : 'none';
-            });
+        function saveDonatorDB(db) {
+            localStorage.setItem('minehera_donators_v3', JSON.stringify(db));
         }
 
         function switchDonatorCategory(cat) {
             currentDonatorCategory = cat;
-            document.getElementById('btnTabBulanan').classList.toggle('active', cat === 'bulanan');
-            document.getElementById('btnTabTahunan').classList.toggle('active', cat === 'tahunan');
-            document.getElementById('btnTabAllTime').classList.toggle('active', cat === 'alltime');
+            var b1 = document.getElementById('btnTabBulanan');
+            var b2 = document.getElementById('btnTabTahunan');
+            var b3 = document.getElementById('btnTabAllTime');
+
+            if (b1) b1.classList.remove('active');
+            if (b2) b2.classList.remove('active');
+            if (b3) b3.classList.remove('active');
+
+            if (cat === 'bulanan' && b1) b1.classList.add('active');
+            if (cat === 'tahunan' && b2) b2.classList.add('active');
+            if (cat === 'alltime' && b3) b3.classList.add('active');
+
             loadDonatorData(cat);
+        }
+
+        function loadDonatorData(cat) {
+            var db = getDonatorDB();
+            var data = db[cat] || db.bulanan;
+
+            var t1Name = document.getElementById('top1-name');
+            var t1Amt = document.getElementById('top1-amount');
+            var t1Img = document.getElementById('top1-img');
+
+            var t2Name = document.getElementById('top2-name');
+            var t2Amt = document.getElementById('top2-amount');
+            var t2Img = document.getElementById('top2-img');
+
+            var t3Name = document.getElementById('top3-name');
+            var t3Amt = document.getElementById('top3-amount');
+            var t3Img = document.getElementById('top3-img');
+
+            if (t1Name) t1Name.innerText = data.top1.name;
+            if (t1Amt) t1Amt.innerText = data.top1.amount;
+            if (t1Img) t1Img.src = getBustUrl(data.top1.name);
+
+            if (t2Name) t2Name.innerText = data.top2.name;
+            if (t2Amt) t2Amt.innerText = data.top2.amount;
+            if (t2Img) t2Img.src = getBustUrl(data.top2.name);
+
+            if (t3Name) t3Name.innerText = data.top3.name;
+            if (t3Amt) t3Amt.innerText = data.top3.amount;
+            if (t3Img) t3Img.src = getBustUrl(data.top3.name);
         }
 
         function switchAdminCategory(cat) {
             currentAdminCategory = cat;
-            document.getElementById('adminTabBulanan').classList.toggle('active', cat === 'bulanan');
-            document.getElementById('adminTabTahunan').classList.toggle('active', cat === 'tahunan');
-            document.getElementById('adminTabAllTime').classList.toggle('active', cat === 'alltime');
-            loadAdminDataFields(cat);
-        }
+            var b1 = document.getElementById('adminTabBulanan');
+            var b2 = document.getElementById('adminTabTahunan');
+            var b3 = document.getElementById('adminTabAllTime');
 
-        /* Menambahkan properti error handling fallback secara dinamis */
-        function loadDonatorData(category) {
-            var cat = category || currentDonatorCategory;
-            var defaultData = {
-                bulanan: [{user: "Azyll_", amt: "1.000.000"}, {user: "Tomortus", amt: "500.000"}, {user: "Sun_Bloom", amt: "250.000"}],
-                tahunan: [{user: "Moon_Ti...", amt: "940.000"}, {user: "Tomortus", amt: "900.000"}, {user: "Sun_Bloom", amt: "800.000"}],
-                alltime: [{user: "LuuXuan", amt: "5.000.000"}, {user: "Azyll_", amt: "3.500.000"}, {user: "Crist_K", amt: "2.000.000"}]
-            };
-            var activeSet = defaultData[cat];
+            if (b1) b1.classList.remove('active');
+            if (b2) b2.classList.remove('active');
+            if (b3) b3.classList.remove('active');
 
-            for (var i = 1; i <= 3; i++) {
-                var u = localStorage.getItem('top' + i + 'User_' + cat) || activeSet[i-1].user;
-                var a = localStorage.getItem('top' + i + 'Amt_' + cat) || activeSet[i-1].amt;
-                var nameEl = document.getElementById('top' + i + '-name');
-                var amtEl = document.getElementById('top' + i + '-amount');
-                var imgEl = document.getElementById('top' + i + '-img');
-                if (nameEl) nameEl.innerText = u;
-                if (amtEl) amtEl.innerText = a;
-                if (imgEl) {
-                    imgEl.onerror = function() {
-                        this.onerror = null; 
-                        this.src = 'https://visage.surgeplay.com/bust/256/MHF_Steve'; 
-                    };
-                    imgEl.src = getBustUrl(u);
-                }
-            }
-            loadAdminDataFields(currentAdminCategory);
-        }
+            if (cat === 'bulanan' && b1) b1.classList.add('active');
+            if (cat === 'tahunan' && b2) b2.classList.add('active');
+            if (cat === 'alltime' && b3) b3.classList.add('active');
 
-        function loadAdminDataFields(cat) {
-            var defaultData = {
-                bulanan: [{user: "Azyll_", amt: "1.000.000"}, {user: "Tomortus", amt: "500.000"}, {user: "Sun_Bloom", amt: "250.000"}],
-                tahunan: [{user: "Moon_Ti...", amt: "940.000"}, {user: "Tomortus", amt: "900.000"}, {user: "Sun_Bloom", amt: "800.000"}],
-                alltime: [{user: "LuuXuan", amt: "5.000.000"}, {user: "Azyll_", amt: "3.500.000"}, {user: "Crist_K", amt: "2.000.000"}]
-            };
-            var activeSet = defaultData[cat];
-            for (var i = 1; i <= 3; i++) {
-                var u = localStorage.getItem('top' + i + 'User_' + cat) || activeSet[i-1].user;
-                var a = localStorage.getItem('top' + i + 'Amt_' + cat) || activeSet[i-1].amt;
-                var inUser = document.getElementById('adminTop' + i + 'User');
-                var inAmt = document.getElementById('adminTop' + i + 'Amt');
-                if (inUser) inUser.value = u;
-                if (inAmt) inAmt.value = a;
-            }
+            var db = getDonatorDB();
+            var data = db[cat] || db.bulanan;
+
+            document.getElementById('adminTop1User').value = data.top1.name;
+            document.getElementById('adminTop1Amt').value = data.top1.amount;
+            document.getElementById('adminTop2User').value = data.top2.name;
+            document.getElementById('adminTop2Amt').value = data.top2.amount;
+            document.getElementById('adminTop3User').value = data.top3.name;
+            document.getElementById('adminTop3Amt').value = data.top3.amount;
         }
 
         function saveDonatorData() {
-            var cat = currentAdminCategory;
-            for (var i = 1; i <= 3; i++) {
-                var inUser = document.getElementById('adminTop' + i + 'User');
-                var inAmt = document.getElementById('adminTop' + i + 'Amt');
-                var u = inUser ? (inUser.value || 'Player' + i) : 'Player' + i;
-                var a = inAmt ? (inAmt.value || '0') : '0';
-                localStorage.setItem('top' + i + 'User_' + cat, u);
-                localStorage.setItem('top' + i + 'Amt_' + cat, a);
-            }
+            var db = getDonatorDB();
+            db[currentAdminCategory] = {
+                top1: { name: document.getElementById('adminTop1User').value.trim() || 'Player 1', amount: document.getElementById('adminTop1Amt').value.trim() || '0' },
+                top2: { name: document.getElementById('adminTop2User').value.trim() || 'Player 2', amount: document.getElementById('adminTop2Amt').value.trim() || '0' },
+                top3: { name: document.getElementById('adminTop3User').value.trim() || 'Player 3', amount: document.getElementById('adminTop3Amt').value.trim() || '0' }
+            };
+            saveDonatorDB(db);
             loadDonatorData(currentDonatorCategory);
-            showCustomAlert("Data Top Donatur Disimpan!");
-            showSection('sectionDonator');
+            showCustomAlert("Leaderboard Top Donatur berhasil diperbarui!", "success");
         }
 
+        // GALLERY MANAGEMENT (Limit: 7 photos per account)
+        function getGalleryDB() {
+            var stored = localStorage.getItem('minehera_gallery_v3');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveGalleryDB(list) {
+            localStorage.setItem('minehera_gallery_v3', JSON.stringify(list));
+            loadGlobalGallery();
+        }
+
+        function uploadGalleryPhoto(event) {
+            var file = event.target.files[0];
+            if (!file) return;
+
+            if (!currentUser) {
+                showError("Silahkan login terlebih dahulu untuk upload foto.");
+                return;
+            }
+
+            var gallery = getGalleryDB();
+            var userCount = gallery.filter(function(item) { return item.uploader === currentUser.username; }).length;
+
+            if (userCount >= 7) {
+                showError("Batas limit upload galeri tercapai! Maksimal 7 foto per akun.");
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var newItem = {
+                    id: 'gal_' + Date.now() + Math.random().toString(36).substring(2,6),
+                    image: e.target.result,
+                    uploader: currentUser.username,
+                    platform: currentUser.platform || 'java',
+                    createdAt: Date.now()
+                };
+                gallery.unshift(newItem);
+                saveGalleryDB(gallery);
+                showCustomAlert("Foto berhasil diunggah ke galeri!", "success");
+                event.target.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function loadGlobalGallery() {
+            var gallery = getGalleryDB();
+            var grid = document.getElementById('galleryGrid');
+            var totalEl = document.getElementById('totalGalleryPhotos');
+            if (totalEl) totalEl.innerText = gallery.length;
+
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (gallery.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:30px; color:var(--text-muted);">Belum ada foto di galeri server.</div>';
+                return;
+            }
+
+            for (var i = 0; i < gallery.length; i++) {
+                var item = gallery[i];
+                var div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = '<img src="' + item.image + '" alt="Gallery Image" onclick="openImgModal(\'' + item.image + '\')">' +
+                                '<div class="gallery-info">' +
+                                    '<span class="uploader-name"><img src="' + getSkinHeadUrl(item.uploader, item.platform) + '" style="width:14px; height:14px; border-radius:3px; image-rendering:pixelated;"> ' + item.uploader + '</span>' +
+                                    (currentUser && (currentUser.isAdmin || currentUser.username === item.uploader) ? '<button onclick="deleteGalleryPhoto(\'' + item.id + '\')" style="background:rgba(225,29,72,0.8); border:none; color:#fff; padding:3px 6px; border-radius:4px; font-size:0.65s; cursor:pointer;"><i data-lucide="trash-2" style="width:12px;"></i></button>' : '') +
+                                '</div>';
+                grid.appendChild(div);
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function searchGallery() {
+            var query = document.getElementById('searchGalleryInput').value.toLowerCase();
+            var gallery = getGalleryDB();
+            var grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+
+            var filtered = gallery.filter(function(item) {
+                return item.uploader.toLowerCase().includes(query);
+            });
+
+            grid.innerHTML = '';
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:30px; color:var(--text-muted);">Tidak ditemukan foto dari uploader tersebut.</div>';
+                return;
+            }
+
+            for (var i = 0; i < filtered.length; i++) {
+                var item = filtered[i];
+                var div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = '<img src="' + item.image + '" alt="Gallery Image" onclick="openImgModal(\'' + item.image + '\')">' +
+                                '<div class="gallery-info">' +
+                                    '<span class="uploader-name"><img src="' + getSkinHeadUrl(item.uploader, item.platform) + '" style="width:14px; height:14px; border-radius:3px; image-rendering:pixelated;"> ' + item.uploader + '</span>' +
+                                '</div>';
+                grid.appendChild(div);
+            }
+        }
+
+        function deleteGalleryPhoto(id) {
+            openCustomConfirm("Hapus Foto", "Apakah Anda yakin ingin menghapus foto ini?", function() {
+                var gallery = getGalleryDB();
+                gallery = gallery.filter(function(item) { return item.id !== id; });
+                saveGalleryDB(gallery);
+                showCustomAlert("Foto berhasil dihapus.", "success");
+            });
+        }
+
+        function openImgModal(src) {
+            var modal = document.getElementById('imgModal');
+            var img = document.getElementById('imgModalSrc');
+            if (modal && img) {
+                img.src = src;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeImgModal() {
+            var modal = document.getElementById('imgModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        // STASH BUILD MANAGEMENT (Limit: 3 builds per account)
+        var previewUploadImageBase64 = "";
+
+        function getStashDB() {
+            var stored = localStorage.getItem('minehera_stash_v3');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveStashDB(list) {
+            localStorage.setItem('minehera_stash_v3', JSON.stringify(list));
+            loadStashBuilds();
+        }
+
+        function openUploadStashModal(editId) {
+            if (!currentUser) {
+                showError("Silahkan login terlebih dahulu untuk upload Stash Build.");
+                return;
+            }
+            
+            var modal = document.getElementById('uploadStashModal');
+            var form = document.getElementById('stashForm');
+            if (form) form.reset();
+            document.getElementById('editStashId').value = '';
+            document.getElementById('uploadPreviewBox').style.display = 'none';
+            previewUploadImageBase64 = "";
+
+            if (editId) {
+                var stashList = getStashDB();
+                var item = stashList.find(function(s) { return s.id === editId; });
+                if (item) {
+                    document.getElementById('editStashId').value = item.id;
+                    document.getElementById('stashTitleInput').value = item.title;
+                    document.getElementById('stashDifficultyInput').value = item.difficulty;
+                    document.getElementById('stashCostInput').value = item.cost;
+                    document.getElementById('stashTimeUnit').value = item.timeUnit;
+                    document.getElementById('stashTimeValue').value = item.timeValue;
+                    document.getElementById('stashDescInput').value = item.desc;
+                    previewUploadImageBase64 = item.image;
+                    document.getElementById('uploadPreviewImg').src = item.image;
+                    document.getElementById('uploadPreviewBox').style.display = 'flex';
+                    document.getElementById('stashModalHeaderTitle').innerText = "Edit Stash Build";
+                    document.getElementById('btnSubmitStash').innerText = "Simpan Perubahan &rarr;";
+                }
+            } else {
+                document.getElementById('stashModalHeaderTitle').innerText = "Upload Stash / Base Build";
+                document.getElementById('btnSubmitStash').innerText = "Upload Stash Build &rarr;";
+            }
+
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeUploadStashModal() {
+            var modal = document.getElementById('uploadStashModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function previewUploadImage(event) {
+            var file = event.target.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                previewUploadImageBase64 = e.target.result;
+                var previewImg = document.getElementById('uploadPreviewImg');
+                var previewBox = document.getElementById('uploadPreviewBox');
+                if (previewImg) previewImg.src = previewUploadImageBase64;
+                if (previewBox) previewBox.style.display = 'flex';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveStashBuild(event) {
+            event.preventDefault();
+            if (!currentUser) return;
+
+            var editId = document.getElementById('editStashId').value;
+            var title = document.getElementById('stashTitleInput').value.trim();
+            var difficulty = document.getElementById('stashDifficultyInput').value;
+            var cost = document.getElementById('stashCostInput').value.trim();
+            var timeUnit = document.getElementById('stashTimeUnit').value;
+            var timeValue = document.getElementById('stashTimeValue').value;
+            var desc = document.getElementById('stashDescInput').value.trim();
+
+            if (!previewUploadImageBase64) {
+                showError("Silahkan unggah foto screenshot base Anda!");
+                return;
+            }
+
+            var stashList = getStashDB();
+
+            if (!editId) {
+                var userCount = stashList.filter(function(s) { return s.owner === currentUser.username; }).length;
+                if (userCount >= 3) {
+                    showError("Batas limit Stash Build tercapai! Maksimal 3 base per akun.");
+                    return;
+                }
+
+                var newItem = {
+                    id: 'stash_' + Date.now() + Math.random().toString(36).substring(2,6),
+                    title: title,
+                    difficulty: difficulty,
+                    cost: cost,
+                    timeUnit: timeUnit,
+                    timeValue: timeValue,
+                    desc: desc,
+                    image: previewUploadImageBase64,
+                    owner: currentUser.username,
+                    platform: currentUser.platform || 'java',
+                    views: 0,
+                    likes: 0,
+                    likedBy: [],
+                    createdAt: Date.now()
+                };
+                stashList.unshift(newItem);
+                showCustomAlert("Stash Build berhasil diunggah!", "success");
+            } else {
+                var item = stashList.find(function(s) { return s.id === editId; });
+                if (item) {
+                    item.title = title;
+                    item.difficulty = difficulty;
+                    item.cost = cost;
+                    item.timeUnit = timeUnit;
+                    item.timeValue = timeValue;
+                    item.desc = desc;
+                    item.image = previewUploadImageBase64;
+                    showCustomAlert("Stash Build berhasil diperbarui!", "success");
+                }
+            }
+
+            saveStashDB(stashList);
+            closeUploadStashModal();
+        }
+
+        function loadStashBuilds() {
+            var stashList = getStashDB();
+            var grid = document.getElementById('stashGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            if (stashList.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:30px; color:var(--text-muted);">Belum ada Stash Build yang diunggah.</div>';
+                return;
+            }
+
+            for (var i = 0; i < stashList.length; i++) {
+                var item = stashList[i];
+                var isLiked = currentUser && item.likedBy && item.likedBy.includes(currentUser.username);
+                var isOwner = currentUser && (currentUser.isAdmin || currentUser.username === item.owner);
+
+                var card = document.createElement('div');
+                card.className = 'stash-card';
+                card.innerHTML = '<div class="stash-img-wrapper" onclick="openPreviewStashModal(\'' + item.id + '\')">' +
+                                    '<img src="' + item.image + '" alt="Stash Image">' +
+                                    '<span class="stash-badge">' + item.difficulty.split(' - ')[0] + '</span>' +
+                                 '</div>' +
+                                 '<div class="stash-body">' +
+                                    '<div onclick="openPreviewStashModal(\'' + item.id + '\')">' +
+                                        '<div class="stash-title">' + item.title + '</div>' +
+                                        '<div class="stash-owner"><img src="' + getSkinHeadUrl(item.owner, item.platform) + '"> ' + item.owner + '</div>' +
+                                        '<div class="stash-desc-preview">' + item.desc + '</div>' +
+                                        '<div class="stash-cost"><i data-lucide="coins" style="width:14px;"></i> ' + item.cost + '</div>' +
+                                        '<div class="stash-build-time"><i data-lucide="clock" style="width:14px;"></i> Waktu: ' + item.timeValue + ' ' + item.timeUnit + '</div>' +
+                                    '</div>' +
+                                    '<div class="stash-footer">' +
+                                        '<div class="stash-stats">' +
+                                            '<span class="stash-stat-item"><i data-lucide="eye" style="width:14px;"></i> ' + (item.views || 0) + '</span>' +
+                                            '<span class="stash-stat-item"><i data-lucide="heart" style="width:14px;"></i> ' + (item.likes || 0) + '</span>' +
+                                        '</div>' +
+                                        '<button class="btn-like ' + (isLiked ? 'liked' : '') + '" onclick="toggleLikeStash(\'' + item.id + '\')"><i data-lucide="heart" style="width:16px;"></i> ' + (item.likes || 0) + '</button>' +
+                                    '</div>' +
+                                    (isOwner ? '<div class="action-btn-row"><button class="btn-action-small btn-edit" onclick="openUploadStashModal(\'' + item.id + '\')">Edit</button><button class="btn-action-small btn-delete" onclick="deleteStashBuild(\'' + item.id + '\')">Hapus</button></div>' : '') +
+                                 '</div>';
+                grid.appendChild(card);
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function filterStashBuilds() {
+            var searchQ = document.getElementById('searchStashInput').value.toLowerCase();
+            var diffQ = document.getElementById('filterDifficultySelect').value;
+            var stashList = getStashDB();
+            var grid = document.getElementById('stashGrid');
+            if (!grid) return;
+
+            var filtered = stashList.filter(function(item) {
+                var matchSearch = item.title.toLowerCase().includes(searchQ) || item.owner.toLowerCase().includes(searchQ);
+                var matchDiff = (diffQ === 'ALL' || item.difficulty.includes(diffQ));
+                return matchSearch && matchDiff;
+            });
+
+            grid.innerHTML = '';
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:30px; color:var(--text-muted);">Stash Build tidak ditemukan.</div>';
+                return;
+            }
+
+            for (var i = 0; i < filtered.length; i++) {
+                var item = filtered[i];
+                var isLiked = currentUser && item.likedBy && item.likedBy.includes(currentUser.username);
+                var isOwner = currentUser && (currentUser.isAdmin || currentUser.username === item.owner);
+
+                var card = document.createElement('div');
+                card.className = 'stash-card';
+                card.innerHTML = '<div class="stash-img-wrapper" onclick="openPreviewStashModal(\'' + item.id + '\')">' +
+                                    '<img src="' + item.image + '" alt="Stash Image">' +
+                                    '<span class="stash-badge">' + item.difficulty.split(' - ')[0] + '</span>' +
+                                 '</div>' +
+                                 '<div class="stash-body">' +
+                                    '<div onclick="openPreviewStashModal(\'' + item.id + '\')">' +
+                                        '<div class="stash-title">' + item.title + '</div>' +
+                                        '<div class="stash-owner"><img src="' + getSkinHeadUrl(item.owner, item.platform) + '"> ' + item.owner + '</div>' +
+                                        '<div class="stash-desc-preview">' + item.desc + '</div>' +
+                                        '<div class="stash-cost"><i data-lucide="coins" style="width:14px;"></i> ' + item.cost + '</div>' +
+                                        '<div class="stash-build-time"><i data-lucide="clock" style="width:14px;"></i> Waktu: ' + item.timeValue + ' ' + item.timeUnit + '</div>' +
+                                    '</div>' +
+                                    '<div class="stash-footer">' +
+                                        '<div class="stash-stats">' +
+                                            '<span class="stash-stat-item"><i data-lucide="eye" style="width:14px;"></i> ' + (item.views || 0) + '</span>' +
+                                            '<span class="stash-stat-item"><i data-lucide="heart" style="width:14px;"></i> ' + (item.likes || 0) + '</span>' +
+                                        '</div>' +
+                                        '<button class="btn-like ' + (isLiked ? 'liked' : '') + '" onclick="toggleLikeStash(\'' + item.id + '\')"><i data-lucide="heart" style="width:16px;"></i> ' + (item.likes || 0) + '</button>' +
+                                    '</div>' +
+                                    (isOwner ? '<div class="action-btn-row"><button class="btn-action-small btn-edit" onclick="openUploadStashModal(\'' + item.id + '\')">Edit</button><button class="btn-action-small btn-delete" onclick="deleteStashBuild(\'' + item.id + '\')">Hapus</button></div>' : '') +
+                                 '</div>';
+                grid.appendChild(card);
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function openPreviewStashModal(id) {
+            var stashList = getStashDB();
+            var item = stashList.find(function(s) { return s.id === id; });
+            if (!item) return;
+
+            activePreviewStashId = item.id;
+            item.views = (item.views || 0) + 1;
+            saveStashDB(stashList);
+
+            document.getElementById('stashPreviewImg').src = item.image;
+            document.getElementById('stashPreviewTitle').innerText = item.title;
+            document.getElementById('stashPreviewBadge').innerText = item.difficulty;
+            document.getElementById('stashPreviewOwner').innerText = item.owner;
+            document.getElementById('stashPreviewOwnerHead').src = getSkinHeadUrl(item.owner, item.platform);
+            document.getElementById('stashPreviewCost').innerText = item.cost;
+            document.getElementById('stashPreviewBuildTime').innerText = item.timeValue + ' ' + item.timeUnit;
+            document.getElementById('stashPreviewDesc').innerText = item.desc;
+            document.getElementById('stashPreviewViews').innerText = item.views;
+            document.getElementById('stashPreviewLikes').innerText = item.likes || 0;
+
+            var isLiked = currentUser && item.likedBy && item.likedBy.includes(currentUser.username);
+            var likeBtn = document.getElementById('stashPreviewLikeBtn');
+            if (likeBtn) {
+                likeBtn.innerText = isLiked ? 'Batalkan Like' : 'Beri Like';
+                likeBtn.style.background = isLiked ? '#be123c' : 'var(--primary-red)';
+            }
+
+            var modal = document.getElementById('previewStashModal');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closePreviewStashModal() {
+            var modal = document.getElementById('previewStashModal');
+            if (modal) modal.style.display = 'none';
+            activePreviewStashId = null;
+        }
+
+        function toggleLikeStash(id) {
+            if (!currentUser) {
+                showError("Silahkan login terlebih dahulu untuk memberikan like.");
+                return;
+            }
+            var stashList = getStashDB();
+            var item = stashList.find(function(s) { return s.id === id; });
+            if (!item) return;
+
+            if (!item.likedBy) item.likedBy = [];
+            var index = item.likedBy.indexOf(currentUser.username);
+            if (index > -1) {
+                item.likedBy.splice(index, 1);
+                item.likes = Math.max(0, (item.likes || 1) - 1);
+            } else {
+                item.likedBy.push(currentUser.username);
+                item.likes = (item.likes || 0) + 1;
+            }
+            saveStashDB(stashList);
+        }
+
+        function toggleLikeActiveStash() {
+            if (!activePreviewStashId) return;
+            toggleLikeStash(activePreviewStashId);
+            openPreviewStashModal(activePreviewStashId);
+        }
+
+        function deleteStashBuild(id) {
+            openCustomConfirm("Hapus Stash Build", "Apakah Anda yakin ingin menghapus Stash Build ini?", function() {
+                var stashList = getStashDB();
+                stashList = stashList.filter(function(s) { return s.id !== id; });
+                saveStashDB(stashList);
+                showCustomAlert("Stash Build berhasil dihapus.", "success");
+            });
+        }
+
+        // ADMIN PANEL ACCOUNT MANAGEMENT (With Delete Account Feature)
         function loadAdminAccountTable() {
             var tbody = document.getElementById('registeredAccountsTableBody');
             if (!tbody) return;
-            var users = JSON.parse(localStorage.getItem('registeredUsersDB') || '{"DrXuan_":"admin123", "Crist_Kagenou":"admin123"}');
+
+            var db = getAccountsDatabase();
+            var banned = getBannedList();
             tbody.innerHTML = '';
-            
-            for (var username in users) {
-                var password = users[username];
+
+            var keys = Object.keys(db);
+            if (keys.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">Belum ada akun terdaftar di database.</td></tr>';
+                return;
+            }
+
+            for (var i = 0; i < keys.length; i++) {
+                var usernameKey = keys[i];
+                var acc = db[usernameKey];
+                var isBanned = banned.includes(usernameKey.toLowerCase());
+
                 var tr = document.createElement('tr');
-                tr.setAttribute('data-username', username.toLowerCase());
-                tr.innerHTML = `
-                    <td style="font-weight:700;">${username}</td>
-                    <td><code style="background:#000; padding:4px 8px; border-radius:4px; color:var(--gold);">${password}</code></td>
-                    <td><button style="background:rgba(225,29,72,0.2); border:1px solid var(--primary-red); color:#fff; padding:4px 8px; border-radius:6px; cursor:pointer; font-size:0.75rem;" onclick="deleteRegisteredUser('${username}')">Hapus</button></td>
-                `;
+                tr.innerHTML = '<td><div style="display:flex; align-items:center; gap:8px;"><img src="' + getSkinHeadUrl(acc.username, acc.platform) + '" style="width:20px; height:20px; border-radius:4px; image-rendering:pixelated;"><strong>' + acc.username + '</strong></div></td>' +
+                               '<td>' + (acc.platform || 'java') + '</td>' +
+                               '<td><span style="color:' + (isBanned ? '#ef4444' : '#22c55e') + '; font-weight:800;">' + (isBanned ? 'Banned' : 'Aktif') + '</span></td>' +
+                               '<td><button class="btn-action-small btn-delete" onclick="adminDeleteAccount(\'' + usernameKey + '\')">Hapus Akun</button></td>' +
+                               '<td><button class="btn-action-small ' + (isBanned ? 'btn-edit' : 'btn-delete') + '" onclick="toggleBanAccount(\'' + usernameKey + '\')">' + (isBanned ? 'Unban' : 'Banned') + '</button></td>';
                 tbody.appendChild(tr);
             }
         }
 
         function filterRegisteredAccounts() {
-            var term = document.getElementById('searchAccountInput').value.toLowerCase();
-            var rows = document.querySelectorAll('#registeredAccountsTableBody tr');
-            rows.forEach(function(row) {
-                var uname = row.getAttribute('data-username');
-                row.style.display = uname.includes(term) ? '' : 'none';
+            var query = document.getElementById('searchAccountInput').value.toLowerCase();
+            var tbody = document.getElementById('registeredAccountsTableBody');
+            if (!tbody) return;
+
+            var db = getAccountsDatabase();
+            var banned = getBannedList();
+            tbody.innerHTML = '';
+
+            var keys = Object.keys(db).filter(function(k) { return k.includes(query); });
+            if (keys.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">Akun tidak ditemukan.</td></tr>';
+                return;
+            }
+
+            for (var i = 0; i < keys.length; i++) {
+                var usernameKey = keys[i];
+                var acc = db[usernameKey];
+                var isBanned = banned.includes(usernameKey.toLowerCase());
+
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><div style="display:flex; align-items:center; gap:8px;"><img src="' + getSkinHeadUrl(acc.username, acc.platform) + '" style="width:20px; height:20px; border-radius:4px; image-rendering:pixelated;"><strong>' + acc.username + '</strong></div></td>' +
+                               '<td>' + (acc.platform || 'java') + '</td>' +
+                               '<td><span style="color:' + (isBanned ? '#ef4444' : '#22c55e') + '; font-weight:800;">' + (isBanned ? 'Banned' : 'Aktif') + '</span></td>' +
+                               '<td><button class="btn-action-small btn-delete" onclick="adminDeleteAccount(\'' + usernameKey + '\')">Hapus Akun</button></td>' +
+                               '<td><button class="btn-action-small ' + (isBanned ? 'btn-edit' : 'btn-delete') + '" onclick="toggleBanAccount(\'' + usernameKey + '\')">' + (isBanned ? 'Unban' : 'Banned') + '</button></td>';
+                tbody.appendChild(tr);
+            }
+        }
+
+        function adminDeleteAccount(usernameKey) {
+            openCustomConfirm("Hapus Akun", "Apakah Anda yakin ingin menghapus permanen akun " + usernameKey + "?", function() {
+                var db = getAccountsDatabase();
+                if (db[usernameKey]) {
+                    delete db[usernameKey];
+                    saveAccountsDatabase(db);
+                    showCustomAlert("Akun " + usernameKey + " berhasil dihapus permanen.", "success");
+                }
             });
         }
 
-        function deleteRegisteredUser(username) {
-            var users = JSON.parse(localStorage.getItem('registeredUsersDB') || '{}');
-            if (users[username]) {
-                delete users[username];
-                localStorage.setItem('registeredUsersDB', JSON.stringify(users));
-                loadAdminAccountTable();
-                showCustomAlert("Akun " + username + " berhasil dihapus!");
+        function toggleBanAccount(usernameKey) {
+            var banned = getBannedList();
+            var idx = banned.indexOf(usernameKey.toLowerCase());
+            if (idx > -1) {
+                banned.splice(idx, 1);
+                showCustomAlert("Akun " + usernameKey + " berhasil di-unban.", "success");
+            } else {
+                banned.push(usernameKey.toLowerCase());
+                showCustomAlert("Akun " + usernameKey + " berhasil di-banned.", "success");
             }
+            saveBannedList(banned);
+            loadAdminAccountTable();
+        }
+
+        function banUserByAdmin() {
+            var input = document.getElementById('adminBanUsernameInput');
+            if (!input) return;
+            var username = input.value.trim().toLowerCase();
+            if (!username) {
+                showError("Masukkan username yang ingin di-banned!");
+                return;
+            }
+
+            var banned = getBannedList();
+            if (!banned.includes(username)) {
+                banned.push(username);
+                saveBannedList(banned);
+                showCustomAlert("User " + username + " berhasil di-banned!", "success");
+                input.value = '';
+                loadAdminAccountTable();
+            } else {
+                showError("User tersebut sudah berada dalam daftar ban.");
+            }
+        }
+
+        // COPY DISCORD ID & USERNAME
+        function copyDiscordId(discordId) {
+            navigator.clipboard.writeText(discordId);
+            showCustomAlert("ID Discord berhasil disalin: " + discordId, "success");
+        }
+
+        function copyDiscordUsername(discordUsn) {
+            navigator.clipboard.writeText(discordUsn);
+            showCustomAlert("Username Discord berhasil disalin: " + discordUsn, "success");
         }
     </script>
 </body>
