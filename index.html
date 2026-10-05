@@ -1,82 +1,1178 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minehera - Top Kills Leaderboard</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: #0d1117; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .container { width: 100%; max-width: 480px; background-color: #161b22; border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid #30363d; }
-        h2 { text-align: center; margin-bottom: 24px; color: #f87171; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
-        .podium { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-        .card { flex: 1; background-color: #0d1117; border-radius: 12px; padding: 16px 8px; text-align: center; border: 1px solid #30363d; }
-        .rank-1 { order: 2; border-color: #eab308; transform: scale(1.05); background: linear-gradient(180deg, #161b22 0%, #2e2305 100%); }
-        .rank-2 { order: 1; border-color: #94a3b8; }
-        .rank-3 { order: 3; border-color: #b45309; }
-        .badge { font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
-        .rank-1 .badge { background-color: #eab308; color: #000; }
-        .rank-2 .badge { background-color: #94a3b8; color: #000; }
-        .rank-3 .badge { background-color: #b45309; color: #fff; }
-        .avatar { width: 72px; height: 72px; margin: 0 auto 12px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); }
-        .username { font-weight: 700; font-size: 13px; word-break: break-all; margin-bottom: 4px; color: #f0f6fc; }
-        .score { font-size: 12px; color: #8b949e; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MineHera - Lifesteal Semi Anarchy</title>
+  
+  <!-- FontAwesome Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #0a0507;
+      --bg-card: #130a0d;
+      --border-color: #2a1219;
+      --red-primary: #dc2626;
+      --red-glow: rgba(220, 38, 38, 0.4);
+      --red-dark: #881337;
+      --gold-vip: #f59e0b;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 5, 7, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      height: 70px;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .hamburger-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* SIDEBAR NAVIGATION */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100vh;
+      background-color: #0d0609;
+      border-left: 1px solid var(--border-color);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background: var(--bg-card);
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    /* HOME HERO */
+    .sub-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--red-primary);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero-welcome {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .hero-title-big {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .btn-main {
+      background: var(--red-primary);
+      color: #ffffff;
+      font-weight: 800;
+      padding: 16px 24px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px var(--red-glow);
+      transition: 0.2s ease;
+    }
+
+    .btn-main:hover {
+      background: #b91c1c;
+    }
+
+    .btn-sub {
+      background: transparent;
+      color: #ffffff;
+      font-weight: 700;
+      padding: 16px 24px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .btn-sub:hover {
+      background: var(--bg-card);
+      border-color: var(--red-primary);
+    }
+
+    .stat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 30px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-item-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .stat-item-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .about-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 30px;
+    }
+
+    .about-box h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--red-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .about-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* TOP DONATE PODIUM */
+    .podium-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 8px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .podium-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 6px;
+      text-align: center;
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .podium-card.rank-1 {
+      border-color: var(--red-primary);
+      box-shadow: 0 0 15px var(--red-glow);
+      order: 2;
+      transform: translateY(-8px);
+    }
+
+    .podium-card.rank-2 { order: 1; }
+    .podium-card.rank-3 { order: 3; }
+
+    .badge-rank {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+    }
+
+    .rank-1 .badge-rank {
+      background: var(--red-primary);
+      color: #ffffff;
+    }
+
+    .skin-bust {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+
+    .player-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    .amount {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* GALERI STYLES */
+    .upload-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      background: #0a0507;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 0.9rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--red-primary);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .gallery-info {
+      padding: 12px;
+    }
+
+    .gallery-uploader {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #ffffff;
+    }
+
+    .gallery-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .btn-delete-img {
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-top: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* PLACEHOLDER */
+    .empty-box {
+      background: var(--bg-card);
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* STAFF INFO */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .staff-card {
+      background: linear-gradient(135deg, #180a0f, #0d0609);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+    }
+
+    .staff-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--red-primary);
+      border-radius: 14px 0 0 14px;
+    }
+
+    .staff-avatar {
+      width: 55px;
+      height: 55px;
+      flex-shrink: 0;
+    }
+
+    .staff-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+
+    .staff-role {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--red-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: rgba(220, 38, 38, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    .staff-name {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    .staff-badge {
+      font-size: 0.68rem;
+      color: var(--gold-vip);
+      margin-top: 3px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #060304;
+      border-top: 1px solid var(--border-color);
+      padding: 40px 24px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .footer-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      max-width: 400px;
+      margin: 0 auto 20px auto;
+      line-height: 1.5;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .social-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: 0.2s ease;
+    }
+
+    .social-btn:hover {
+      border-color: var(--red-primary);
+      color: var(--red-primary);
+    }
+
+    .copyright {
+      color: #4b5563;
+      font-size: 0.75rem;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--red-primary);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: transform 0.3s ease;
+      z-index: 2000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>⚔ TOP 3 KILLS ⚔</h2>
-        <div class="podium">
-            <div class="card rank-2">
-                <span class="badge">#2</span>
-                <img id="avatar-2" class="avatar" src="https://visage.surgeplay.com/bust/128/MHF_Steve" alt="Skin">
-                <div id="name-2" class="username">Loading...</div>
-                <div id="score-2" class="score">0 Kills</div>
-            </div>
-            <div class="card rank-1">
-                <span class="badge">👑 #1</span>
-                <img id="avatar-1" class="avatar" src="https://visage.surgeplay.com/bust/128/MHF_Steve" alt="Skin">
-                <div id="name-1" class="username">Loading...</div>
-                <div id="score-1" class="score">0 Kills</div>
-            </div>
-            <div class="card rank-3">
-                <span class="badge">#3</span>
-                <img id="avatar-3" class="avatar" src="https://visage.surgeplay.com/bust/128/MHF_Steve" alt="Skin">
-                <div id="name-3" class="username">Loading...</div>
-                <div id="score-3" class="score">0 Kills</div>
-            </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="https://i.imgur.com/DfdCsWN.png" alt="MineHera Logo">
+      <span>MineHera</span>
+    </div>
+    <button id="menu-btn" class="hamburger-btn" aria-label="Buka Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <div id="overlay" class="overlay"></div>
+
+  <!-- SIDEBAR NAVIGASI -->
+  <nav id="sidebar-menu" class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <img src="https://i.imgur.com/DfdCsWN.png" alt="MineHera Logo">
+        <span>MineHera</span>
+      </div>
+      <button id="close-btn" class="close-btn" aria-label="Tutup Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <ul class="nav-links">
+      <li><a onclick="switchPage('home-page')" id="link-home" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a onclick="switchPage('donate-page')" id="link-donate"><i class="fa-solid fa-trophy"></i> Top Donate</a></li>
+      <li><a onclick="switchPage('gallery-page')" id="link-gallery"><i class="fa-solid fa-images"></i> Galeri Player</a></li>
+      <li><a onclick="switchPage('shop-page')" id="link-shop"><i class="fa-solid fa-cart-shopping"></i> Shop</a></li>
+      <li><a onclick="switchPage('vote-page')" id="link-vote"><i class="fa-solid fa-check-to-slot"></i> Vote</a></li>
+      <li><a onclick="switchPage('staff-page')" id="link-staff"><i class="fa-solid fa-user-shield"></i> Staff Info</a></li>
+      <li><a onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> Admin Panel</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main>
+    
+    <!-- 1. HOME PAGE -->
+    <div id="home-page" class="page active">
+      <div class="sub-tag">PLAY.MINEHERA.XYZ:19155</div>
+      <div class="hero-welcome">Selamat Datang di</div>
+      <h1 class="hero-title-big">MineHera</h1>
+      <p class="hero-desc">Server Minecraft Indonesia dengan pengalaman bermain yang seru dan penuh tantangan. Gabung sekarang juga!</p>
+
+      <div class="cta-group">
+        <button class="btn-main" onclick="copyIP('play.minehera.xyz:19155')">
+          <i class="fa-solid fa-gamepad"></i> Main Sekarang
+        </button>
+        <a href="https://discord.gg/HyvVb9sBt" target="_blank" class="btn-sub">
+          <i class="fa-brands fa-discord"></i> Gabung Discord
+        </a>
+      </div>
+
+      <div class="stat-list">
+        <div class="stat-item">
+          <span class="stat-item-label">PEMAIN ONLINE</span>
+          <span id="player-count" class="stat-item-value">-</span>
         </div>
+        <div class="stat-item">
+          <span class="stat-item-label">VERSI SERVER</span>
+          <span class="stat-item-value">1.21.7</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item-label">CROSPLAY</span>
+          <span class="stat-item-value">Java & Bedrock</span>
+        </div>
+      </div>
+
+      <div class="about-box">
+        <h3><i class="fa-solid fa-shield-halved"></i> Tentang Server</h3>
+        <p>Server Minecraft Bertemakan Lifesteal Semi Anarchy. Disini tidak ada peraturan, kalian bebas melakukan penyerangan, penjarahan, dan penghancuran antar player. Tetapi kami tegaskan <strong>cheat tetap dilarang keras!</strong></p>
+      </div>
     </div>
 
-    <script>
-        async function fetchLeaderboard() {
-            try {
-                const response = await fetch('/api/leaderboard');
-                const data = await response.json();
+    <!-- 2. TOP DONATE PAGE -->
+    <div id="donate-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Top Donate</h2>
+      <div class="podium-container">
+        
+        <!-- RANK 2 -->
+        <div class="podium-card rank-2">
+          <div class="badge-rank">2</div>
+          <img id="rank2-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust">
+          <div id="rank2-name" class="player-name">Loading...</div>
+          <div id="rank2-amount" class="amount">Rp -</div>
+        </div>
 
-                for (let i = 0; i < 3; i++) {
-                    const rank = i + 1;
-                    const player = data[i];
+        <!-- RANK 1 -->
+        <div class="podium-card rank-1">
+          <div class="badge-rank">1</div>
+          <img id="rank1-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust">
+          <div id="rank1-name" class="player-name">Loading...</div>
+          <div id="rank1-amount" class="amount">Rp -</div>
+        </div>
 
-                    const nameEl = document.getElementById(`name-${rank}`);
-                    const scoreEl = document.getElementById(`score-${rank}`);
-                    const avatarEl = document.getElementById(`avatar-${rank}`);
+        <!-- RANK 3 -->
+        <div class="podium-card rank-3">
+          <div class="badge-rank">3</div>
+          <img id="rank3-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust">
+          <div id="rank3-name" class="player-name">Loading...</div>
+          <div id="rank3-amount" class="amount">Rp -</div>
+        </div>
 
-                    if (player && player.playername) {
-                        nameEl.innerText = player.playername;
-                        scoreEl.innerText = `${player.value} Kills`;
-                        avatarEl.src = `https://visage.surgeplay.com/bust/128/${player.playername}`;
-                        
-                        avatarEl.onerror = function() {
-                            this.src = 'https://visage.surgeplay.com/bust/128/MHF_Steve';
-                        };
-                    }
-                }
-            } catch (err) {
-                console.error("Gagal mengambil data:", err);
-            }
+      </div>
+    </div>
+
+    <!-- 3. GALERI PLAYER PAGE -->
+    <div id="gallery-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-images"></i> Galeri Community</h2>
+      
+      <!-- Upload Box -->
+      <div class="upload-card">
+        <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--red-primary);"><i class="fa-solid fa-upload"></i> Upload Screenshots Game</h3>
+        <div class="form-group">
+          <label>Nama / Nickname Game</label>
+          <input type="text" id="uploader-name" class="form-input" placeholder="Contoh: DrXuan_">
+        </div>
+        <div class="form-group">
+          <label>Keterangan / Deskripsi Foto</label>
+          <input type="text" id="uploader-desc" class="form-input" placeholder="Contoh: Base Anarchy kami!">
+        </div>
+        <div class="form-group">
+          <label>Pilih Gambar</label>
+          <input type="file" id="uploader-file" accept="image/*" class="form-input">
+        </div>
+        <button id="upload-btn" class="btn-main" style="width: 100%; padding: 12px; font-size: 0.9rem;" onclick="uploadPhoto()">
+          <i class="fa-solid fa-paper-plane"></i> Kirim Foto
+        </button>
+      </div>
+
+      <!-- Container Foto Realtime -->
+      <div id="gallery-container" class="gallery-grid">
+        <!-- Foto dari Firebase akan dimuat di sini -->
+      </div>
+    </div>
+
+    <!-- 4. SHOP PAGE -->
+    <div id="shop-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-cart-shopping"></i> Shop</h2>
+      <div class="empty-box">
+        <p>Toko server sedang dalam persiapan.</p>
+      </div>
+    </div>
+
+    <!-- 5. VOTE PAGE -->
+    <div id="vote-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-check-to-slot"></i> Vote Server</h2>
+      <div class="empty-box" style="border-style: solid;">
+        <p style="margin-bottom: 20px;">Dukung MineHera dengan memberikan Vote dan dapatkan hadiah menarik di dalam game!</p>
+        <a href="https://minecraft-mp.com/server-s358584" target="_blank" class="btn-main" style="display: inline-flex; text-decoration: none;">
+          Vote Sekarang <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. STAFF INFO PAGE -->
+    <div id="staff-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Staff Info</h2>
+      <div class="staff-grid">
+        
+        <div class="staff-card">
+          <img src="https://visage.surgeplay.com/bust/128/DrXuan_" alt="DrXuan_" class="skin-bust staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
+          <div class="staff-info">
+            <span class="staff-role">Owner</span>
+            <div class="staff-name">DrXuan_</div>
+            <span class="staff-badge"><i class="fa-solid fa-circle-check"></i> VIP Official</span>
+          </div>
+        </div>
+
+        <div class="staff-card">
+          <img src="https://visage.surgeplay.com/bust/128/Crist_Kagenou" alt="Crist_Kagenou" class="skin-bust staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
+          <div class="staff-info">
+            <span class="staff-role">Co Owner</span>
+            <div class="staff-name">Crist_Kagenou</div>
+            <span class="staff-badge"><i class="fa-solid fa-circle-check"></i> VIP Official</span>
+          </div>
+        </div>
+
+        <div class="staff-card">
+          <img src="https://visage.surgeplay.com/bust/128/Yoshida_Kuze" alt="Yoshida_Kuze" class="skin-bust staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
+          <div class="staff-info">
+            <span class="staff-role">Head Staff</span>
+            <div class="staff-name">Yoshida_Kuze</div>
+            <span class="staff-badge"><i class="fa-solid fa-circle-check"></i> VIP Official</span>
+          </div>
+        </div>
+
+        <div class="staff-card">
+          <img src="https://visage.surgeplay.com/bust/128/ItsSijee" alt="ItsSijee" class="skin-bust staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
+          <div class="staff-info">
+            <span class="staff-role">Developer</span>
+            <div class="staff-name">ItsSijee</div>
+            <span class="staff-badge"><i class="fa-solid fa-circle-check"></i> VIP Official</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 7. ADMIN PANEL PAGE (PROTECTED) -->
+    <div id="admin-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> Admin Panel</h2>
+      <div class="upload-card">
+        <h3 style="font-size: 1rem; margin-bottom: 16px; color: var(--red-primary);">Update Data Top Donate</h3>
+        
+        <!-- RANK 1 -->
+        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
+          <h4 style="font-size: 0.85rem; color: var(--gold-vip); margin-bottom: 8px;">Rank 1</h4>
+          <div class="form-group">
+            <input type="text" id="admin-r1-name" class="form-input" placeholder="Username Minecraft Rank 1">
+          </div>
+          <div class="form-group">
+            <input type="text" id="admin-r1-amount" class="form-input" placeholder="Nominal Rp (Contoh: Rp 100.000)">
+          </div>
+        </div>
+
+        <!-- RANK 2 -->
+        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
+          <h4 style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Rank 2</h4>
+          <div class="form-group">
+            <input type="text" id="admin-r2-name" class="form-input" placeholder="Username Minecraft Rank 2">
+          </div>
+          <div class="form-group">
+            <input type="text" id="admin-r2-amount" class="form-input" placeholder="Nominal Rp (Contoh: Rp 50.000)">
+          </div>
+        </div>
+
+        <!-- RANK 3 -->
+        <div style="margin-bottom: 20px;">
+          <h4 style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Rank 3</h4>
+          <div class="form-group">
+            <input type="text" id="admin-r3-name" class="form-input" placeholder="Username Minecraft Rank 3">
+          </div>
+          <div class="form-group">
+            <input type="text" id="admin-r3-amount" class="form-input" placeholder="Nominal Rp (Contoh: Rp 25.000)">
+          </div>
+        </div>
+
+        <button class="btn-main" style="width: 100%;" onclick="saveTopDonate()">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Top Donate
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://i.imgur.com/DfdCsWN.png" alt="MineHera Logo" style="width: 28px; height: 28px;">
+      <span>MineHera</span>
+    </div>
+    <p class="footer-desc">Server Minecraft Lifesteal Semi Anarchy Indonesia. Bergabunglah dengan komunitas kami sekarang!</p>
+    
+    <div class="social-links">
+      <a href="https://discord.gg/HyvVb9sBt" target="_blank" class="social-btn" aria-label="Discord">
+        <i class="fa-brands fa-discord"></i>
+      </a>
+      <a href="https://www.tiktok.com/@minehera.ofc?_r=1&_t=ZS-9AIvWAnEVO8" target="_blank" class="social-btn" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+    </div>
+
+    <p class="copyright">&copy; 2026 MineHera. All rights reserved.</p>
+  </footer>
+
+  <div id="toast" class="toast">Pesan Info</div>
+
+  <!-- FIREBASE SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+    // FIREBASE CONFIG MILIK KAMU
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEkOV46LoObqsbaqQs8dZcyCpVkySZuQU",
+      authDomain: "minehera-20850.firebaseapp.com",
+      projectId: "minehera-20850",
+      storageBucket: "minehera-20850.firebasestorage.app",
+      messagingSenderId: "615316045759",
+      appId: "1:615316045759:web:64ffa0bb544b90609c2b0a"
+    };
+
+    // INITALIZE FIREBASE
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    let isAdminLoggedIn = false;
+
+    // --- REALTIME LISTEN TOP DONATE ---
+    onSnapshot(doc(db, "settings", "top_donate"), (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        
+        // Update UI Top Donate
+        updateRankUI(1, data.r1_name, data.r1_amount);
+        updateRankUI(2, data.r2_name, data.r2_amount);
+        updateRankUI(3, data.r3_name, data.r3_amount);
+
+        // Pre-fill Admin Form
+        document.getElementById('admin-r1-name').value = data.r1_name || '';
+        document.getElementById('admin-r1-amount').value = data.r1_amount || '';
+        document.getElementById('admin-r2-name').value = data.r2_name || '';
+        document.getElementById('admin-r2-amount').value = data.r2_amount || '';
+        document.getElementById('admin-r3-name').value = data.r3_name || '';
+        document.getElementById('admin-r3-amount').value = data.r3_amount || '';
+      }
+    });
+
+    function updateRankUI(rank, name, amount) {
+      const nameEl = document.getElementById(`rank${rank}-name`);
+      const amountEl = document.getElementById(`rank${rank}-amount`);
+      const skinEl = document.getElementById(`rank${rank}-skin`);
+
+      const pName = name && name.trim() !== '' ? name : 'Belum Ada';
+      nameEl.textContent = pName;
+      amountEl.textContent = amount && amount.trim() !== '' ? amount : 'Rp -';
+      
+      if (pName !== 'Belum Ada') {
+        skinEl.src = `https://visage.surgeplay.com/bust/128/${pName}`;
+      } else {
+        skinEl.src = `https://visage.surgeplay.com/bust/128/Steve`;
+      }
+    }
+
+    // SIMPAN DATA TOP DONATE (DARI ADMIN PANEL)
+    window.saveTopDonate = async function() {
+      const r1_name = document.getElementById('admin-r1-name').value;
+      const r1_amount = document.getElementById('admin-r1-amount').value;
+      const r2_name = document.getElementById('admin-r2-name').value;
+      const r2_amount = document.getElementById('admin-r2-amount').value;
+      const r3_name = document.getElementById('admin-r3-name').value;
+      const r3_amount = document.getElementById('admin-r3-amount').value;
+
+      try {
+        await setDoc(doc(db, "settings", "top_donate"), {
+          r1_name, r1_amount,
+          r2_name, r2_amount,
+          r3_name, r3_amount
+        });
+        showToast("Top Donate Berhasil Diupdate!");
+      } catch (err) {
+        showToast("Gagal menyimpan data!");
+        console.error(err);
+      }
+    }
+
+    // --- UPLOAD FOTO KE GALERI GLOBAL ---
+    window.uploadPhoto = async function() {
+      const nameInput = document.getElementById('uploader-name').value;
+      const descInput = document.getElementById('uploader-desc').value;
+      const fileInput = document.getElementById('uploader-file').files[0];
+      const uploadBtn = document.getElementById('upload-btn');
+
+      if (!nameInput || !fileInput) {
+        showToast("Isi Nickname dan Pilih Foto!");
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      uploadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah...`;
+
+      try {
+        // Upload File ke Firebase Storage
+        const fileRef = ref(storage, `gallery/${Date.now()}_${fileInput.name}`);
+        await uploadBytes(fileRef, fileInput);
+        const imageUrl = await getDownloadURL(fileRef);
+
+        // Simpan Data Metadata ke Firestore Database
+        await addDoc(collection(db, "gallery"), {
+          uploader: nameInput,
+          desc: descInput || "Tidak ada keterangan",
+          imageUrl: imageUrl,
+          storagePath: fileRef.fullPath,
+          createdAt: Date.now()
+        });
+
+        showToast("Foto berhasil diupload!");
+        document.getElementById('uploader-name').value = '';
+        document.getElementById('uploader-desc').value = '';
+        document.getElementById('uploader-file').value = '';
+      } catch (err) {
+        showToast("Gagal mengupload foto!");
+        console.error(err);
+      } finally {
+        uploadBtn.disabled = false;
+        uploadBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Foto`;
+      }
+    }
+
+    // REALTIME LOAD GALERI FOTO
+    const q = query(collection(db, "gallery"), orderBy("createdAt", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const galleryContainer = document.getElementById('gallery-container');
+      galleryContainer.innerHTML = '';
+
+      if (snapshot.empty) {
+        galleryContainer.innerHTML = `<div class="empty-box" style="grid-column: 1/-1;"><p>Belum ada foto yang di-upload.</p></div>`;
+        return;
+      }
+
+      snapshot.forEach((docSnap) => {
+        const item = docSnap.data();
+        const id = docSnap.id;
+
+        const card = document.createElement('div');
+        card.className = 'gallery-item';
+        card.innerHTML = `
+          <img src="${item.imageUrl}" class="gallery-img" alt="Gallery Photo">
+          <div class="gallery-info">
+            <div class="gallery-uploader"><i class="fa-solid fa-user" style="color: var(--red-primary);"></i> ${item.uploader}</div>
+            <div class="gallery-desc">${item.desc}</div>
+            ${isAdminLoggedIn ? `<button class="btn-delete-img" onclick="deleteGalleryItem('${id}', '${item.storagePath}')"><i class="fa-solid fa-trash"></i> Hapus Foto</button>` : ''}
+          </div>
+        `;
+        galleryContainer.appendChild(card);
+      });
+    });
+
+    // HAPUS FOTO (KHUSUS ADMIN)
+    window.deleteGalleryItem = async function(docId, storagePath) {
+      if (confirm("Apakah kamu yakin ingin menghapus foto ini?")) {
+        try {
+          // Hapus dari Storage & Database
+          await deleteDoc(doc(db, "gallery", docId));
+          const fileRef = ref(storage, storagePath);
+          await deleteObject(fileRef);
+          showToast("Foto berhasil dihapus!");
+        } catch (err) {
+          showToast("Gagal menghapus foto!");
+          console.error(err);
         }
-        fetchLeaderboard();
-    </script>
+      }
+    }
+
+    // PROMPT ADMIN PANEL PASSWORD
+    window.openAdminModal = function() {
+      if (isAdminLoggedIn) {
+        switchPage('admin-page');
+        return;
+      }
+
+      const pass = prompt("Masukkan Password Admin Panel:");
+      // UBAH PASSWORD ADMIN KAMU DI SINI:
+      if (pass === "minehera123") {
+        isAdminLoggedIn = true;
+        showToast("Akses Admin Diberikan!");
+        switchPage('admin-page');
+      } else if (pass !== null) {
+        alert("Password Salah!");
+      }
+    }
+  </script>
+
+  <!-- SCRIPT GENERAL -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const sidebar = document.getElementById('sidebar-menu');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    function switchPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => link.classList.remove('active'));
+
+      document.getElementById(pageId).classList.add('active');
+      closeMenu();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copyIP(ip) {
+      navigator.clipboard.writeText(ip);
+      showToast("IP Berhasil Disalin!");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // FETCH PLAYER ONLINE
+    async function fetchServerStatus() {
+      const serverIP = "play.minehera.xyz";
+      const playerCountEl = document.getElementById('player-count');
+
+      try {
+        const res = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+        const data = await res.json();
+
+        if (data.online) {
+          playerCountEl.textContent = data.players.online;
+        } else {
+          playerCountEl.textContent = "0";
+        }
+      } catch (err) {
+        playerCountEl.textContent = "0";
+      }
+    }
+
+    fetchServerStatus();
+    setInterval(fetchServerStatus, 30000);
+  </script>
 </body>
 </html>
