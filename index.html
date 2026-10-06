@@ -75,6 +75,12 @@
       object-fit: contain;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .hamburger-btn {
       background: none;
       border: none;
@@ -104,11 +110,10 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
     }
 
-    .sidebar.active {
-      right: 0;
-    }
+    .sidebar.active { right: 0; }
 
     .sidebar-header {
       display: flex;
@@ -176,10 +181,10 @@
     /* MAIN CONTENT */
     main {
       flex: 1;
-      max-width: 900px;
+      max-width: 950px;
       width: 100%;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 20px 120px 20px;
     }
 
     .page {
@@ -187,9 +192,7 @@
       animation: fadeIn 0.4s ease forwards;
     }
 
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -207,9 +210,7 @@
       text-shadow: 0 0 15px var(--red-glow);
     }
 
-    /* ========================================= */
-    /* DASHBOARD / HERO SECTION RESTRUCTURED    */
-    /* ========================================= */
+    /* HERO SECTION */
     .hero-container {
       position: relative;
       background: linear-gradient(180deg, rgba(220, 38, 38, 0.08) 0%, rgba(10, 5, 7, 0.95) 100%);
@@ -221,7 +222,6 @@
       margin-bottom: 30px;
     }
 
-    /* Status Pill Like Kaizen / LeftyCraft */
     .status-pill {
       display: inline-flex;
       align-items: center;
@@ -239,308 +239,197 @@
     .status-dot {
       width: 8px;
       height: 8px;
-      background-color: #22c55e;
+      background-color: #ef4444;
       border-radius: 50%;
+      box-shadow: 0 0 10px #ef4444;
+    }
+
+    .status-dot.online {
+      background-color: #22c55e;
       box-shadow: 0 0 10px #22c55e;
     }
 
-    .hero-welcome {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #e5e7eb;
-      margin-bottom: 4px;
-    }
-
-    .hero-title-big {
-      font-size: 3.2rem;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      color: #ffffff;
-      text-shadow: 0 0 30px var(--red-glow);
-      letter-spacing: -0.5px;
-    }
-
-    .hero-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .hero-welcome { font-size: 1.2rem; font-weight: 700; color: #e5e7eb; margin-bottom: 4px; }
+    .hero-title-big { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: #ffffff; text-shadow: 0 0 30px var(--red-glow); letter-spacing: -0.5px; }
+    .hero-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
     .cta-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 320px;
-      margin: 0 auto 25px auto;
+      display: flex; flex-direction: column; gap: 12px; max-width: 320px; margin: 0 auto 25px auto;
     }
 
     .btn-main, .btn-sub {
-      width: 100%;
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.98rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      width: 100%; padding: 14px 20px; border-radius: 12px; font-weight: 800; font-size: 0.98rem; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s ease;
     }
 
-    .btn-main {
-      background: var(--red-primary);
-      color: #ffffff;
-      border: none;
-      box-shadow: 0 6px 20px var(--red-glow);
-    }
+    .btn-main { background: var(--red-primary); color: #ffffff; border: none; box-shadow: 0 6px 20px var(--red-glow); }
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.6); background: #ef4444; }
+    .btn-sub { background: rgba(255, 255, 255, 0.05); color: #ffffff; border: 1px solid var(--border-color); }
+    .btn-sub:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
 
-    .btn-main:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.6);
-      background: #ef4444;
-    }
-
-    .btn-sub {
-      background: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
-      border: 1px solid var(--border-color);
-    }
-
-    .btn-sub:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-
-    /* IP Box Bar Like LeftyCraft */
     .ip-box-widget {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 12px 18px;
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; max-width: 380px; margin: 0 auto;
+    }
+    .ip-box-info { text-align: left; }
+    .ip-box-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .ip-box-text { font-size: 0.95rem; font-weight: 800; color: #ffffff; }
+
+    .btn-copy-icon {
+      background: rgba(220, 38, 38, 0.15); border: 1px solid var(--red-primary); color: #ffffff; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s ease;
+    }
+    .btn-copy-icon:hover { background: var(--red-primary); transform: scale(1.05); }
+
+    /* DASHBOARD STATS */
+    .server-stats-banner { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .stat-box { background: var(--gradient-card); border: 1px solid var(--border-color); padding: 22px 18px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; transition: border-color 0.3s ease; }
+    .stat-box:hover { border-color: var(--red-primary); }
+    .stat-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(220, 38, 38, 0.1); color: var(--red-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 4px; }
+    .stat-value { font-size: 2.2rem; color: #fff; font-weight: 800; line-height: 1; }
+    .stat-title { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .stat-subtext { font-size: 0.75rem; color: #ef4444; font-weight: 700; opacity: 0.95; }
+
+    .support-badge-container {
+      display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;
+    }
+    .support-tag {
+      background: rgba(220, 38, 38, 0.15); border: 1px solid var(--red-primary); color: #fff; font-size: 0.8rem; font-weight: 800; padding: 6px 16px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    .about-section { margin-bottom: 40px; }
+    .about-header { text-align: center; margin-bottom: 24px; }
+    .about-tag { font-size: 0.75rem; font-weight: 800; color: var(--red-primary); text-transform: uppercase; letter-spacing: 2px; }
+    .about-title { font-size: 1.6rem; font-weight: 800; color: #ffffff; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .feature-card { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; transition: 0.3s ease; }
+    .feature-card:hover { border-color: rgba(220, 38, 38, 0.5); transform: translateY(-3px); }
+    .feature-icon-box { width: 40px; height: 40px; border-radius: 10px; background: rgba(220, 38, 38, 0.15); color: var(--red-primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
+    .feature-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* RATING FLOATING HOVER BAR */
+    .rating-floating-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
+      max-width: 500px;
+      background: rgba(19, 10, 13, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--red-primary);
+      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.35);
+      border-radius: 50px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 380px;
-      margin: 0 auto;
-    }
-
-    .ip-box-info {
-      text-align: left;
-    }
-
-    .ip-box-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .ip-box-text {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .btn-copy-icon {
-      background: rgba(220, 38, 38, 0.15);
-      border: 1px solid var(--red-primary);
-      color: #ffffff;
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      z-index: 500;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: all 0.3s ease;
     }
-
-    .btn-copy-icon:hover {
-      background: var(--red-primary);
-      transform: scale(1.05);
+    .rating-floating-bar:hover {
+      transform: translateX(-50%) translateY(-3px);
+      box-shadow: 0 15px 35px rgba(220, 38, 38, 0.55);
     }
+    .rating-bar-info { display: flex; align-items: center; gap: 10px; }
+    .rating-score { font-size: 1.15rem; font-weight: 800; color: #ffffff; }
+    .rating-stars { color: var(--gold-vip); font-size: 0.9rem; display: flex; gap: 2px; }
+    .rating-count { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-align: right; }
 
-    /* SERVER STATS GRID */
-    .server-stats-banner {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    /* AUTOMATIC INFINITE SLIDER / CAROUSEL ULASAN (MANUAL BUTTONS REMOVED, AUTO MONDAR-MANDIR) */
+    .reviews-carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px 0;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .reviews-carousel-container {
+      display: flex;
+      width: max-content;
       gap: 16px;
-      margin-bottom: 40px;
+      animation: continuousScroll 35s linear infinite;
+    }
+    .reviews-carousel-wrapper:hover .reviews-carousel-container {
+      animation-play-state: paused;
+    }
+    @keyframes continuousScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    .stat-box {
+    .review-card {
+      width: 300px;
+      max-width: 300px;
       background: var(--gradient-card);
       border: 1px solid var(--border-color);
-      padding: 22px 18px;
       border-radius: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 8px;
-      transition: border-color 0.3s ease;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .review-user-header { display: flex; align-items: center; gap: 10px; }
+    .review-avatar { width: 36px; height: 36px; border-radius: 8px; background: #000; border: 1px solid var(--border-color); object-fit: cover; }
+    .review-user-name { font-size: 0.9rem; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+    /* FIXED OVERFLOW & TEXT LENGTH FOR REVIEWS TO FIT BOX PERFECTLY */
+    .review-text { 
+      font-size: 0.85rem; 
+      color: var(--text-muted); 
+      line-height: 1.5; 
+      word-break: break-word; 
+      overflow-wrap: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .stat-box:hover {
-      border-color: var(--red-primary);
-    }
+    /* STAR RATING INPUT STYLES */
+    .star-rating-input { display: flex; gap: 8px; font-size: 1.8rem; color: #4b5563; cursor: pointer; margin: 10px 0; justify-content: center; }
+    .star-rating-input .fa-star.active { color: var(--gold-vip); }
 
-    .stat-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: rgba(220, 38, 38, 0.1);
-      color: var(--red-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
-
-    .stat-value {
-      font-size: 2.2rem;
-      color: #fff;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .stat-title {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 700;
-    }
-
-    /* ABOUT SECTION (CARDS LIKE LEFTYCRAFT) */
-    .about-section {
-      margin-bottom: 40px;
-    }
-
-    .about-header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .about-tag {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--red-primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .about-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .feature-card {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 20px;
-      transition: 0.3s ease;
-    }
-
-    .feature-card:hover {
-      border-color: rgba(220, 38, 38, 0.5);
-      transform: translateY(-3px);
-    }
-
-    .feature-icon-box {
+    /* PROFILE HEAD ICON BUTTON */
+    .profile-head-btn {
       width: 40px;
       height: 40px;
       border-radius: 10px;
       background: rgba(220, 38, 38, 0.15);
-      color: var(--red-primary);
+      border: 1px solid var(--red-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
-      margin-bottom: 14px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-
-    .feature-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* TOP DONATE PODIUM */
-    .podium-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 12px;
-      margin-top: 30px;
-      width: 100%;
-    }
-
-    .podium-card {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 20px 10px;
-      text-align: center;
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
       overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      padding: 0;
+    }
+    .profile-head-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 15px var(--red-glow);
+    }
+    .profile-head-btn img {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
     }
 
-    .podium-card:hover {
-      border-color: rgba(220, 38, 38, 0.5);
-      transform: translateY(-5px);
+    /* PODIUM DONATION */
+    .podium-container {
+      display: flex; justify-content: center; align-items: flex-end; gap: 12px; margin-top: 30px; width: 100%;
     }
-
-    .podium-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 4px;
+    .podium-card {
+      background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px 10px; text-align: center; flex: 1; width: 33%; min-width: 0; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease;
     }
-
-    .podium-card.rank-1 {
-      border-color: var(--red-primary);
-      box-shadow: 0 10px 30px var(--red-glow);
-      order: 2;
-      transform: translateY(-15px);
-      padding: 30px 10px;
-      z-index: 2;
-    }
-    
-    .podium-card.rank-1:hover {
-      transform: translateY(-20px);
-    }
-
+    .podium-card:hover { border-color: rgba(220, 38, 38, 0.5); transform: translateY(-5px); }
+    .podium-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; }
+    .podium-card.rank-1 { border-color: var(--red-primary); box-shadow: 0 10px 30px var(--red-glow); order: 2; transform: translateY(-15px); padding: 30px 10px; z-index: 2; }
+    .podium-card.rank-1:hover { transform: translateY(-20px); }
     .podium-card.rank-1::before { background: var(--red-primary); }
     .podium-card.rank-2 { order: 1; }
     .podium-card.rank-2::before { background: silver; }
@@ -548,340 +437,178 @@
     .podium-card.rank-3::before { background: #cd7f32; }
 
     .badge-rank {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.9rem;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;
     }
     .rank-1 .badge-rank { background: var(--red-primary); color: #fff; }
     .rank-2 .badge-rank { background: silver; color: #000; }
     .rank-3 .badge-rank { background: #cd7f32; color: #fff; }
 
+    .player-name { font-weight: 800; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: break-all; margin-top: 10px; }
+    .amount { font-weight: 800; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 4px; font-size: 0.85rem; }
+
     /* SHOP COMPONENT */
-    .shop-tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 30px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .shop-tab-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .shop-tab-btn.active {
-      background: var(--red-primary);
-      color: #ffffff;
-      border-color: var(--red-primary);
-      box-shadow: 0 4px 15px var(--red-glow);
-    }
-    .shop-category {
-      display: none;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
+    .shop-tabs { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
+    .shop-tab-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+    .shop-tab-btn.active { background: var(--red-primary); color: #ffffff; border-color: var(--red-primary); box-shadow: 0 4px 15px var(--red-glow); }
+    .shop-category { display: none; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
     .shop-category.active { display: grid; }
-    .shop-card {
+    .shop-card { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px 18px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4); transition: all 0.3s ease; }
+    .shop-card:hover { border-color: var(--red-primary); transform: translateY(-6px); box-shadow: 0 12px 30px rgba(220, 38, 38, 0.25); }
+    .shop-bonus-tag { position: absolute; top: 0; right: 0; background: var(--red-primary); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 6px 14px; border-bottom-left-radius: 12px; box-shadow: -2px 2px 10px rgba(0,0,0,0.3); letter-spacing: 1px; }
+
+    .shop-icon-wrapper { width: 75px; height: 75px; background: rgba(220, 38, 38, 0.05); border: 1px solid var(--border-color); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: 0.3s; }
+    .shop-icon { width: 45px; height: 45px; object-fit: contain; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); transition: transform 0.3s; }
+    .shop-item-title { font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
+    .shop-price-tag { font-size: 0.95rem; font-weight: 800; color: var(--gold-vip); margin-bottom: 16px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); padding: 4px 14px; border-radius: 8px; }
+    .btn-buy { width: 100%; background: linear-gradient(45deg, var(--red-primary), #ef4444); color: #ffffff; border: none; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; box-shadow: 0 4px 15px var(--red-glow); transition: 0.3s; }
+    .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6); }
+
+    /* GALLERY STYLES */
+    .gallery-filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: space-between; align-items: center; }
+    .gallery-controls { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+    
+    .gallery-card {
       background: var(--gradient-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 30px 18px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
-    }
-    .shop-card:hover {
-      border-color: var(--red-primary);
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(220, 38, 38, 0.25);
-    }
-    .shop-bonus-tag {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: var(--red-primary);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 6px 14px;
-      border-bottom-left-radius: 12px;
-      box-shadow: -2px 2px 10px rgba(0,0,0,0.3);
-      letter-spacing: 1px;
-    }
-
-    .shop-icon-wrapper {
-      width: 75px; height: 75px;
-      background: rgba(220, 38, 38, 0.05);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px; transition: 0.3s;
-    }
-    .shop-icon {
-      width: 45px; height: 45px;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-      transition: transform 0.3s;
-    }
-    .shop-item-title {
-      font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;
-    }
-    .shop-price-tag {
-      font-size: 0.95rem; font-weight: 800; color: var(--gold-vip); margin-bottom: 16px;
-      background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25);
-      padding: 4px 14px; border-radius: 8px;
-    }
-    .btn-buy {
-      width: 100%;
-      background: linear-gradient(45deg, var(--red-primary), #ef4444);
-      color: #ffffff; border: none; padding: 10px; border-radius: 8px;
-      font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      margin-top: auto; box-shadow: 0 4px 15px var(--red-glow); transition: 0.3s;
-    }
-    .btn-buy:hover {
-      transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
-    }
-
-    /* STAFF INFO - ACCORDION STYLE */
-    .staff-container {
-      display: grid;
-      gap: 16px;
-    }
-
-    .staff-card {
-      background: var(--gradient-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 20px;
       display: flex;
       flex-direction: column;
       transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
+    .gallery-card:hover { border-color: var(--red-primary); transform: translateY(-4px); }
+    .gallery-img-box { width: 100%; height: 200px; background: #000; overflow: hidden; position: relative; }
+    .gallery-img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-body { padding: 16px; display: flex; flex-direction: column; flex: 1; gap: 8px; }
+    .gallery-title { font-weight: 800; font-size: 1.05rem; color: #fff; }
+    .gallery-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+    .gallery-author { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .gallery-meta-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .gallery-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .btn-like { background: rgba(220,38,38,0.1); border: 1px solid var(--border-color); color: #ef4444; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+    .btn-like:hover, .btn-like.liked { background: var(--red-primary); color: #fff; }
+    .tag-badge { background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; color: #d1d5db; }
 
-    .staff-card:hover {
-      border-color: rgba(220, 38, 38, 0.5);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    /* WARNING BOX & FORMS */
+    .warning-box {
+      background: rgba(220, 38, 38, 0.1); border: 1px solid var(--red-primary); border-radius: 12px; padding: 14px; margin-bottom: 16px; color: #fca5a5; font-size: 0.82rem; line-height: 1.5;
     }
+    .warning-box strong { color: #ffffff; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 0.9rem; }
 
-    .staff-card.active {
-      border-color: var(--red-primary);
-      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.1);
+    .upload-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 30px; }
+    .form-input, .form-select { width: 100%; padding: 12px 14px; background: #050203; border: 1px solid var(--border-color); border-radius: 10px; color: #ffffff; font-size: 0.9rem; transition: 0.3s; margin-bottom: 12px; }
+    .form-input:focus, .form-select:focus { outline: none; border-color: var(--red-primary); box-shadow: 0 0 10px rgba(220, 38, 38, 0.2); }
+    
+    /* MODAL OVERLAY HIGH Z-INDEX */
+    .modal-overlay { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100vw; 
+      height: 100vh; 
+      background: rgba(0, 0, 0, 0.85); 
+      backdrop-filter: blur(8px); 
+      display: none; 
+      justify-content: center; 
+      align-items: center; 
+      z-index: 9999; 
+      padding: 20px; 
     }
+    .modal-card { 
+      background: var(--gradient-card); 
+      border: 1px solid var(--red-primary); 
+      border-radius: 20px; 
+      padding: 25px; 
+      width: 100%; 
+      max-width: 480px; 
+      text-align: left; 
+      box-shadow: 0 10px 40px rgba(220, 38, 38, 0.25); 
+      max-height: 90vh; 
+      overflow-y: auto; 
+    }
+    .btn-cancel { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 12px; border-radius: 10px; flex: 1; font-weight: 700; cursor: pointer; transition: 0.3s; }
+    .btn-cancel:hover { background: rgba(255,255,255,0.05); color: #fff; }
 
-    .staff-header-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    /* AUTH MODAL STYLES */
+    .auth-toggle-group { display: flex; background: #050203; border-radius: 10px; padding: 4px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+    .auth-tab-btn { flex: 1; padding: 10px; border: none; background: transparent; color: var(--text-muted); font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .auth-tab-btn.active { background: var(--red-primary); color: #fff; }
+    .platform-selector { display: flex; gap: 10px; margin-bottom: 15px; }
+    .platform-btn { flex: 1; padding: 10px; border: 1px solid var(--border-color); background: #050203; color: var(--text-muted); font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .platform-btn.active { border-color: var(--red-primary); color: #fff; background: rgba(220, 38, 38, 0.15); }
+    
+    .checkbox-container { display: flex; align-items: center; gap: 10px; text-align: left; margin: 15px 0; font-size: 0.88rem; color: var(--text-muted); cursor: pointer; }
+    .checkbox-container input { accent-color: var(--red-primary); width: 18px; height: 18px; cursor: pointer; }
 
-    .staff-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
-      background: #000;
-      padding: 2px;
-      border: 1px solid var(--border-color);
-    }
+    /* PROFESSIONAL LOGICAL PUZZLE SYSTEM & UI DRAG/DROP STYLING */
+    .puzzle-box { background: #050203; border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center; }
+    .puzzle-align-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px 0; }
+    .puzzle-slot { width: 50px; height: 50px; border: 2px dashed var(--red-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(220, 38, 38, 0.05); }
+    .puzzle-options { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .puzzle-piece { width: 42px; height: 42px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
+    .puzzle-piece.selected { border-color: var(--red-primary); background: rgba(220,38,38,0.25); transform: scale(1.05); }
+    
+    .verify-loading-bar { width: 100%; height: 8px; background: #1a0b12; border-radius: 10px; overflow: hidden; margin-top: 12px; display: none; }
+    .verify-loading-progress { width: 0%; height: 100%; background: var(--red-primary); transition: width 0.1s linear; }
 
-    .staff-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-    }
+    /* STAFF & FAQ STYLES */
+    .staff-container { display: grid; gap: 16px; }
+    .staff-card { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; transition: all 0.3s ease; cursor: pointer; position: relative; }
+    .staff-card:hover { border-color: rgba(220, 38, 38, 0.5); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+    .staff-card.active { border-color: var(--red-primary); box-shadow: 0 4px 15px rgba(220, 38, 38, 0.1); }
+    .staff-header-row { display: flex; align-items: center; gap: 16px; }
+    .staff-avatar { width: 60px; height: 60px; border-radius: 12px; background: #000; padding: 2px; border: 1px solid var(--border-color); object-fit: cover; }
+    .staff-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 6px; margin-bottom: 6px; }
     .badge-owner { background: rgba(220, 38, 38, 0.15); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.4); }
     .badge-coowner { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }
     .badge-head { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
     .badge-dev { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+    .staff-name { font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+    .staff-toggle-icon { margin-left: auto; font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s ease, color 0.3s ease; }
+    .staff-card.active .staff-toggle-icon { transform: rotate(180deg); color: var(--red-primary); }
+    .staff-body { max-height: 0; overflow: hidden; opacity: 0; padding-top: 0; margin-top: 0; border-top: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.4s ease; }
+    .staff-card.active .staff-body { max-height: 500px; opacity: 1; padding-top: 16px; margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .staff-info-block { display: flex; flex-direction: column; gap: 4px; }
+    .staff-info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+    .staff-info-text { font-size: 0.9rem; color: #e5e7eb; line-height: 1.6; }
 
-    .staff-name {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-    
-    .staff-toggle-icon {
-      margin-left: auto;
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-
-    .staff-card.active .staff-toggle-icon {
-      transform: rotate(180deg);
-      color: var(--red-primary);
-    }
-
-    .staff-body {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      padding-top: 0;
-      margin-top: 0;
-      border-top: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: all 0.4s ease;
-    }
-    
-    .staff-card.active .staff-body {
-      max-height: 500px;
-      opacity: 1;
-      padding-top: 16px;
-      margin-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .staff-info-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .staff-info-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .staff-info-text {
-      font-size: 0.9rem;
-      color: #e5e7eb;
-      line-height: 1.6;
-    }
-
-    /* FAQ */
-    .faq-category-filters {
-      display: flex; gap: 8px; margin-bottom: 24px; justify-content: center; flex-wrap: wrap;
-    }
-    .faq-filter-btn {
-      background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted);
-      padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.3s;
-    }
-    .faq-filter-btn.active {
-      background: var(--red-primary); color: #fff; border-color: var(--red-primary); box-shadow: 0 4px 12px var(--red-glow);
-    }
+    .faq-category-filters { display: flex; gap: 8px; margin-bottom: 24px; justify-content: center; flex-wrap: wrap; }
+    .faq-filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.3s; }
+    .faq-filter-btn.active { background: var(--red-primary); color: #fff; border-color: var(--red-primary); box-shadow: 0 4px 12px var(--red-glow); }
     .faq-container { display: flex; flex-direction: column; gap: 12px; }
-    .faq-item {
-      background: var(--gradient-card); border: 1px solid var(--border-color);
-      border-radius: 12px; overflow: hidden; transition: all 0.3s ease;
-    }
+    .faq-item { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
     .faq-item:hover { border-color: rgba(220, 38, 38, 0.4); }
-    .faq-question {
-      width: 100%; padding: 18px 20px; text-align: left; background: transparent; border: none;
-      color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-    }
-    .faq-answer {
-      padding: 0 20px; max-height: 0; overflow: hidden; opacity: 0; color: var(--text-muted);
-      font-size: 0.92rem; line-height: 1.7; transition: all 0.4s ease;
-    }
+    .faq-question { width: 100%; padding: 18px 20px; text-align: left; background: transparent; border: none; color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; opacity: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; transition: all 0.4s ease; }
     .faq-item.active { border-color: var(--red-primary); box-shadow: 0 4px 15px rgba(220, 38, 38, 0.1); }
     .faq-item.active .faq-question { border-bottom: 1px solid var(--border-color); background: rgba(220, 38, 38, 0.05); }
     .faq-item.active .faq-answer { padding: 18px 20px; max-height: 400px; opacity: 1; }
 
-    /* FORMS & MODALS */
-    .upload-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 30px; }
-    .form-input { width: 100%; padding: 14px; background: #050203; border: 1px solid var(--border-color); border-radius: 10px; color: #ffffff; font-size: 0.95rem; transition: 0.3s; }
-    .form-input:focus { outline: none; border-color: var(--red-primary); box-shadow: 0 0 10px rgba(220, 38, 38, 0.2); }
-    
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 9999; }
-    .modal-card { background: var(--gradient-card); border: 1px solid var(--red-primary); border-radius: 20px; padding: 30px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 40px rgba(220, 38, 38, 0.2); }
-    .btn-cancel { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 14px; border-radius: 10px; flex: 1; font-weight: 700; cursor: pointer; transition: 0.3s; }
-    .btn-cancel:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    /* TABLES & ACTIONS */
+    .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; font-size: 0.85rem; }
+    .admin-table th, .admin-table td { padding: 10px; border-bottom: 1px solid var(--border-color); }
+    .admin-table th { color: var(--text-muted); text-transform: uppercase; }
+    .badge-status { padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 0.7rem; }
+    .status-active { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+    .status-banned { background: rgba(220, 38, 38, 0.15); color: #ef4444; }
+    .btn-action { padding: 5px 10px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.75rem; margin-right: 4px; }
+    .btn-ban { background: #dc2626; color: #fff; }
+    .btn-unban { background: #22c55e; color: #fff; }
+    .btn-del { background: #4b5563; color: #fff; }
 
-    /* FOOTER RESTRUCTURED */
-    footer { 
-      background: #060304; 
-      border-top: 1px solid var(--border-color); 
-      padding: 40px 24px 25px; 
-      margin-top: auto; 
-    }
-    .footer-content {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-    .footer-top {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      text-align: left;
-    }
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 1.2rem;
-    }
-    .footer-desc {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-    .footer-links-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .footer-links-title {
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      transition: color 0.2s;
-      cursor: pointer;
-    }
-    .footer-links a:hover {
-      color: var(--red-primary);
-    }
+    /* FOOTER */
+    footer { background: #060304; border-top: 1px solid var(--border-color); padding: 40px 24px 25px; margin-top: auto; }
+    .footer-content { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+    .footer-top { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; }
+    .footer-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+    .footer-links-group { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links-title { font-size: 0.9rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; cursor: pointer; }
+    .footer-links a:hover { color: var(--red-primary); }
     .social-links { display: flex; gap: 12px; }
     .social-btn { width: 42px; height: 42px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; transition: 0.3s ease; }
     .social-btn:hover { border-color: var(--red-primary); color: #fff; background: var(--red-primary); transform: translateY(-2px); box-shadow: 0 5px 15px var(--red-glow); }
@@ -899,9 +626,14 @@
       <img src="https://i.imgur.com/DfdCsWN.png" alt="MineHera Logo">
       <span>MineHera</span>
     </div>
-    <button id="menu-btn" class="hamburger-btn" aria-label="Buka Menu">
-      <i class="fa-solid fa-bars"></i>
-    </button>
+    <div class="header-actions">
+      <button class="profile-head-btn" onclick="switchPage('profile-page')" title="Ke Akun Saya">
+        <img id="nav-profile-skin-head" src="https://visage.surgeplay.com/bust/128/Steve" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
+      </button>
+      <button id="menu-btn" class="hamburger-btn" aria-label="Buka Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
   </header>
 
   <div id="overlay" class="overlay"></div>
@@ -921,27 +653,24 @@
       <li><a onclick="switchPage('home-page')" id="link-home" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
       <li><a onclick="switchPage('donate-page')" id="link-donate"><i class="fa-solid fa-trophy"></i> Top Donate</a></li>
       <li><a onclick="switchPage('shop-page')" id="link-shop"><i class="fa-solid fa-cart-shopping"></i> Shop</a></li>
+      <li><a onclick="switchPage('player-gallery-page')"><i class="fa-solid fa-camera"></i> Galeri Player</a></li>
+      <li><a onclick="switchPage('build-gallery-page')"><i class="fa-solid fa-cubes"></i> Build Gallery</a></li>
       <li><a onclick="switchPage('faq-page')" id="link-faq"><i class="fa-solid fa-circle-question"></i> FAQ / Bantuan</a></li>
       <li><a onclick="switchPage('vote-page')" id="link-vote"><i class="fa-solid fa-check-to-slot"></i> Vote</a></li>
       <li><a onclick="switchPage('staff-page')" id="link-staff"><i class="fa-solid fa-user-shield"></i> Tim Server</a></li>
-      <li><a onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> Admin Panel</a></li>
+      <li id="admin-nav-item" style="display: none;"><a onclick="switchPage('admin-page')"><i class="fa-solid fa-lock"></i> Admin Panel</a></li>
+      <li><a onclick="logoutUser()" id="logout-nav-item" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
     </ul>
   </nav>
 
   <main>
-    
-    <!-- 1. HOME PAGE / DASHBOARD (NEW STRUCTURE) -->
+    <!-- 1. HOME PAGE -->
     <div id="home-page" class="page active">
-      
-      <!-- HERO CONTAINER -->
       <div class="hero-container">
-        
-        <!-- Status Indicator Pill -->
         <div class="status-pill">
-          <span class="status-dot"></span>
-          <span>Server Online</span>
+          <span class="status-dot" id="server-dot"></span>
+          <span id="server-status-text">Memeriksa Status...</span>
         </div>
-
         <div class="hero-welcome">Selamat Datang di</div>
         <h1 class="hero-title-big">MineHera</h1>
         <p class="hero-desc">Tempat di mana kamu membuktikan kemampuan bertahan hidup. Server Minecraft Lifesteal Semi-Anarchy Indonesia dengan pengalaman bermain tanpa batas!</p>
@@ -955,7 +684,6 @@
           </a>
         </div>
 
-        <!-- IP Copy Widget Box -->
         <div class="ip-box-widget">
           <div class="ip-box-info">
             <div class="ip-box-label">SERVER IP</div>
@@ -965,15 +693,19 @@
             <i class="fa-regular fa-copy"></i>
           </button>
         </div>
-
       </div>
 
-      <!-- Live Server Status Grid -->
       <div class="server-stats-banner">
         <div class="stat-box">
           <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
           <span class="stat-value" id="online-players">0</span>
           <span class="stat-title">Pemain Online</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-user-plus"></i></div>
+          <span class="stat-value">2.500+</span>
+          <span class="stat-title">Pemain Terdaftar</span>
+          <span class="stat-subtext" id="registered-accounts-count">(0 Akun terdaftar dalam web)</span>
         </div>
         <div class="stat-box">
           <div class="stat-icon"><i class="fa-solid fa-server"></i></div>
@@ -982,13 +714,32 @@
         </div>
       </div>
 
-      <!-- About / Features Section -->
+      <div style="text-align: center; margin-bottom: 30px;">
+        <div class="support-badge-container">
+          <span class="support-tag"><i class="fa-brands fa-java"></i> Support Java</span>
+          <span class="support-tag" style="border-color: #38bdf8; background: rgba(56,189,248,0.15);"><i class="fa-solid fa-mobile-screen-button"></i> Support Bedrock</span>
+        </div>
+      </div>
+
+      <!-- AUTOMATIC INFINITE SLIDER / CAROUSEL ULASAN PLAYER (MONDAR MANDIR OTOMATIS BERKELANJUTAN TANPA TOMBOL) -->
+      <div class="about-section">
+        <div class="about-header">
+          <div class="about-tag">ULASAN PLAYER</div>
+          <h2 class="about-title">Apa Kata Komunitas?</h2>
+        </div>
+        
+        <div class="reviews-carousel-wrapper">
+          <div id="reviews-carousel-container" class="reviews-carousel-container">
+            <!-- Diisi lewat JavaScript & diduplikasi otomatis untuk efek infinite scroll -->
+          </div>
+        </div>
+      </div>
+
       <div class="about-section">
         <div class="about-header">
           <div class="about-tag">TENTANG KAMI</div>
           <h2 class="about-title">Tentang Server</h2>
         </div>
-
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
@@ -1007,7 +758,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- 2. TOP DONATE PAGE -->
@@ -1016,20 +766,20 @@
       <div class="podium-container">
         <div class="podium-card rank-2">
           <div class="badge-rank">2</div>
-          <img id="rank2-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust staff-avatar">
-          <div id="rank2-name" class="player-name" style="margin-top: 10px; font-size: 1rem;">Loading...</div>
+          <img id="rank2-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
+          <div id="rank2-name" class="player-name">Loading...</div>
           <div id="rank2-amount" class="amount" style="color: silver;">Rp -</div>
         </div>
         <div class="podium-card rank-1">
           <div class="badge-rank">1</div>
-          <img id="rank1-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust staff-avatar" style="width: 85px; height: 85px;">
-          <div id="rank1-name" class="player-name" style="margin-top: 10px; font-size: 1.1rem;">Loading...</div>
-          <div id="rank1-amount" class="amount" style="color: var(--gold-vip); font-size: 0.9rem;">Rp -</div>
+          <img id="rank1-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust staff-avatar" style="width: 80px; height: 80px;" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
+          <div id="rank1-name" class="player-name" style="font-size: 1.1rem;">Loading...</div>
+          <div id="rank1-amount" class="amount" style="color: var(--gold-vip); font-size: 0.95rem;">Rp -</div>
         </div>
         <div class="podium-card rank-3">
           <div class="badge-rank">3</div>
-          <img id="rank3-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust staff-avatar">
-          <div id="rank3-name" class="player-name" style="margin-top: 10px; font-size: 1rem;">Loading...</div>
+          <img id="rank3-skin" src="https://visage.surgeplay.com/bust/128/Steve" alt="Player Skin" class="skin-bust staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
+          <div id="rank3-name" class="player-name">Loading...</div>
           <div id="rank3-amount" class="amount" style="color: #cd7f32;">Rp -</div>
         </div>
       </div>
@@ -1038,7 +788,6 @@
     <!-- 3. SHOP PAGE -->
     <div id="shop-page" class="page">
       <h2 class="section-title"><i class="fa-solid fa-cart-shopping"></i> Official Shop</h2>
-
       <div class="shop-tabs">
         <button class="shop-tab-btn active" onclick="switchShopTab('ranks-cat', this)"><i class="fa-solid fa-crown"></i> Ranks</button>
         <button class="shop-tab-btn" onclick="switchShopTab('shards-cat', this)"><i class="fa-solid fa-gem"></i> Shards</button>
@@ -1096,7 +845,119 @@
       </div>
     </div>
 
-    <!-- 4. FAQ / BANTUAN PAGE -->
+    <!-- 4. GALERY PLAYER PAGE -->
+    <div id="player-gallery-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-camera"></i> Galeri Player</h2>
+      <div class="gallery-filter-bar">
+        <div class="gallery-controls">
+          <input type="text" id="pg-search" class="form-input" placeholder="Cari Username..." style="max-width: 200px; margin-bottom: 0;">
+          <select id="pg-sort" class="form-select" style="max-width: 150px; margin-bottom: 0;">
+            <option value="popular">Most Popular</option>
+            <option value="new">Terbaru (New)</option>
+            <option value="old">Terlama</option>
+          </select>
+        </div>
+        <button class="btn-main" style="width: auto; padding: 10px 20px;" onclick="openModal('pg-upload-modal')">
+          <i class="fa-solid fa-upload"></i> Upload Foto
+        </button>
+      </div>
+
+      <div style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted);" id="pg-total-count">
+        Total Foto: 0
+      </div>
+
+      <div id="player-gallery-grid" class="gallery-grid">
+        <!-- Render Javascript -->
+      </div>
+    </div>
+
+    <!-- 5. BUILD GALLERY PAGE -->
+    <div id="build-gallery-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-cubes"></i> Build Gallery</h2>
+      <div class="gallery-filter-bar">
+        <div class="gallery-controls">
+          <input type="text" id="bg-search" class="form-input" placeholder="Cari Build..." style="max-width: 180px; margin-bottom: 0;">
+          <select id="bg-cat-filter" class="form-select" style="max-width: 140px; margin-bottom: 0;">
+            <option value="all">Semua Kategori</option>
+            <option value="stashes">Stashes</option>
+            <option value="traps">Traps</option>
+            <option value="farm">Farm</option>
+            <option value="dekorasi">Dekorasi</option>
+          </select>
+          <select id="bg-sort" class="form-select" style="max-width: 140px; margin-bottom: 0;">
+            <option value="popular">Most Popular</option>
+            <option value="new">Terbaru</option>
+            <option value="old">Terlama</option>
+          </select>
+        </div>
+        <button class="btn-main" style="width: auto; padding: 10px 20px;" onclick="openModal('bg-upload-modal')">
+          <i class="fa-solid fa-plus"></i> Upload Build
+        </button>
+      </div>
+
+      <div style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted);" id="bg-total-count">
+        Total Build Base: 0
+      </div>
+
+      <div id="build-gallery-grid" class="gallery-grid">
+        <!-- Render Javascript -->
+      </div>
+    </div>
+
+    <!-- 6. PROFILE PAGE LENGKAP -->
+    <div id="profile-page" class="page">
+      <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> Profil Saya</h2>
+      
+      <div class="upload-card" style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+        <button class="profile-head-btn" onclick="switchPage('profile-page')" title="Ke Menu Akun">
+          <img id="my-profile-skin-head" src="https://visage.surgeplay.com/bust/128/Steve" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
+        </button>
+
+        <div style="flex: 1;">
+          <h3 id="my-profile-name" style="font-size: 1.4rem; color: #fff;">Guest</h3>
+          <span id="my-profile-plat" class="tag-badge" style="background: var(--red-primary); color: #fff; text-transform: uppercase;">Java Edition</span>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">Selamat bertualang di MineHera!</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 25px;">
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-camera"></i></div>
+          <span class="stat-value" id="my-photo-count">0</span>
+          <span class="stat-title">Foto Di-upload</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-cubes"></i></div>
+          <span class="stat-value" id="my-build-count">0</span>
+          <span class="stat-title">Build Di-upload</span>
+        </div>
+      </div>
+
+      <div class="upload-card">
+        <h3 style="color:#fff; font-size:1.1rem; margin-bottom:15px;"><i class="fa-solid fa-star" style="color:var(--gold-vip)"></i> Beri Rating & Ulasan Server</h3>
+        <form id="rating-form">
+          <label style="font-size:0.85rem; color:var(--text-muted);">Pilih Bintang:</label>
+          <div class="star-rating-input" id="star-input-group">
+            <i class="fa-solid fa-star active" data-value="1"></i>
+            <i class="fa-solid fa-star active" data-value="2"></i>
+            <i class="fa-solid fa-star active" data-value="3"></i>
+            <i class="fa-solid fa-star active" data-value="4"></i>
+            <i class="fa-solid fa-star active" data-value="5"></i>
+          </div>
+          <textarea id="rating-comment" class="form-input" placeholder="Tulis ulasan kamu (maksimal 100 kata)..." rows="3" maxlength="300" required></textarea>
+          <button type="submit" class="btn-main" style="width: 100%;">Kirim Ulasan</button>
+        </form>
+      </div>
+
+      <div class="upload-card">
+        <h3 style="color:#fff; font-size:1.1rem; margin-bottom:15px;"><i class="fa-solid fa-list-check"></i> Kelola Postingan Saya</h3>
+        <div id="my-uploads-list" style="display: flex; flex-direction: column; gap: 12px;">
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Memuat postingan Anda...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. FAQ PAGE -->
     <div id="faq-page" class="page">
       <h2 class="section-title"><i class="fa-solid fa-comments"></i> Pusat Bantuan</h2>
       <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">Pilih kategori pertanyaan atau klik untuk melihat jawaban lengkapnya.</p>
@@ -1110,14 +971,12 @@
       <div class="faq-container"></div>
     </div>
 
-    <!-- 5. STAFF INFO PAGE (ACCORDION STYLE) -->
+    <!-- 8. STAFF PAGE -->
     <div id="staff-page" class="page">
       <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> Tim Server</h2>
       <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Kenalan dengan jajaran pengurus profesional di balik operasional MineHera.</p>
       
       <div class="staff-container">
-        
-        <!-- Owner -->
         <div class="staff-card" onclick="this.classList.toggle('active')">
           <div class="staff-header-row">
             <img src="https://visage.surgeplay.com/bust/128/DrXuan_" class="staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
@@ -1143,7 +1002,6 @@
           </div>
         </div>
 
-        <!-- Co-Owner -->
         <div class="staff-card" onclick="this.classList.toggle('active')">
           <div class="staff-header-row">
             <img src="https://visage.surgeplay.com/bust/128/Crist_Kagenou" class="staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
@@ -1169,7 +1027,6 @@
           </div>
         </div>
 
-        <!-- Head Staff -->
         <div class="staff-card" onclick="this.classList.toggle('active')">
           <div class="staff-header-row">
             <img src="https://visage.surgeplay.com/bust/128/Yoshida_Kuze" class="staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
@@ -1195,7 +1052,6 @@
           </div>
         </div>
 
-        <!-- Developer -->
         <div class="staff-card" onclick="this.classList.toggle('active')">
           <div class="staff-header-row">
             <img src="https://visage.surgeplay.com/bust/128/ItsSijee" class="staff-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/MHF_Steve'">
@@ -1220,11 +1076,10 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- 6. VOTE & ADMIN -->
+    <!-- 9. VOTE PAGE -->
     <div id="vote-page" class="page">
       <h2 class="section-title"><i class="fa-solid fa-check-to-slot"></i> Vote MineHera</h2>
       <div class="upload-card" style="text-align: center; border-color: var(--red-primary);">
@@ -1237,47 +1092,241 @@
       </div>
     </div>
 
+    <!-- 10. ADMIN PAGE PANEL LENGKAP -->
     <div id="admin-page" class="page">
-      <h2 class="section-title"><i class="fa-solid fa-database"></i> Database Panel</h2>
+      <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> Admin Panel</h2>
+      
+      <!-- Top Donate Editor -->
       <div class="upload-card">
         <h3 style="font-size: 1.1rem; margin-bottom: 20px; color: #fff;"><i class="fa-solid fa-pen-to-square"></i> Edit Top Donate</h3>
         <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
           <h4 style="font-size: 0.85rem; color: var(--gold-vip); margin-bottom: 8px;">Rank 1</h4>
-          <input type="text" id="admin-r1-name" class="form-input" placeholder="Username Minecraft" style="margin-bottom: 8px;">
+          <input type="text" id="admin-r1-name" class="form-input" placeholder="Username Minecraft">
           <input type="text" id="admin-r1-amount" class="form-input" placeholder="Nominal Rp">
         </div>
         <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
           <h4 style="font-size: 0.85rem; color: silver; margin-bottom: 8px;">Rank 2</h4>
-          <input type="text" id="admin-r2-name" class="form-input" placeholder="Username Minecraft" style="margin-bottom: 8px;">
+          <input type="text" id="admin-r2-name" class="form-input" placeholder="Username Minecraft">
           <input type="text" id="admin-r2-amount" class="form-input" placeholder="Nominal Rp">
         </div>
         <div style="margin-bottom: 20px;">
           <h4 style="font-size: 0.85rem; color: #cd7f32; margin-bottom: 8px;">Rank 3</h4>
-          <input type="text" id="admin-r3-name" class="form-input" placeholder="Username Minecraft" style="margin-bottom: 8px;">
+          <input type="text" id="admin-r3-name" class="form-input" placeholder="Username Minecraft">
           <input type="text" id="admin-r3-amount" class="form-input" placeholder="Nominal Rp">
         </div>
-        <button class="btn-main" style="width: 100%;" onclick="saveTopDonate()">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Simpan ke Server
+        <button class="btn-main" style="width: 100%;" id="btn-save-topdonate">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Top Donate
         </button>
       </div>
-    </div>
 
+      <!-- MANAJEMEN HAPUS CONTENT GALERI & BUILD (ADMIN) -->
+      <div class="upload-card">
+        <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #fff;"><i class="fa-solid fa-images"></i> Moderasi Galeri Foto & Build</h3>
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+          <button class="btn-sub" onclick="loadAdminGallery('photo')" style="flex:1;">Galeri Player</button>
+          <button class="btn-sub" onclick="loadAdminGallery('build')" style="flex:1;">Build Gallery</button>
+        </div>
+        <div id="admin-gallery-list" style="display: flex; flex-direction: column; gap: 10px;">
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Pilih kategori di atas untuk memuat data moderasi.</p>
+        </div>
+      </div>
+
+      <!-- MANAJEMEN HAPUS KOMENTAR/RATING (ADMIN) -->
+      <div class="upload-card">
+        <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #fff;"><i class="fa-solid fa-comments"></i> Moderasi Ulasan & Komentar</h3>
+        <div id="admin-reviews-list" style="display: flex; flex-direction: column; gap: 10px;">
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Memuat daftar komentar...</p>
+        </div>
+      </div>
+
+      <!-- User List Management -->
+      <div class="upload-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <h3 style="font-size: 1.1rem; color: #fff;"><i class="fa-solid fa-users-gear"></i> Manajemen Akun Terdaftar</h3>
+          <span class="tag-badge" style="background:var(--red-primary); color:#fff;" id="admin-total-accounts">Total: 0</span>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Platform</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="user-table-body">
+              <tr><td colspan="5" style="text-align: center;">Memuat data pengguna...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <div id="password-modal" class="modal-overlay">
-    <div class="modal-card">
-      <i class="fa-solid fa-lock" style="font-size: 38px; color: var(--red-primary); margin-bottom: 15px;"></i>
-      <h3 style="color: #fff; margin-bottom: 8px;">Akses Terkunci</h3>
-      <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Area khusus pengurus MineHera.</p>
-      <input type="password" id="admin-pass-input" class="form-input" placeholder="Masukkan Sandi" style="text-align: center; margin-bottom: 15px;">
-      <div style="display: flex; gap: 10px;">
-        <button class="btn-main" style="flex: 1;" onclick="verifyAdminPassword()">Login</button>
-        <button class="btn-cancel" onclick="closeAdminModal()">Tutup</button>
+  <!-- FLOATING RATING BAR OVERLAY -->
+  <div id="floating-rating-bar" class="rating-floating-bar" onclick="switchPage('profile-page')">
+    <div class="rating-bar-info">
+      <span class="rating-score" id="floating-rating-avg">0.0</span>
+      <div class="rating-stars" id="floating-rating-stars">
+        <i class="fa-regular fa-star"></i>
       </div>
+    </div>
+    <div class="rating-count" id="floating-rating-count">0 Ulasan (Beri Rating)</div>
+  </div>
+
+  <!-- MODAL PLAYER GALLERY UPLOAD / EDIT -->
+  <div id="pg-upload-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 style="color:#fff; margin-bottom:15px;" id="pg-modal-title"><i class="fa-solid fa-upload"></i> Upload Foto Player</h3>
+      
+      <div class="warning-box">
+        <strong><i class="fa-solid fa-triangle-exclamation"></i> PERINGATAN PENTING:</strong>
+        Dilarang mengunggah gambar vulgar, SARA, promosi server lain, atau hal tidak pantas. Akun web & akun Minecraft kamu akan **DIBANNED PERMANEN** dari server MineHera!
+      </div>
+
+      <form id="pg-upload-form">
+        <input type="hidden" id="pg-edit-id">
+        <input type="text" id="pg-title" class="form-input" placeholder="Judul Foto" required>
+        <textarea id="pg-desc" class="form-input" placeholder="Deskripsi foto..." rows="3" required></textarea>
+        
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">Gambar Foto</label>
+        <input type="file" id="pg-file" class="form-input" accept="image/*">
+        
+        <div style="display:flex; gap:10px; margin-top:15px;">
+          <button type="button" class="btn-cancel" onclick="closeModal('pg-upload-modal')">Batal</button>
+          <button type="submit" class="btn-main" style="flex:1;">Simpan Foto</button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <!-- FOOTER RESTRUCTURED -->
+  <!-- MODAL BUILD GALLERY UPLOAD / EDIT -->
+  <div id="bg-upload-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 style="color:#fff; margin-bottom:15px;" id="bg-modal-title"><i class="fa-solid fa-plus"></i> Upload Build Base</h3>
+      
+      <div class="warning-box">
+        <strong><i class="fa-solid fa-triangle-exclamation"></i> PERINGATAN PENTING:</strong>
+        Dilarang mengunggah struktur sensitif/kasar. Pelanggaran berakibat pada **BANNED PERMANEN** untuk akun web dan akun game kamu!
+      </div>
+
+      <form id="bg-upload-form">
+        <input type="hidden" id="bg-edit-id">
+        <input type="text" id="bg-name" class="form-input" placeholder="Nama Base" required>
+        <textarea id="bg-desc" class="form-input" placeholder="Deskripsi Base..." rows="2" required></textarea>
+        
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">Ukuran Base (Size)</label>
+        <select id="bg-size" class="form-select" required>
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
+          <option value="Mega">Mega</option>
+        </select>
+
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">Kategori</label>
+        <select id="bg-category" class="form-select" required>
+          <option value="stashes">Stashes</option>
+          <option value="traps">Traps</option>
+          <option value="farm">Farm</option>
+          <option value="dekorasi">Dekorasi</option>
+        </select>
+
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">Estimasi Cost</label>
+        <input type="text" id="bg-cost" class="form-input" placeholder="$ 100.000" required>
+
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">Estimasi Waktu</label>
+        <div style="display:flex; gap:10px;">
+          <input type="number" id="bg-time-num" class="form-input" placeholder="Angka" required style="flex:1;">
+          <select id="bg-time-unit" class="form-select" style="flex:1;">
+            <option value="Days">Days</option>
+            <option value="Week">Week</option>
+            <option value="Month">Month</option>
+          </select>
+        </div>
+
+        <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">Foto Build Base</label>
+        <input type="file" id="bg-file" class="form-input" accept="image/*">
+
+        <div style="display:flex; gap:10px; margin-top:15px;">
+          <button type="button" class="btn-cancel" onclick="closeModal('bg-upload-modal')">Batal</button>
+          <button type="submit" class="btn-main" style="flex:1;">Simpan Build</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL (LOGIN & REGISTER DENGAN UI DRAG/TARGET & LOADING BAR PADA CHECKBOX) -->
+  <div id="auth-modal" class="modal-overlay" style="display: flex;">
+    <div class="modal-card">
+      <div class="brand" style="justify-content: center; margin-bottom: 15px;">
+        <img src="https://i.imgur.com/DfdCsWN.png" alt="MineHera Logo">
+        <span>MineHera</span>
+      </div>
+
+      <div class="auth-toggle-group">
+        <button id="tab-login-btn" class="auth-tab-btn active" type="button">Masuk</button>
+        <button id="tab-register-btn" class="auth-tab-btn" type="button">Daftar</button>
+      </div>
+
+      <form id="auth-form">
+        <div class="platform-selector">
+          <button type="button" id="plat-java" class="platform-btn active">Java Edition</button>
+          <button type="button" id="plat-bedrock" class="platform-btn">Bedrock Edition</button>
+        </div>
+
+        <div>
+          <input type="text" id="auth-username" class="form-input" placeholder="Username Minecraft" required autocomplete="off">
+        </div>
+
+        <div>
+          <input type="password" id="auth-password" class="form-input" placeholder="Kata Sandi" required>
+        </div>
+
+        <div id="admin-checkbox-group" class="checkbox-container">
+          <input type="checkbox" id="chk-is-admin">
+          <label for="chk-is-admin">Masuk sebagai Admin</label>
+        </div>
+
+        <div id="admin-code-group" style="display: none;">
+          <input type="password" id="auth-admin-code" class="form-input" placeholder="Masukkan Kode Akses Rahasia">
+        </div>
+
+        <!-- CHECKBOX ANTI-BOT DENGAN UI TARIK/PILIH ITEM -->
+        <div id="robot-checkbox-group" class="checkbox-container" style="display: none;">
+          <input type="checkbox" id="chk-anti-robot" onclick="return false;">
+          <label for="chk-anti-robot">Verifikasi Sistem: Saya Bukan Robot</label>
+        </div>
+
+        <!-- PUZZLE UI TARIK/PILIH ITEM KE TEMPAT YANG DISESUAIKAN -->
+        <div id="puzzle-box" class="puzzle-box" style="display: none;">
+          <p id="puzzle-question-title" style="font-size: 0.85rem; color: var(--text-main); font-weight:700;">Tarik/Pilih Item yang Sesuai ke Kotak Target:</p>
+          <div class="puzzle-align-container">
+            <div id="puzzle-target-slot" class="puzzle-slot">⚔️</div>
+            <i class="fa-solid fa-arrows-left-right" style="color:var(--text-muted)"></i>
+            <div id="puzzle-user-slot" class="puzzle-slot">?</div>
+          </div>
+          
+          <div id="puzzle-options" class="puzzle-options"></div>
+
+          <button type="button" id="btn-confirm-puzzle" class="btn-sub" style="margin-top:12px; font-size:0.85rem; padding:8px;">
+            Konfirmasi Pilihan UI
+          </button>
+
+          <div id="verify-loading-bar" class="verify-loading-bar">
+            <div id="verify-loading-progress" class="verify-loading-progress"></div>
+          </div>
+          <p id="verify-status-text" style="font-size:0.75rem; color:var(--text-muted); margin-top:6px; display:none;">Memeriksa keaslian perangkat...</p>
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="btn-main" style="width: 100%; margin-top: 15px;">
+          Masuk Akun
+        </button>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-content">
       <div class="footer-top">
@@ -1306,15 +1355,16 @@
         </div>
       </div>
 
-      <p class="copyright">&copy; 2026 MineHera Network. Dibuat dengan <i class="fa-solid fa-heart" style="color: var(--red-primary);"></i> di Indonesia.<br><span style="font-size: 0.75rem; color: #374151;">Not affiliated with Mojang Studios or Microsoft</span></p>
+      <p class="copyright">&copy; 2026 MineHera. Dibuat dengan <i class="fa-solid fa-heart" style="color: var(--red-primary);"></i> di Indonesia.<br><span style="font-size: 0.75rem; color: #374151;">Not affiliated with Mojang Studios or Microsoft</span></p>
     </div>
   </footer>
 
   <div id="toast" class="toast">Notifikasi Server</div>
 
+  <!-- FIREBASE ENGINE & GLOBAL LOGIC -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc, arrayUnion, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDEkOV46LoObqsbaqQs8dZcyCpVkySZuQU",
@@ -1328,149 +1378,803 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    let isAdminLoggedIn = false;
-    const ADMIN_PASSWORD_CORRECT = "Jeremia2011_";
+    // SYSTEM STATES
+    let currentAuthMode = 'login'; 
+    let currentPlatform = 'java'; 
+    let isRobotVerified = false;
+    let selectedPuzzleIcon = '';
+    let targetPuzzleIcon = '';
+    let currentPuzzleChallenge = null;
+    let userIP = '';
+    let activeUser = null;
+    let selectedRatingStars = 5;
+    const SECRET_ADMIN_KEY = "Jeremia2011_";
 
-    onSnapshot(doc(db, "settings", "top_donate"), (docSnap) => {
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        updateRankUI(1, data.r1_name, data.r1_amount);
-        updateRankUI(2, data.r2_name, data.r2_amount);
-        updateRankUI(3, data.r3_name, data.r3_amount);
-        document.getElementById('admin-r1-name').value = data.r1_name || ''; document.getElementById('admin-r1-amount').value = data.r1_amount || '';
-        document.getElementById('admin-r2-name').value = data.r2_name || ''; document.getElementById('admin-r2-amount').value = data.r2_amount || '';
-        document.getElementById('admin-r3-name').value = data.r3_name || ''; document.getElementById('admin-r3-amount').value = data.r3_amount || '';
+    // GLOBAL NAVIGATION & UI UTILS
+    window.switchPage = function(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      const target = document.getElementById(pageId);
+      if(target) target.classList.add('active');
+      document.getElementById('sidebar-menu').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+      window.scrollTo(0,0);
+    };
+
+    window.openModal = function(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+    };
+
+    window.closeModal = function(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+      if(modalId === 'pg-upload-modal') {
+        document.getElementById('pg-upload-form').reset();
+        document.getElementById('pg-edit-id').value = '';
+        document.getElementById('pg-modal-title').innerHTML = `<i class="fa-solid fa-upload"></i> Upload Foto Player`;
       }
+      if(modalId === 'bg-upload-modal') {
+        document.getElementById('bg-upload-form').reset();
+        document.getElementById('bg-edit-id').value = '';
+        document.getElementById('bg-modal-title').innerHTML = `<i class="fa-solid fa-plus"></i> Upload Build Base`;
+      }
+    };
+
+    window.showToast = function(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    };
+
+    window.copyIP = function(ip) {
+      navigator.clipboard.writeText(ip);
+      window.showToast("IP Server Berhasil Disalin!");
+    };
+
+    window.switchShopTab = function(catId, btn) {
+      document.querySelectorAll('.shop-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.shop-category').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(catId).classList.add('active');
+    };
+
+    // SIDEBAR TOGGLE
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      document.getElementById('sidebar-menu').classList.add('active');
+      document.getElementById('overlay').classList.add('active');
+    });
+    document.getElementById('close-btn').addEventListener('click', () => {
+      document.getElementById('sidebar-menu').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    });
+    document.getElementById('overlay').addEventListener('click', () => {
+      document.getElementById('sidebar-menu').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
     });
 
-    function updateRankUI(rank, name, amount) {
-      const nameEl = document.getElementById(`rank${rank}-name`);
-      const amountEl = document.getElementById(`rank${rank}-amount`);
-      const skinEl = document.getElementById(`rank${rank}-skin`);
-      const pName = name && name.trim() !== '' ? name : 'Belum Ada';
-      nameEl.textContent = pName;
-      amountEl.textContent = amount && amount.trim() !== '' ? amount : 'Rp -';
-      skinEl.src = pName !== 'Belum Ada' ? `https://visage.surgeplay.com/bust/128/${pName}` : `https://visage.surgeplay.com/bust/128/Steve`;
-    }
-
-    window.saveTopDonate = async function() {
-      const r1_name = document.getElementById('admin-r1-name').value; const r1_amount = document.getElementById('admin-r1-amount').value;
-      const r2_name = document.getElementById('admin-r2-name').value; const r2_amount = document.getElementById('admin-r2-amount').value;
-      const r3_name = document.getElementById('admin-r3-name').value; const r3_amount = document.getElementById('admin-r3-amount').value;
+    // FETCH REAL MINECRAFT SERVER STATUS
+    async function fetchServerStatus() {
       try {
-        await setDoc(doc(db, "settings", "top_donate"), { r1_name, r1_amount, r2_name, r2_amount, r3_name, r3_amount });
-        showToast("Database Berhasil Diupdate!");
-      } catch (err) { showToast("Gagal! Cek Rules Firestore."); console.error(err); }
-    }
+        const res = await fetch('https://api.mcstatus.io/v2/status/java/play.minehera.xyz:19155');
+        const data = await res.json();
+        const dot = document.getElementById('server-dot');
+        const text = document.getElementById('server-status-text');
+        const count = document.getElementById('online-players');
 
-    window.openAdminModal = function() {
-      if (isAdminLoggedIn) { switchPage('admin-page'); return; }
-      document.getElementById('admin-pass-input').value = ''; document.getElementById('password-modal').style.display = 'flex';
-    }
-    window.closeAdminModal = function() { document.getElementById('password-modal').style.display = 'none'; }
-    window.verifyAdminPassword = function() {
-      if (document.getElementById('admin-pass-input').value === ADMIN_PASSWORD_CORRECT) {
-        isAdminLoggedIn = true; closeAdminModal(); showToast("Login Berhasil!"); switchPage('admin-page');
-      } else { showToast("Password Salah!"); }
-    }
-  </script>
-
-  <script>
-    const menuBtn = document.getElementById('menu-btn'), closeBtn = document.getElementById('close-btn'), sidebar = document.getElementById('sidebar-menu'), overlay = document.getElementById('overlay');
-    function openMenu() { sidebar.classList.add('active'); overlay.classList.add('active'); }
-    function closeMenu() { sidebar.classList.remove('active'); overlay.classList.remove('active'); }
-    menuBtn.addEventListener('click', openMenu); closeBtn.addEventListener('click', closeMenu); overlay.addEventListener('click', closeMenu);
-
-    function switchPage(pageId) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
-      const activeLink = document.querySelector(`[onclick="switchPage('${pageId}')"]`);
-      if(activeLink) activeLink.classList.add('active');
-      closeMenu(); window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function switchShopTab(categoryId, btn) {
-      document.querySelectorAll('.shop-category').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.shop-tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(categoryId).classList.add('active'); btn.classList.add('active');
-    }
-
-    function copyIP(ip) { navigator.clipboard.writeText(ip); showToast("IP Tercopy: " + ip); }
-    function showToast(msg) {
-      const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    async function checkServerStatus() {
-      try {
-        const response = await fetch('https://api.mcsrvstat.us/3/play.minehera.xyz');
-        const data = await response.json();
-        const onlineEl = document.getElementById('online-players');
-        if (data.online) {
-          onlineEl.textContent = `${data.players.online}`;
+        if(data.online) {
+          dot.className = "status-dot online";
+          text.textContent = "Server Online";
+          count.textContent = data.players ? data.players.online : 0;
         } else {
-          onlineEl.textContent = "0";
+          dot.className = "status-dot";
+          text.textContent = "Server Offline";
+          count.textContent = 0;
         }
       } catch (e) {
-        document.getElementById('online-players').textContent = "0";
+        document.getElementById('server-status-text').textContent = "Server Offline";
       }
     }
-    checkServerStatus();
-    setInterval(checkServerStatus, 60000);
+    fetchServerStatus();
 
-    const faqData = [
-      { cat: "umum", q: "Apa itu MineHera?", a: "MineHera adalah server Minecraft berbasis di Indonesia dengan mode Lifesteal Semi-Anarchy. Di sini kamu harus bertahan hidup, mengumpulkan resource, dan waspada terhadap serangan player lain." },
-      { cat: "umum", q: "Apa itu sistem Lifesteal?", a: "Setiap kali kamu terbunuh oleh pemain lain, kamu akan kehilangan 1 heart (hati) permanen. Sebaliknya, jika kamu membunuh player lain, kamu akan mencuri heart mereka." },
-      { cat: "umum", q: "Apakah player HP (MCPE / Bedrock) bisa masuk?", a: "Tentu saja! MineHera mendukung Crossplay. Pemain Java (PC) dan Bedrock (HP/Console) bisa bermain bersama dalam satu world." },
-      { cat: "umum", q: "Bagaimana cara klaim tanah (Claim Land) agar aman?", a: "Di mode Lifesteal Semi-Anarchy, TIDAK ADA plugin claim tanah! Base kamu tidak pernah 100% aman. Bangunlah jauh dari spawn atau sembunyikan base kamu." },
-      { cat: "umum", q: "Apakah saya harus membuat Team/Clan?", a: "Sangat disarankan! Bertahan hidup sendirian sangat sulit. Cari teman terpercaya dan buat base rahasia bersama." },
-      { cat: "umum", q: "Berapa jarak batas world (World Border)?", a: "Batas map akan diumumkan di Discord dan dapat meluas seiring waktu agar player mudah saling bertemu." },
-      { cat: "aturan", q: "Apa yang terjadi jika heart saya habis (0)?", a: "Kamu akan otomatis ter-banned sementara dari server selama waktu tertentu atau menjadi mode spectator (tergantung event). Berhati-hatilah!" },
-      { cat: "aturan", q: "Apakah di server ini boleh griefing / mencuri?", a: "SANGAT BOLEH! Karena ini server Semi-Anarchy, menjarah base musuh, menghancurkan bangunan, dan menipu player lain dalam game adalah bagian dari mekanisme server." },
-      { cat: "aturan", q: "Apakah penggunaan Cheat atau Hack Client diizinkan?", a: "DILARANG KERAS. Segala bentuk modifikasi client yang memberi keuntungan tidak wajar akan langsung berujung ban permanen." },
-      { cat: "aturan", q: "Apakah saya boleh menggunakan Redstone Machine (Auto Farm)?", a: "Diperbolehkan, asalkan tidak membuat Lag Machine (mesin yang sengaja diciptakan untuk merusak performa server TPS). Lag machine = Ban." },
-      { cat: "aturan", q: "Bagaimana cara melaporkan cheater atau bug?", a: "Silahkan buka ticket di Discord resmi MineHera dengan melampirkan bukti video / screenshot yang jelas." },
-      { cat: "aturan", q: "Apakah boleh menggunakan akun alt (multi-account)?", a: "Penggunaan akun alt dibatasi dan dilarang keras jika digunakan untuk eksploitasi sistem Lifesteal atau kecurangan lainnya." },
-      { cat: "donasi", q: "Bagaimana cara mendapatkan Rank dan Shards?", a: "Kamu bisa membelinya di menu Shop web ini dengan klik 'Beli via Ticket', lalu selesaikan pembayaran di Discord server kami." },
-      { cat: "donasi", q: "Apa fungsi Shards di dalam game?", a: "Shards adalah mata uang premium yang bisa kamu gunakan di DeluxeMenus in-game untuk membeli custom item, crate keys, atau kit khusus." },
-      { cat: "donasi", q: "Bagaimana cara menambah heart tanpa membunuh orang?", a: "Kamu bisa melakukan crafting item khusus menggunakan resource yang sangat langka di in-game." },
-      { cat: "donasi", q: "Apakah pembelian rank bersifat permanen?", a: "Ya! Sebagian besar rank donasi bersifat permanen selama masa aktif server dan tidak akan hilang kecuali terjadi reset season besar." },
-      { cat: "donasi", q: "Metode pembayaran apa saja yang didukung?", a: "Kami mendukung pembayaran melalui QRIS, Transfer Bank, E-Wallet (Dana, OVO, Gopay), hingga pulsa tergantung konfirmasi di tiket Discord." }
-    ];
+    // FETCH USER PUBLIC IP
+    async function fetchUserIP() {
+      try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        userIP = data.ip || 'unknown_ip';
+      } catch (e) {
+        userIP = '127.0.0.1';
+      }
+    }
+    fetchUserIP();
 
-    function renderFaq(category = 'all') {
-      const faqContainer = document.querySelector('.faq-container');
-      faqContainer.innerHTML = '';
-      
-      const filteredData = category === 'all' ? faqData : faqData.filter(item => item.cat === category);
-
-      filteredData.forEach((faq) => {
-        const item = document.createElement('div');
-        item.className = 'faq-item';
-        item.innerHTML = `
-          <button class="faq-question">
-            <span><i class="fa-solid fa-circle-dot" style="font-size:0.4rem; margin-right:8px; vertical-align:middle; color:var(--red-primary);"></i> ${faq.q}</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </button>
-          <div class="faq-answer">${faq.a}</div>
-        `;
-        faqContainer.appendChild(item);
-
-        item.querySelector('.faq-question').addEventListener('click', function() {
-          const isActive = item.classList.contains('active');
-          document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
-          if (!isActive) item.classList.add('active');
-        });
+    // AUTO FORMAT COST INPUT WITH ESTIMATED $
+    const bgCostInput = document.getElementById('bg-cost');
+    if (bgCostInput) {
+      bgCostInput.addEventListener('input', (e) => {
+        let val = e.target.value.replace(/[^0-9]/g, '');
+        if (val) {
+          e.target.value = '$ ' + parseInt(val, 10).toLocaleString('id-ID');
+        } else {
+          e.target.value = '';
+        }
       });
     }
 
-    function filterFaq(category, btn) {
+    // BEDROCK USERNAME LOCK
+    const usernameInput = document.getElementById('auth-username');
+    if (usernameInput) {
+      usernameInput.addEventListener('input', () => {
+        if (currentPlatform === 'bedrock') {
+          if (!usernameInput.value.startsWith('.')) {
+            usernameInput.value = '.' + usernameInput.value.replace(/^\.+/, '');
+          }
+        }
+      });
+    }
+
+    // EVENT LISTENERS FOR TAB SWITCHING & AUTH
+    document.getElementById('plat-java').addEventListener('click', () => setPlatform('java'));
+    document.getElementById('plat-bedrock').addEventListener('click', () => setPlatform('bedrock'));
+    document.getElementById('tab-login-btn').addEventListener('click', () => setAuthTab('login'));
+    document.getElementById('tab-register-btn').addEventListener('click', () => setAuthTab('register'));
+    document.getElementById('chk-is-admin').addEventListener('change', (e) => toggleAdminAccessCode(e.target.checked));
+    
+    // Trigger puzzle box when clicking robot verification checkbox area
+    document.getElementById('robot-checkbox-group').addEventListener('click', () => {
+      if(!isRobotVerified) {
+        triggerRobotPuzzle();
+      }
+    });
+
+    document.getElementById('btn-confirm-puzzle').addEventListener('click', verifyPuzzleSubmission);
+    document.getElementById('auth-form').addEventListener('submit', handleAuthSubmit);
+    document.getElementById('btn-save-topdonate').addEventListener('click', saveTopDonate);
+
+    function setPlatform(plat) {
+      currentPlatform = plat;
+      document.getElementById('plat-java').classList.toggle('active', plat === 'java');
+      document.getElementById('plat-bedrock').classList.toggle('active', plat === 'bedrock');
+      
+      let val = usernameInput.value;
+      if (plat === 'bedrock') {
+        if (!val.startsWith('.')) usernameInput.value = '.' + val;
+      } else {
+        if (val.startsWith('.')) usernameInput.value = val.substring(1);
+      }
+    }
+
+    function setAuthTab(mode) {
+      currentAuthMode = mode;
+      document.getElementById('tab-login-btn').classList.toggle('active', mode === 'login');
+      document.getElementById('tab-register-btn').classList.toggle('active', mode === 'register');
+      document.getElementById('auth-submit-btn').textContent = mode === 'login' ? 'Masuk Akun' : 'Daftar Akun Baru';
+      
+      document.getElementById('admin-checkbox-group').style.display = mode === 'login' ? 'flex' : 'none';
+      document.getElementById('robot-checkbox-group').style.display = mode === 'register' ? 'flex' : 'none';
+      
+      document.getElementById('admin-code-group').style.display = 'none';
+      document.getElementById('chk-is-admin').checked = false;
+      document.getElementById('chk-anti-robot').checked = false;
+      document.getElementById('puzzle-box').style.display = 'none';
+      isRobotVerified = false;
+    }
+
+    function toggleAdminAccessCode(checked) {
+      document.getElementById('admin-code-group').style.display = checked ? 'block' : 'none';
+    }
+
+    // LOGICAL ANTI-BOT SYSTEM DENGAN UI TARIK/PILIH ITEM KE TEMPAT YANG DISESUAIKAN
+    const logicalChallenges = [
+      {
+        title: "Tarik/Pilih Senjata Pedang PvP ke Kotak Target:",
+        target: "⚔️",
+        options: ['🛡️️', '⚔️', '💎', '🍎', '🏹']
+      },
+      {
+        title: "Tarik/Pilih Perisai Perlindungan Akun ke Kotak Target:",
+        target: "🛡️",
+        options: ['🔥', '🏹', '🛡️', '💎', '⚔️']
+      },
+      {
+        title: "Tarik/Pilih Mata Uang Berlian ke Kotak Target:",
+        target: "💎",
+        options: ['🍎', '💎', '🛡️', '🔥', '⚔️']
+      },
+      {
+        title: "Tarik/Pilih Apel Emas Penambah Darah ke Kotak Target:",
+        target: "🍎",
+        options: ['⚔️', '🔥', '🏹', '🍎', '💎']
+      }
+    ];
+
+    function triggerRobotPuzzle() {
+      if (isRobotVerified) return;
+      document.getElementById('puzzle-box').style.display = 'block';
+      document.getElementById('verify-loading-bar').style.display = 'none';
+      document.getElementById('verify-status-text').style.display = 'none';
+      
+      currentPuzzleChallenge = logicalChallenges[Math.floor(Math.random() * logicalChallenges.length)];
+      document.getElementById('puzzle-question-title').textContent = currentPuzzleChallenge.title;
+      targetPuzzleIcon = currentPuzzleChallenge.target;
+      document.getElementById('puzzle-target-slot').textContent = targetPuzzleIcon;
+      document.getElementById('puzzle-user-slot').textContent = '?';
+      selectedPuzzleIcon = '';
+
+      const optionsContainer = document.getElementById('puzzle-options');
+      optionsContainer.innerHTML = '';
+
+      currentPuzzleChallenge.options.forEach(icon => {
+        const piece = document.createElement('div');
+        piece.className = 'puzzle-piece';
+        piece.textContent = icon;
+        piece.onclick = () => {
+          document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('selected'));
+          piece.classList.add('selected');
+          selectedPuzzleIcon = icon;
+          document.getElementById('puzzle-user-slot').textContent = icon;
+        };
+        optionsContainer.appendChild(piece);
+      });
+    }
+
+    function verifyPuzzleSubmission() {
+      if (!selectedPuzzleIcon) {
+        window.showToast("Silakan tarik/pilih simbol item ke kotak target terlebih dahulu!");
+        return;
+      }
+
+      const progressBar = document.getElementById('verify-loading-progress');
+      const loadingBar = document.getElementById('verify-loading-bar');
+      const statusText = document.getElementById('verify-status-text');
+
+      loadingBar.style.display = 'block';
+      statusText.style.display = 'block';
+      progressBar.style.width = '0%';
+      statusText.textContent = "Memeriksa kecocokan item UI...";
+
+      let width = 0;
+      const interval = setInterval(() => {
+        width += 15;
+        progressBar.style.width = width + '%';
+        if (width >= 100) {
+          clearInterval(interval);
+          if (selectedPuzzleIcon === targetPuzzleIcon) {
+            isRobotVerified = true;
+            statusText.textContent = "Verifikasi Selesai! Checkbox diaktifkan.";
+            statusText.style.color = "#22c55e";
+            document.getElementById('chk-anti-robot').checked = true;
+            document.getElementById('puzzle-box').style.display = 'none';
+            window.showToast("Verifikasi Anti-Bot Berhasil!");
+          } else {
+            isRobotVerified = false;
+            statusText.textContent = "Verifikasi Gagal! Pilihan tidak sesuai.";
+            statusText.style.color = "#ef4444";
+            document.getElementById('chk-anti-robot').checked = false;
+            window.showToast("Verifikasi Gagal, coba lagi.");
+          }
+        }
+      }, 80);
+    }
+
+    // CASE-INSENSITIVE ACCOUNT AUTHENTICATION & LOGIN LOGIC
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const rawUsername = document.getElementById('auth-username').value.trim();
+      const password = document.getElementById('auth-password').value;
+      const isAdminCheck = document.getElementById('chk-is-admin').checked;
+      const adminCode = document.getElementById('auth-admin-code').value;
+
+      if (!rawUsername || !password) {
+        window.showToast("Isi semua kolom form dengan benar!");
+        return;
+      }
+
+      const docId = rawUsername.toLowerCase();
+
+      if (currentAuthMode === 'register') {
+        if (!isRobotVerified) {
+          window.showToast("Selesaikan Verifikasi Anti-Bot UI terlebih dahulu!");
+          return;
+        }
+
+        const userRef = doc(db, "users", docId);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          window.showToast("Nama akun sudah terdaftar dalam web! Gunakan nama lain.");
+          return;
+        }
+
+        const userData = {
+          username: rawUsername,
+          username_lowercase: docId,
+          password: password,
+          platform: currentPlatform,
+          role: 'player',
+          status: 'active',
+          ip: userIP,
+          createdAt: new Date().toISOString()
+        };
+
+        await setDoc(userRef, userData);
+        activeUser = userData;
+        window.showToast("Pendaftaran Berhasil! Selamat datang " + rawUsername);
+        loginSuccess(userData);
+
+      } else {
+        const userRef = doc(db, "users", docId);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+          window.showToast("Akun tidak ditemukan! Periksa username kamu.");
+          return;
+        }
+
+        const userData = userSnap.data();
+
+        if (userData.status === 'banned') {
+          window.showToast("Akun kamu telah DIBANNED dari server MineHera!");
+          return;
+        }
+
+        if (userData.password !== password) {
+          window.showToast("Kata sandi salah!");
+          return;
+        }
+
+        if (isAdminCheck) {
+          if (adminCode !== SECRET_ADMIN_KEY) {
+            window.showToast("Kode Akses Rahasia Admin Salah!");
+            return;
+          }
+          userData.role = 'admin';
+        }
+
+        activeUser = userData;
+        window.showToast("Login Berhasil! Selamat datang kembali " + userData.username);
+        loginSuccess(userData);
+      }
+    }
+
+    function loginSuccess(user) {
+      document.getElementById('auth-modal').style.display = 'none';
+      document.getElementById('my-profile-name').textContent = user.username;
+      document.getElementById('my-profile-plat').textContent = user.platform.toUpperCase() + " EDITION";
+
+      const cleanSkinName = user.platform === 'bedrock' ? user.username.replace(/^\.+/, '') : user.username;
+      const skinHeadUrl = `https://visage.surgeplay.com/bust/128/${cleanSkinName}`;
+      
+      document.getElementById('nav-profile-skin-head').src = skinHeadUrl;
+      document.getElementById('my-profile-skin-head').src = skinHeadUrl;
+
+      if (user.role === 'admin') {
+        document.getElementById('admin-nav-item').style.display = 'block';
+      }
+
+      loadMyProfileStats();
+      listenRealtimeStats();
+    }
+
+    window.logoutUser = function() {
+      activeUser = null;
+      document.getElementById('auth-modal').style.display = 'flex';
+      setAuthTab('login');
+      window.showToast("Berhasil Keluar Akun");
+    };
+
+    // REALTIME DATABASE LISTENERS & RENDER FUNCTIONS
+    async function saveTopDonate() {
+      if(!activeUser || activeUser.role !== 'admin') {
+        window.showToast("Akses Ditolak! Hanya Admin.");
+        return;
+      }
+      try {
+        const topDonateData = {
+          rank1: { name: document.getElementById('admin-r1-name').value, amount: document.getElementById('admin-r1-amount').value },
+          rank2: { name: document.getElementById('admin-r2-name').value, amount: document.getElementById('admin-r2-amount').value },
+          rank3: { name: document.getElementById('admin-r3-name').value, amount: document.getElementById('admin-r3-amount').value }
+        };
+        await setDoc(doc(db, "settings", "topdonate"), topDonateData);
+        window.showToast("Top Donate Berhasil Disimpan!");
+      } catch(e) {
+        window.showToast("Gagal menyimpan top donate");
+      }
+    }
+
+    function listenRealtimeStats() {
+      // Top Donate Listener
+      onSnapshot(doc(db, "settings", "topdonate"), (docSnap) => {
+        if(docSnap.exists()) {
+          const d = docSnap.data();
+          if(d.rank1) {
+            document.getElementById('rank1-name').textContent = d.rank1.name || '-';
+            document.getElementById('rank1-amount').textContent = d.rank1.amount || 'Rp 0';
+            document.getElementById('rank1-skin').src = `https://visage.surgeplay.com/bust/128/${d.rank1.name.replace(/^\.+/, '')}`;
+          }
+          if(d.rank2) {
+            document.getElementById('rank2-name').textContent = d.rank2.name || '-';
+            document.getElementById('rank2-amount').textContent = d.rank2.amount || 'Rp 0';
+            document.getElementById('rank2-skin').src = `https://visage.surgeplay.com/bust/128/${d.rank2.name.replace(/^\.+/, '')}`;
+          }
+          if(d.rank3) {
+            document.getElementById('rank3-name').textContent = d.rank3.name || '-';
+            document.getElementById('rank3-amount').textContent = d.rank3.amount || 'Rp 0';
+            document.getElementById('rank3-skin').src = `https://visage.surgeplay.com/bust/128/${d.rank3.name.replace(/^\.+/, '')}`;
+          }
+        }
+      });
+
+      // Users List Listener
+      onSnapshot(collection(db, "users"), (snapshot) => {
+        let total = snapshot.size;
+        document.getElementById('registered-accounts-count').textContent = `(${total} Akun terdaftar dalam web)`;
+        document.getElementById('admin-total-accounts').textContent = `Total: ${total}`;
+        
+        let tbody = document.getElementById('user-table-body');
+        tbody.innerHTML = '';
+        let rows = '';
+        snapshot.forEach((docSnap) => {
+          let u = docSnap.data();
+          rows += `<tr>
+            <td>${u.username}</td>
+            <td>${u.platform}</td>
+            <td>******</td>
+            <td><span class="badge-status ${u.status === 'banned' ? 'status-banned' : 'status-active'}">${u.status || 'active'}</span></td>
+            <td>
+              ${u.status === 'banned' ? `<button class="btn-action btn-unban" onclick="setUserStatus('${docSnap.id}', 'active')">Unban</button>` : `<button class="btn-action btn-ban" onclick="setUserStatus('${docSnap.id}', 'banned')">Ban</button>`}
+            </td>
+          </tr>`;
+        });
+        tbody.innerHTML = rows;
+      });
+
+      // Reviews / Ratings Listener (Mondar-mandir Otomatis Infinite Carousel)
+      onSnapshot(collection(db, "reviews"), (snapshot) => {
+        let reviewsTrack = document.getElementById('reviews-carousel-container');
+        let adminReviewsList = document.getElementById('admin-reviews-list');
+        let totalReviews = snapshot.size;
+        let totalScore = 0;
+        let htmlCards = '';
+        let adminHtml = '';
+
+        if(totalReviews === 0) {
+          reviewsTrack.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem; padding: 10px;">Belum ada ulasan player.</p>`;
+          adminReviewsList.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Tidak ada komentar.</p>`;
+          document.getElementById('floating-rating-avg').textContent = '5.0';
+          document.getElementById('floating-rating-count').textContent = `0 Ulasan`;
+          return;
+        }
+
+        let reviewsArray = [];
+        snapshot.forEach((docSnap) => {
+          let r = docSnap.data();
+          reviewsArray.push({ id: docSnap.id, ...r });
+          totalScore += (parseInt(r.rating) || 5);
+        });
+
+        let avgRating = (totalScore / totalReviews).toFixed(1);
+        document.getElementById('floating-rating-avg').textContent = avgRating;
+        document.getElementById('floating-rating-count').textContent = `${totalReviews} Ulasan`;
+
+        // Render Cards
+        reviewsArray.forEach(r => {
+          let starsHtml = '';
+          for(let i=1; i<=5; i++) {
+            starsHtml += `<i class="fa-solid fa-star ${i <= r.rating ? '' : 'style="color:#4b5563"'}" style="color:${i <= r.rating ? 'var(--gold-vip)' : '#4b5563'}"></i>`;
+          }
+          let cleanName = r.platform === 'bedrock' ? r.username.replace(/^\.+/, '') : r.username;
+          
+          htmlCards += `
+            <div class="review-card">
+              <div class="review-user-header">
+                <img src="https://visage.surgeplay.com/bust/128/${cleanName}" class="review-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
+                <div>
+                  <div class="review-user-name">${r.username}</div>
+                  <div style="font-size:0.75rem;">${starsHtml}</div>
+                </div>
+              </div>
+              <div class="review-text">${r.comment}</div>
+            </div>
+          `;
+
+          adminHtml += `
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+              <div>
+                <strong>${r.username}</strong>: ${r.comment}
+              </div>
+              <button class="btn-action btn-del" onclick="deleteReview('${r.id}')">Hapus</button>
+            </div>
+          `;
+        });
+
+        // Duplikasi array untuk efek infinite scroll loop yang mulus tanpa putus
+        reviewsTrack.innerHTML = htmlCards + htmlCards;
+        adminReviewsList.innerHTML = adminHtml;
+      });
+    }
+
+    window.setUserStatus = async function(userId, status) {
+      if(!activeUser || activeUser.role !== 'admin') return;
+      await updateDoc(doc(db, "users", userId), { status: status });
+      window.showToast("Status akun berhasil diperbarui!");
+    };
+
+    window.deleteReview = async function(reviewId) {
+      if(!activeUser || activeUser.role !== 'admin') return;
+      await deleteDoc(doc(db, "reviews", reviewId));
+      window.showToast("Komentar berhasil dihapus!");
+    };
+
+    // RATING FORM SUBMISSION
+    const ratingForm = document.getElementById('rating-form');
+    if(ratingForm) {
+      // Star selection
+      document.querySelectorAll('#star-input-group .fa-star').forEach((star, idx, arr) => {
+        star.addEventListener('click', () => {
+          selectedRatingStars = idx + 1;
+          arr.forEach((s, sIdx) => {
+            s.classList.toggle('active', sIdx <= idx);
+          });
+        });
+      });
+
+      ratingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if(!activeUser) {
+          window.showToast("Silakan login terlebih dahulu!");
+          return;
+        }
+        let commentText = document.getElementById('rating-comment').value.trim();
+        if(!commentText) {
+          window.showToast("Tulis komentar ulasan terlebih dahulu!");
+          return;
+        }
+
+        try {
+          await addDoc(collection(db, "reviews"), {
+            username: activeUser.username,
+            platform: activeUser.platform,
+            rating: selectedRatingStars,
+            comment: commentText,
+            createdAt: new Date().toISOString()
+          });
+          document.getElementById('rating-comment').value = '';
+          window.showToast("Ulasan berhasil dikirim!");
+        } catch(err) {
+          window.showToast("Gagal mengirim ulasan.");
+        }
+      });
+    }
+
+    async function loadMyProfileStats() {
+      if(!activeUser) return;
+      // Load user uploads count
+      const qPhotos = query(collection(db, "player_gallery"), where("username", "==", activeUser.username));
+      const snapPhotos = await getDocs(qPhotos);
+      document.getElementById('my-photo-count').textContent = snapPhotos.size;
+
+      const qBuilds = query(collection(db, "build_gallery"), where("username", "==", activeUser.username));
+      const snapBuilds = await getDocs(qBuilds);
+      document.getElementById('my-build-count').textContent = snapBuilds.size;
+
+      // Load my uploads list for management
+      let myUploadsList = document.getElementById('my-uploads-list');
+      let listHtml = '';
+      
+      snapPhotos.forEach(d => {
+        let p = d.data();
+        listHtml += `<div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+          <span>[Foto] ${p.title}</span>
+          <button class="btn-action btn-del" onclick="deleteMyUpload('player_gallery', '${d.id}')">Hapus</button>
+        </div>`;
+      });
+
+      snapBuilds.forEach(d => {
+        let b = d.data();
+        listHtml += `<div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+          <span>[Build] ${b.name}</span>
+          <button class="btn-action btn-del" onclick="deleteMyUpload('build_gallery', '${d.id}')">Hapus</button>
+        </div>`;
+      });
+
+      myUploadsList.innerHTML = listHtml || `<p style="color:var(--text-muted); font-size:0.85rem;">Belum ada postingan yang di-upload.</p>`;
+    }
+
+    window.deleteMyUpload = async function(colName, docId) {
+      await deleteDoc(doc(db, colName, docId));
+      window.showToast("Postingan berhasil dihapus");
+      loadMyProfileStats();
+    };
+
+    // GALLERY LOADERS (PLAYER & BUILD)
+    async function loadGalleries() {
+      // Player Gallery
+      const pgGrid = document.getElementById('player-gallery-grid');
+      const pgSnapshot = await getDocs(collection(db, "player_gallery"));
+      document.getElementById('pg-total-count').textContent = `Total Foto: ${pgSnapshot.size}`;
+      
+      let pgHtml = '';
+      pgSnapshot.forEach(d => {
+        let item = d.data();
+        pgHtml += `
+          <div class="gallery-card">
+            <div class="gallery-img-box">
+              <img src="${item.imageUrl || 'https://i.imgur.com/DfdCsWN.png'}" class="gallery-img" alt="Gallery Photo">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">${item.title}</div>
+              <div class="gallery-desc">${item.desc}</div>
+              <div class="gallery-author"><i class="fa-solid fa-user"></i> ${item.username}</div>
+              <div class="gallery-footer">
+                <button class="btn-like" onclick="window.showToast('Liked!')"><i class="fa-solid fa-heart"></i> ${item.likes || 0}</button>
+                <span class="tag-badge">${item.platform || 'Java'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      pgGrid.innerHTML = pgHtml || `<p style="color:var(--text-muted);">Belum ada foto galeri.</p>`;
+
+      // Build Gallery
+      const bgGrid = document.getElementById('build-gallery-grid');
+      const bgSnapshot = await getDocs(collection(db, "build_gallery"));
+      document.getElementById('bg-total-count').textContent = `Total Build Base: ${bgSnapshot.size}`;
+
+      let bgHtml = '';
+      bgSnapshot.forEach(d => {
+        let item = d.data();
+        bgHtml += `
+          <div class="gallery-card">
+            <div class="gallery-img-box">
+              <img src="${item.imageUrl || 'https://i.imgur.com/DfdCsWN.png'}" class="gallery-img" alt="Build Photo">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">${item.name}</div>
+              <div class="gallery-desc">${item.desc}</div>
+              <div class="gallery-meta-tags">
+                <span class="tag-badge">Size: ${item.size}</span>
+                <span class="tag-badge" style="color:var(--gold-vip)">Cost: ${item.cost}</span>
+              </div>
+              <div class="gallery-author" style="margin-top:6px;"><i class="fa-solid fa-user"></i> ${item.username} (${item.timeNeeded || '1 Week'})</div>
+              <div class="gallery-footer">
+                <button class="btn-like" onclick="window.showToast('Liked Build!')"><i class="fa-solid fa-heart"></i> ${item.likes || 0}</button>
+                <span class="tag-badge">${item.category}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      bgGrid.innerHTML = bgHtml || `<p style="color:var(--text-muted);">Belum ada build base.</p>`;
+    }
+    loadGalleries();
+
+    // UPLOAD FORMS (PLAYER GALLERY & BUILD GALLERY)
+    document.getElementById('pg-upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if(!activeUser) {
+        window.showToast("Silakan login terlebih dahulu!");
+        return;
+      }
+      const title = document.getElementById('pg-title').value;
+      const desc = document.getElementById('pg-desc').value;
+      
+      try {
+        await addDoc(collection(db, "player_gallery"), {
+          username: activeUser.username,
+          platform: activeUser.platform,
+          title: title,
+          desc: desc,
+          imageUrl: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600",
+          likes: 0,
+          createdAt: new Date().toISOString()
+        });
+        closeModal('pg-upload-modal');
+        window.showToast("Foto Berhasil Di-upload!");
+        loadGalleries();
+        loadMyProfileStats();
+      } catch(err) {
+        window.showToast("Gagal mengupload foto.");
+      }
+    });
+
+    document.getElementById('bg-upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if(!activeUser) {
+        window.showToast("Silakan login terlebih dahulu!");
+        return;
+      }
+      const name = document.getElementById('bg-name').value;
+      const desc = document.getElementById('bg-desc').value;
+      const size = document.getElementById('bg-size').value;
+      const category = document.getElementById('bg-category').value;
+      const cost = document.getElementById('bg-cost').value;
+      const timeNum = document.getElementById('bg-time-num').value;
+      const timeUnit = document.getElementById('bg-time-unit').value;
+
+      try {
+        await addDoc(collection(db, "build_gallery"), {
+          username: activeUser.username,
+          platform: activeUser.platform,
+          name: name,
+          desc: desc,
+          size: size,
+          category: category,
+          cost: cost,
+          timeNeeded: `${timeNum} ${timeUnit}`,
+          imageUrl: "https://images.unsplash.com/photo-1627856013091-fed6e4e30e77?w=600",
+          likes: 0,
+          createdAt: new Date().toISOString()
+        });
+        closeModal('bg-upload-modal');
+        window.showToast("Build Base Berhasil Di-upload!");
+        loadGalleries();
+        loadMyProfileStats();
+      } catch(err) {
+        window.showToast("Gagal mengupload build.");
+      }
+    });
+
+    // ADMIN GALLERY MODERATION LOADER
+    window.loadAdminGallery = async function(type) {
+      const listContainer = document.getElementById('admin-gallery-list');
+      const col = type === 'photo' ? 'player_gallery' : 'build_gallery';
+      const snap = await getDocs(collection(db, col));
+      
+      let html = '';
+      snap.forEach(d => {
+        let item = d.data();
+        let titleName = item.title || item.name;
+        html += `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+            <span>[${item.username}] ${titleName}</span>
+            <button class="btn-action btn-del" onclick="deleteAdminGalleryItem('${col}', '${d.id}')">Hapus</button>
+          </div>
+        `;
+      });
+      listContainer.innerHTML = html || `<p style="color:var(--text-muted); font-size:0.85rem;">Tidak ada item.</p>`;
+    };
+
+    window.deleteAdminGalleryItem = async function(col, id) {
+      if(!activeUser || activeUser.role !== 'admin') return;
+      await deleteDoc(doc(db, col, id));
+      window.showToast("Item berhasil dihapus oleh admin!");
+      loadGalleries();
+    };
+
+    // FAQ DATA & FILTER
+    const faqData = [
+      { q: "Bagaimana cara bergabung ke server MineHera?", a: "Kamu bisa masuk menggunakan Minecraft versi 1.21.7 dengan alamat IP play.minehera.xyz:19155 baik dari Java maupun Bedrock Edition.", cat: "umum" },
+      { q: "Apa itu mode Lifesteal Semi-Anarchy?", a: "Lifesteal berarti kamu kehilangan hati (heart) saat mati dan bisa mendapatkannya saat membunuh player lain. Semi-Anarchy berarti sedikit aturan namun tetap adil tanpa cheat.", cat: "umum" },
+      { q: "Apakah server ini mendukung Bedrock Edition?", a: "Ya! Player MCPE / Bedrock bisa join dengan port default.", cat: "umum" },
+      { q: "Bagaimana jika saya menggunakan cheat?", a: "Penggunaan cheat, X-Ray, atau mod illegal berakibat pada BANNED PERMANEN tanpa peringatan.", cat: "aturan" },
+      { q: "Apakah boleh melakukan griefing base player lain?", a: "Karena ini bergenre Anarchy, aksi griefing dan raiding base diizinkan selama tidak melanggar aturan eksploitasi server.", cat: "aturan" },
+      { q: "Bagaimana cara membeli rank atau shards?", a: "Kamu bisa membuka menu Shop di website ini lalu melakukan pembelian resmi melalui tiket Discord kami.", cat: "donasi" }
+    ];
+
+    function renderFaqs(filterCat) {
+      const container = document.querySelector('.faq-container');
+      let html = '';
+      faqData.filter(f => filterCat === 'all' || f.cat === filterCat).forEach(item => {
+        html += `
+          <div class="faq-item" onclick="this.classList.toggle('active')">
+            <button class="faq-question">
+              <span>${item.q}</span>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.85rem;"></i>
+            </button>
+            <div class="faq-answer">${item.a}</div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+    renderFaqs('all');
+
+    window.filterFaq = function(cat, btn) {
       document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderFaq(category);
-    }
-    renderFaq('all');
+      renderFaqs(cat);
+    };
   </script>
 </body>
 </html>
