@@ -337,7 +337,7 @@
     .rating-stars { color: var(--gold-vip); font-size: 0.9rem; display: flex; gap: 2px; }
     .rating-count { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-align: right; }
 
-    /* AUTOMATIC INFINITE SLIDER / CAROUSEL ULASAN (MANUAL BUTTONS REMOVED, AUTO MONDAR-MANDIR) */
+    /* AUTOMATIC INFINITE SLIDER / CAROUSEL ULASAN */
     .reviews-carousel-wrapper {
       position: relative;
       overflow: hidden;
@@ -376,7 +376,6 @@
     .review-user-header { display: flex; align-items: center; gap: 10px; }
     .review-avatar { width: 36px; height: 36px; border-radius: 8px; background: #000; border: 1px solid var(--border-color); object-fit: cover; }
     .review-user-name { font-size: 0.9rem; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
-    /* FIXED OVERFLOW & TEXT LENGTH FOR REVIEWS TO FIT BOX PERFECTLY */
     .review-text { 
       font-size: 0.85rem; 
       color: var(--text-muted); 
@@ -463,7 +462,7 @@
     .btn-buy { width: 100%; background: linear-gradient(45deg, var(--red-primary), #ef4444); color: #ffffff; border: none; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; box-shadow: 0 4px 15px var(--red-glow); transition: 0.3s; }
     .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6); }
 
-    /* GALLERY STYLES */
+    /* GALLERY STYLES & ENHANCED HOVER EFFECTS */
     .gallery-filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: space-between; align-items: center; }
     .gallery-controls { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; }
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
@@ -475,12 +474,54 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
     }
-    .gallery-card:hover { border-color: var(--red-primary); transform: translateY(-4px); }
-    .gallery-img-box { width: 100%; height: 200px; background: #000; overflow: hidden; position: relative; }
-    .gallery-img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-card:hover { 
+      border-color: var(--red-primary); 
+      transform: translateY(-8px) scale(1.02); 
+      box-shadow: 0 12px 30px rgba(220, 38, 38, 0.3);
+    }
+    .gallery-img-box { 
+      width: 100%; 
+      height: 200px; 
+      background: #000; 
+      overflow: hidden; 
+      position: relative; 
+    }
+    .gallery-img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.5s ease;
+    }
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.1);
+    }
+    
+    /* OVERLAY HOVER BADGE FOR GALLERY */
+    .gallery-overlay-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(10, 5, 7, 0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--red-primary);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+    .gallery-card:hover .gallery-overlay-badge {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .gallery-body { padding: 16px; display: flex; flex-direction: column; flex: 1; gap: 8px; }
     .gallery-title { font-weight: 800; font-size: 1.05rem; color: #fff; }
     .gallery-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
@@ -542,7 +583,7 @@
     .checkbox-container { display: flex; align-items: center; gap: 10px; text-align: left; margin: 15px 0; font-size: 0.88rem; color: var(--text-muted); cursor: pointer; }
     .checkbox-container input { accent-color: var(--red-primary); width: 18px; height: 18px; cursor: pointer; }
 
-    /* PROFESSIONAL LOGICAL PUZZLE SYSTEM & UI DRAG/DROP STYLING */
+    /* LOGICAL PUZZLE SYSTEM & UI DRAG/DROP STYLING */
     .puzzle-box { background: #050203; border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center; }
     .puzzle-align-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px 0; }
     .puzzle-slot { width: 50px; height: 50px; border: 2px dashed var(--red-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(220, 38, 38, 0.05); }
@@ -721,7 +762,7 @@
         </div>
       </div>
 
-      <!-- AUTOMATIC INFINITE SLIDER / CAROUSEL ULASAN PLAYER (MONDAR MANDIR OTOMATIS BERKELANJUTAN TANPA TOMBOL) -->
+      <!-- AUTOMATIC INFINITE SLIDER / CAROUSEL ULASAN PLAYER -->
       <div class="about-section">
         <div class="about-header">
           <div class="about-tag">ULASAN PLAYER</div>
@@ -730,7 +771,7 @@
         
         <div class="reviews-carousel-wrapper">
           <div id="reviews-carousel-container" class="reviews-carousel-container">
-            <!-- Diisi lewat JavaScript & diduplikasi otomatis untuk efek infinite scroll -->
+            <!-- Diisi lewat JavaScript -->
           </div>
         </div>
       </div>
@@ -866,9 +907,7 @@
         Total Foto: 0
       </div>
 
-      <div id="player-gallery-grid" class="gallery-grid">
-        <!-- Render Javascript -->
-      </div>
+      <div id="player-gallery-grid" class="gallery-grid"></div>
     </div>
 
     <!-- 5. BUILD GALLERY PAGE -->
@@ -899,12 +938,10 @@
         Total Build Base: 0
       </div>
 
-      <div id="build-gallery-grid" class="gallery-grid">
-        <!-- Render Javascript -->
-      </div>
+      <div id="build-gallery-grid" class="gallery-grid"></div>
     </div>
 
-    <!-- 6. PROFILE PAGE LENGKAP -->
+    <!-- 6. PROFILE PAGE -->
     <div id="profile-page" class="page">
       <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> Profil Saya</h2>
       
@@ -1092,34 +1129,41 @@
       </div>
     </div>
 
-    <!-- 10. ADMIN PAGE PANEL LENGKAP -->
+    <!-- 10. ADMIN PAGE PANEL -->
     <div id="admin-page" class="page">
       <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> Admin Panel</h2>
       
-      <!-- Top Donate Editor -->
-      <div class="upload-card">
-        <h3 style="font-size: 1.1rem; margin-bottom: 20px; color: #fff;"><i class="fa-solid fa-pen-to-square"></i> Edit Top Donate</h3>
-        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
-          <h4 style="font-size: 0.85rem; color: var(--gold-vip); margin-bottom: 8px;">Rank 1</h4>
-          <input type="text" id="admin-r1-name" class="form-input" placeholder="Username Minecraft">
-          <input type="text" id="admin-r1-amount" class="form-input" placeholder="Nominal Rp">
+      <!-- Top Donate Editor (DISEDERHANAKAN DENGAN UI KUSTOM MAKSIMAL) -->
+      <div class="upload-card" style="background: var(--gradient-card); border: 1px solid var(--red-primary);">
+        <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #fff; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-pen-to-square" style="color: var(--gold-vip);"></i> Edit Top Donate Global
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">Ubah daftar Top Donate di bawah ini dan simpan secara real-time ke seluruh pengunjung web.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 15px;">
+          <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid var(--red-primary);">
+            <h4 style="font-size: 0.85rem; color: var(--red-primary); margin-bottom: 8px; font-weight:800;">Juara 1 (Rank 1)</h4>
+            <input type="text" id="admin-r1-name" class="form-input" placeholder="Username Minecraft" style="margin-bottom:6px;">
+            <input type="text" id="admin-r1-amount" class="form-input" placeholder="Nominal Rp (misal: 150.000)" style="margin-bottom:0;">
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid silver;">
+            <h4 style="font-size: 0.85rem; color: silver; margin-bottom: 8px; font-weight:800;">Juara 2 (Rank 2)</h4>
+            <input type="text" id="admin-r2-name" class="form-input" placeholder="Username Minecraft" style="margin-bottom:6px;">
+            <input type="text" id="admin-r2-amount" class="form-input" placeholder="Nominal Rp" style="margin-bottom:0;">
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 1px solid #cd7f32;">
+            <h4 style="font-size: 0.85rem; color: #cd7f32; margin-bottom: 8px; font-weight:800;">Juara 3 (Rank 3)</h4>
+            <input type="text" id="admin-r3-name" class="form-input" placeholder="Username Minecraft" style="margin-bottom:6px;">
+            <input type="text" id="admin-r3-amount" class="form-input" placeholder="Nominal Rp" style="margin-bottom:0;">
+          </div>
         </div>
-        <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
-          <h4 style="font-size: 0.85rem; color: silver; margin-bottom: 8px;">Rank 2</h4>
-          <input type="text" id="admin-r2-name" class="form-input" placeholder="Username Minecraft">
-          <input type="text" id="admin-r2-amount" class="form-input" placeholder="Nominal Rp">
-        </div>
-        <div style="margin-bottom: 20px;">
-          <h4 style="font-size: 0.85rem; color: #cd7f32; margin-bottom: 8px;">Rank 3</h4>
-          <input type="text" id="admin-r3-name" class="form-input" placeholder="Username Minecraft">
-          <input type="text" id="admin-r3-amount" class="form-input" placeholder="Nominal Rp">
-        </div>
+
         <button class="btn-main" style="width: 100%;" id="btn-save-topdonate">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Top Donate
+          <i class="fa-solid fa-cloud-arrow-up"></i> Simpan & Publikasikan Top Donate
         </button>
       </div>
 
-      <!-- MANAJEMEN HAPUS CONTENT GALERI & BUILD (ADMIN) -->
+      <!-- MANAJEMEN HAPUS CONTENT GALERI & BUILD -->
       <div class="upload-card">
         <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #fff;"><i class="fa-solid fa-images"></i> Moderasi Galeri Foto & Build</h3>
         <div style="display:flex; gap:10px; margin-bottom:15px;">
@@ -1131,20 +1175,26 @@
         </div>
       </div>
 
-      <!-- MANAJEMEN HAPUS KOMENTAR/RATING (ADMIN) -->
+      <!-- MANAJEMEN ULASAN DENGAN TOMBOL "LIHAT ULASAN" & "HAPUS ULASAN" -->
       <div class="upload-card">
-        <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #fff;"><i class="fa-solid fa-comments"></i> Moderasi Ulasan & Komentar</h3>
+        <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: #fff;"><i class="fa-solid fa-comments"></i> Moderasi Ulasan & Rating User</h3>
         <div id="admin-reviews-list" style="display: flex; flex-direction: column; gap: 10px;">
-          <p style="color: var(--text-muted); font-size: 0.85rem;">Memuat daftar komentar...</p>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Memuat daftar ulasan...</p>
         </div>
       </div>
 
-      <!-- User List Management -->
+      <!-- USER LIST MANAGEMENT WITH SEARCH BAR -->
       <div class="upload-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
           <h3 style="font-size: 1.1rem; color: #fff;"><i class="fa-solid fa-users-gear"></i> Manajemen Akun Terdaftar</h3>
           <span class="tag-badge" style="background:var(--red-primary); color:#fff;" id="admin-total-accounts">Total: 0</span>
         </div>
+
+        <!-- KOLOM PENCARIAN USERNAME -->
+        <div style="margin-bottom: 15px;">
+          <input type="text" id="admin-search-user" class="form-input" placeholder="🔍 Cari username akun terdaftar..." style="margin-bottom: 0;">
+        </div>
+
         <div style="overflow-x: auto;">
           <table class="admin-table">
             <thead>
@@ -1257,7 +1307,25 @@
     </div>
   </div>
 
-  <!-- AUTH MODAL (LOGIN & REGISTER DENGAN UI DRAG/TARGET & LOADING BAR PADA CHECKBOX) -->
+  <!-- MODAL VIEW REVIEW DETAIL FOR ADMIN -->
+  <div id="admin-view-review-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 style="color:#fff; margin-bottom:15px;"><i class="fa-solid fa-comment-dots"></i> Detail Ulasan User</h3>
+      <div style="background:#050203; border:1px solid var(--border-color); border-radius:12px; padding:15px; margin-bottom:15px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+          <img id="review-modal-avatar" src="" style="width:40px; height:40px; border-radius:8px; object-fit:cover;">
+          <div>
+            <div id="review-modal-username" style="font-weight:800; color:#fff;"></div>
+            <div id="review-modal-stars" style="color:var(--gold-vip); font-size:0.85rem;"></div>
+          </div>
+        </div>
+        <div id="review-modal-text" style="color:var(--text-muted); font-size:0.9rem; line-height:1.5;"></div>
+      </div>
+      <button type="button" class="btn-cancel" style="width:100%;" onclick="closeModal('admin-view-review-modal')">Tutup</button>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
   <div id="auth-modal" class="modal-overlay" style="display: flex;">
     <div class="modal-card">
       <div class="brand" style="justify-content: center; margin-bottom: 15px;">
@@ -1293,13 +1361,11 @@
           <input type="password" id="auth-admin-code" class="form-input" placeholder="Masukkan Kode Akses Rahasia">
         </div>
 
-        <!-- CHECKBOX ANTI-BOT DENGAN UI TARIK/PILIH ITEM -->
         <div id="robot-checkbox-group" class="checkbox-container" style="display: none;">
           <input type="checkbox" id="chk-anti-robot" onclick="return false;">
           <label for="chk-anti-robot">Verifikasi Sistem: Saya Bukan Robot</label>
         </div>
 
-        <!-- PUZZLE UI TARIK/PILIH ITEM KE TEMPAT YANG DISESUAIKAN -->
         <div id="puzzle-box" class="puzzle-box" style="display: none;">
           <p id="puzzle-question-title" style="font-size: 0.85rem; color: var(--text-main); font-weight:700;">Tarik/Pilih Item yang Sesuai ke Kotak Target:</p>
           <div class="puzzle-align-container">
@@ -1361,10 +1427,10 @@
 
   <div id="toast" class="toast">Notifikasi Server</div>
 
-  <!-- FIREBASE ENGINE & GLOBAL LOGIC -->
+  <!-- FIREBASE ENGINE & GLOBAL LOGIC (100% FIREBASE REALTIME) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc, arrayUnion, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc, arrayUnion, arrayRemove, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDEkOV46LoObqsbaqQs8dZcyCpVkySZuQU",
@@ -1388,6 +1454,7 @@
     let userIP = '';
     let activeUser = null;
     let selectedRatingStars = 5;
+    let allRegisteredUsers = []; 
     const SECRET_ADMIN_KEY = "Jeremia2011_";
 
     // GLOBAL NAVIGATION & UI UTILS
@@ -1520,7 +1587,6 @@
     document.getElementById('tab-register-btn').addEventListener('click', () => setAuthTab('register'));
     document.getElementById('chk-is-admin').addEventListener('change', (e) => toggleAdminAccessCode(e.target.checked));
     
-    // Trigger puzzle box when clicking robot verification checkbox area
     document.getElementById('robot-checkbox-group').addEventListener('click', () => {
       if(!isRobotVerified) {
         triggerRobotPuzzle();
@@ -1538,9 +1604,9 @@
       
       let val = usernameInput.value;
       if (plat === 'bedrock') {
-        if (!val.startsWith('.')) usernameInput.value = '.' + val;
+        if (!val.startsWith('.')) usernameInput.value = '.' + val.replace(/^\.+/, '');
       } else {
-        if (val.startsWith('.')) usernameInput.value = val.substring(1);
+        if (val.startsWith('.')) usernameInput.value = val.replace(/^\.+/, '');
       }
     }
 
@@ -1548,633 +1614,832 @@
       currentAuthMode = mode;
       document.getElementById('tab-login-btn').classList.toggle('active', mode === 'login');
       document.getElementById('tab-register-btn').classList.toggle('active', mode === 'register');
-      document.getElementById('auth-submit-btn').textContent = mode === 'login' ? 'Masuk Akun' : 'Daftar Akun Baru';
+      document.getElementById('auth-submit-btn').textContent = mode === 'login' ? 'Masuk Akun' : 'Daftar Sekarang';
       
-      document.getElementById('admin-checkbox-group').style.display = mode === 'login' ? 'flex' : 'none';
-      document.getElementById('robot-checkbox-group').style.display = mode === 'register' ? 'flex' : 'none';
-      
-      document.getElementById('admin-code-group').style.display = 'none';
-      document.getElementById('chk-is-admin').checked = false;
-      document.getElementById('chk-anti-robot').checked = false;
-      document.getElementById('puzzle-box').style.display = 'none';
-      isRobotVerified = false;
+      const adminGroup = document.getElementById('admin-checkbox-group');
+      const robotGroup = document.getElementById('robot-checkbox-group');
+      const puzzleBox = document.getElementById('puzzle-box');
+
+      if(mode === 'register') {
+        adminGroup.style.display = 'none';
+        robotGroup.style.display = 'flex';
+        document.getElementById('chk-is-admin').checked = false;
+        document.getElementById('admin-code-group').style.display = 'none';
+      } else {
+        adminGroup.style.display = 'flex';
+        robotGroup.style.display = 'none';
+        puzzleBox.style.display = 'none';
+      }
     }
 
     function toggleAdminAccessCode(checked) {
       document.getElementById('admin-code-group').style.display = checked ? 'block' : 'none';
     }
 
-    // LOGICAL ANTI-BOT SYSTEM DENGAN UI TARIK/PILIH ITEM KE TEMPAT YANG DISESUAIKAN
-    const logicalChallenges = [
-      {
-        title: "Tarik/Pilih Senjata Pedang PvP ke Kotak Target:",
-        target: "⚔️",
-        options: ['🛡️️', '⚔️', '💎', '🍎', '🏹']
-      },
-      {
-        title: "Tarik/Pilih Perisai Perlindungan Akun ke Kotak Target:",
-        target: "🛡️",
-        options: ['🔥', '🏹', '🛡️', '💎', '⚔️']
-      },
-      {
-        title: "Tarik/Pilih Mata Uang Berlian ke Kotak Target:",
-        target: "💎",
-        options: ['🍎', '💎', '🛡️', '🔥', '⚔️']
-      },
-      {
-        title: "Tarik/Pilih Apel Emas Penambah Darah ke Kotak Target:",
-        target: "🍎",
-        options: ['⚔️', '🔥', '🏹', '🍎', '💎']
-      }
-    ];
-
+    // PUZZLE BOT SYSTEM
     function triggerRobotPuzzle() {
-      if (isRobotVerified) return;
-      document.getElementById('puzzle-box').style.display = 'block';
-      document.getElementById('verify-loading-bar').style.display = 'none';
-      document.getElementById('verify-status-text').style.display = 'none';
+      const icons = ['⚔️', '🛡️', '💎', '🏹', '🍎', '👑', '🔥'];
+      targetPuzzleIcon = icons[Math.floor(Math.random() * icons.length)];
       
-      currentPuzzleChallenge = logicalChallenges[Math.floor(Math.random() * logicalChallenges.length)];
-      document.getElementById('puzzle-question-title').textContent = currentPuzzleChallenge.title;
-      targetPuzzleIcon = currentPuzzleChallenge.target;
       document.getElementById('puzzle-target-slot').textContent = targetPuzzleIcon;
       document.getElementById('puzzle-user-slot').textContent = '?';
-      selectedPuzzleIcon = '';
+      document.getElementById('puzzle-box').style.display = 'block';
 
-      const optionsContainer = document.getElementById('puzzle-options');
-      optionsContainer.innerHTML = '';
+      const shuffleIcons = [...icons].sort(() => 0.5 - Math.random());
+      const container = document.getElementById('puzzle-options');
+      container.innerHTML = '';
 
-      currentPuzzleChallenge.options.forEach(icon => {
-        const piece = document.createElement('div');
-        piece.className = 'puzzle-piece';
-        piece.textContent = icon;
-        piece.onclick = () => {
+      shuffleIcons.forEach(icon => {
+        const btn = document.createElement('div');
+        btn.className = 'puzzle-piece';
+        btn.textContent = icon;
+        btn.onclick = () => {
           document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('selected'));
-          piece.classList.add('selected');
+          btn.classList.add('selected');
           selectedPuzzleIcon = icon;
           document.getElementById('puzzle-user-slot').textContent = icon;
         };
-        optionsContainer.appendChild(piece);
+        container.appendChild(btn);
       });
     }
 
     function verifyPuzzleSubmission() {
-      if (!selectedPuzzleIcon) {
-        window.showToast("Silakan tarik/pilih simbol item ke kotak target terlebih dahulu!");
+      if(!selectedPuzzleIcon) {
+        window.showToast("Pilih salah satu ikon terlebih dahulu!");
         return;
       }
 
-      const progressBar = document.getElementById('verify-loading-progress');
-      const loadingBar = document.getElementById('verify-loading-bar');
-      const statusText = document.getElementById('verify-status-text');
+      if(selectedPuzzleIcon !== targetPuzzleIcon) {
+        window.showToast("Jawaban salah! Coba cocokkan kembali.");
+        triggerRobotPuzzle();
+        return;
+      }
 
-      loadingBar.style.display = 'block';
-      statusText.style.display = 'block';
-      progressBar.style.width = '0%';
-      statusText.textContent = "Memeriksa kecocokan item UI...";
+      const bar = document.getElementById('verify-loading-bar');
+      const progress = document.getElementById('verify-loading-progress');
+      const text = document.getElementById('verify-status-text');
 
-      let width = 0;
-      const interval = setInterval(() => {
-        width += 15;
-        progressBar.style.width = width + '%';
-        if (width >= 100) {
-          clearInterval(interval);
-          if (selectedPuzzleIcon === targetPuzzleIcon) {
-            isRobotVerified = true;
-            statusText.textContent = "Verifikasi Selesai! Checkbox diaktifkan.";
-            statusText.style.color = "#22c55e";
-            document.getElementById('chk-anti-robot').checked = true;
-            document.getElementById('puzzle-box').style.display = 'none';
-            window.showToast("Verifikasi Anti-Bot Berhasil!");
-          } else {
-            isRobotVerified = false;
-            statusText.textContent = "Verifikasi Gagal! Pilihan tidak sesuai.";
-            statusText.style.color = "#ef4444";
-            document.getElementById('chk-anti-robot').checked = false;
-            window.showToast("Verifikasi Gagal, coba lagi.");
-          }
+      bar.style.display = 'block';
+      text.style.display = 'block';
+      let w = 0;
+
+      const timer = setInterval(() => {
+        w += 10;
+        progress.style.width = w + '%';
+        if(w >= 100) {
+          clearInterval(timer);
+          isRobotVerified = true;
+          document.getElementById('chk-anti-robot').checked = true;
+          document.getElementById('puzzle-box').style.display = 'none';
+          window.showToast("Verifikasi berhasil! Anda bukan robot.");
         }
-      }, 80);
+      }, 100);
     }
 
-    // CASE-INSENSITIVE ACCOUNT AUTHENTICATION & LOGIN LOGIC
+    // AUTH SUBMISSION (LOGIN / REGISTER)
     async function handleAuthSubmit(e) {
       e.preventDefault();
-      const rawUsername = document.getElementById('auth-username').value.trim();
-      const password = document.getElementById('auth-password').value;
-      const isAdminCheck = document.getElementById('chk-is-admin').checked;
-      const adminCode = document.getElementById('auth-admin-code').value;
+      const username = document.getElementById('auth-username').value.trim();
+      const password = document.getElementById('auth-password').value.trim();
+      const isAdmin = document.getElementById('chk-is-admin').checked;
+      const adminCode = document.getElementById('auth-admin-code').value.trim();
 
-      if (!rawUsername || !password) {
-        window.showToast("Isi semua kolom form dengan benar!");
+      if(!username || !password) {
+        window.showToast("Harap isi username dan kata sandi!");
         return;
       }
 
-      const docId = rawUsername.toLowerCase();
+      const userRef = doc(db, "users", username.toLowerCase());
 
-      if (currentAuthMode === 'register') {
-        if (!isRobotVerified) {
-          window.showToast("Selesaikan Verifikasi Anti-Bot UI terlebih dahulu!");
+      if(currentAuthMode === 'register') {
+        if(!isRobotVerified) {
+          window.showToast("Selesaikan verifikasi anti-robot terlebih dahulu!");
           return;
         }
 
-        const userRef = doc(db, "users", docId);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-          window.showToast("Nama akun sudah terdaftar dalam web! Gunakan nama lain.");
+        const snap = await getDoc(userRef);
+        if(snap.exists()) {
+          window.showToast("Username sudah terdaftar! Silakan login.");
           return;
         }
 
-        const userData = {
-          username: rawUsername,
-          username_lowercase: docId,
+        const newUser = {
+          username: username,
           password: password,
           platform: currentPlatform,
-          role: 'player',
-          status: 'active',
+          isAdmin: false,
+          isBanned: false,
           ip: userIP,
           createdAt: new Date().toISOString()
         };
 
-        await setDoc(userRef, userData);
-        activeUser = userData;
-        window.showToast("Pendaftaran Berhasil! Selamat datang " + rawUsername);
-        loginSuccess(userData);
-
+        await setDoc(userRef, newUser);
+        activeUser = newUser;
+        window.showToast("Pendaftaran berhasil! Selamat datang, " + username);
+        closeModal('auth-modal');
+        initUserSession();
       } else {
-        const userRef = doc(db, "users", docId);
-        const userSnap = await getDoc(userRef);
+        if(isAdmin) {
+          if(adminCode !== SECRET_ADMIN_KEY) {
+            window.showToast("Kode rahasia admin salah!");
+            return;
+          }
+        }
 
-        if (!userSnap.exists()) {
-          window.showToast("Akun tidak ditemukan! Periksa username kamu.");
+        const snap = await getDoc(userRef);
+        if(!snap.exists()) {
+          window.showToast("Akun tidak ditemukan! Silakan daftar.");
           return;
         }
 
-        const userData = userSnap.data();
-
-        if (userData.status === 'banned') {
-          window.showToast("Akun kamu telah DIBANNED dari server MineHera!");
-          return;
-        }
-
-        if (userData.password !== password) {
+        const userData = snap.data();
+        if(userData.password !== password) {
           window.showToast("Kata sandi salah!");
           return;
         }
 
-        if (isAdminCheck) {
-          if (adminCode !== SECRET_ADMIN_KEY) {
-            window.showToast("Kode Akses Rahasia Admin Salah!");
-            return;
-          }
-          userData.role = 'admin';
+        if(userData.isBanned) {
+          window.showToast("Akun Anda telah di-banned dari server!");
+          return;
+        }
+
+        if(isAdmin) {
+          userData.isAdmin = true;
+          await updateDoc(userRef, { isAdmin: true });
         }
 
         activeUser = userData;
-        window.showToast("Login Berhasil! Selamat datang kembali " + userData.username);
-        loginSuccess(userData);
+        window.showToast("Berhasil login sebagai " + username);
+        closeModal('auth-modal');
+        initUserSession();
       }
     }
 
-    function loginSuccess(user) {
-      document.getElementById('auth-modal').style.display = 'none';
-      document.getElementById('my-profile-name').textContent = user.username;
-      document.getElementById('my-profile-plat').textContent = user.platform.toUpperCase() + " EDITION";
-
-      const cleanSkinName = user.platform === 'bedrock' ? user.username.replace(/^\.+/, '') : user.username;
-      const skinHeadUrl = `https://visage.surgeplay.com/bust/128/${cleanSkinName}`;
+    function initUserSession() {
+      if(!activeUser) return;
       
-      document.getElementById('nav-profile-skin-head').src = skinHeadUrl;
-      document.getElementById('my-profile-skin-head').src = skinHeadUrl;
+      const headImg = `https://visage.surgeplay.com/bust/128/${activeUser.username}`;
+      document.getElementById('nav-profile-skin-head').src = headImg;
+      document.getElementById('my-profile-skin-head').src = headImg;
+      document.getElementById('my-profile-name').textContent = activeUser.username;
+      document.getElementById('my-profile-plat').textContent = activeUser.platform + " Edition";
 
-      if (user.role === 'admin') {
+      if(activeUser.isAdmin) {
         document.getElementById('admin-nav-item').style.display = 'block';
+        loadAdminUserList();
+        loadAdminGallery('photo');
+        loadAdminReviews();
       }
 
-      loadMyProfileStats();
-      listenRealtimeStats();
+      loadMyUploads();
     }
 
     window.logoutUser = function() {
       activeUser = null;
-      document.getElementById('auth-modal').style.display = 'flex';
-      setAuthTab('login');
-      window.showToast("Berhasil Keluar Akun");
+      document.getElementById('nav-profile-skin-head').src = "https://visage.surgeplay.com/bust/128/Steve";
+      document.getElementById('admin-nav-item').style.display = 'none';
+      openModal('auth-modal');
+      window.showToast("Anda telah keluar.");
     };
 
-    // REALTIME DATABASE LISTENERS & RENDER FUNCTIONS
-    async function saveTopDonate() {
-      if(!activeUser || activeUser.role !== 'admin') {
-        window.showToast("Akses Ditolak! Hanya Admin.");
-        return;
-      }
-      try {
-        const topDonateData = {
-          rank1: { name: document.getElementById('admin-r1-name').value, amount: document.getElementById('admin-r1-amount').value },
-          rank2: { name: document.getElementById('admin-r2-name').value, amount: document.getElementById('admin-r2-amount').value },
-          rank3: { name: document.getElementById('admin-r3-name').value, amount: document.getElementById('admin-r3-amount').value }
-        };
-        await setDoc(doc(db, "settings", "topdonate"), topDonateData);
-        window.showToast("Top Donate Berhasil Disimpan!");
-      } catch(e) {
-        window.showToast("Gagal menyimpan top donate");
-      }
-    }
-
-    function listenRealtimeStats() {
-      // Top Donate Listener
-      onSnapshot(doc(db, "settings", "topdonate"), (docSnap) => {
+    // REALTIME TOP DONATE SYSTEM (GLOBAL SYNC)
+    function listenTopDonate() {
+      onSnapshot(doc(db, "system", "topdonate"), (docSnap) => {
         if(docSnap.exists()) {
           const d = docSnap.data();
-          if(d.rank1) {
-            document.getElementById('rank1-name').textContent = d.rank1.name || '-';
-            document.getElementById('rank1-amount').textContent = d.rank1.amount || 'Rp 0';
-            document.getElementById('rank1-skin').src = `https://visage.surgeplay.com/bust/128/${d.rank1.name.replace(/^\.+/, '')}`;
+          if(d.r1) {
+            document.getElementById('rank1-name').textContent = d.r1.name || "None";
+            document.getElementById('rank1-amount').textContent = "Rp " + (d.r1.amount || "0");
+            document.getElementById('rank1-skin').src = `https://visage.surgeplay.com/bust/128/${d.r1.name || 'Steve'}`;
+            document.getElementById('admin-r1-name').value = d.r1.name || "";
+            document.getElementById('admin-r1-amount').value = d.r1.amount || "";
           }
-          if(d.rank2) {
-            document.getElementById('rank2-name').textContent = d.rank2.name || '-';
-            document.getElementById('rank2-amount').textContent = d.rank2.amount || 'Rp 0';
-            document.getElementById('rank2-skin').src = `https://visage.surgeplay.com/bust/128/${d.rank2.name.replace(/^\.+/, '')}`;
+          if(d.r2) {
+            document.getElementById('rank2-name').textContent = d.r2.name || "None";
+            document.getElementById('rank2-amount').textContent = "Rp " + (d.r2.amount || "0");
+            document.getElementById('rank2-skin').src = `https://visage.surgeplay.com/bust/128/${d.r2.name || 'Steve'}`;
+            document.getElementById('admin-r2-name').value = d.r2.name || "";
+            document.getElementById('admin-r2-amount').value = d.r2.amount || "";
           }
-          if(d.rank3) {
-            document.getElementById('rank3-name').textContent = d.rank3.name || '-';
-            document.getElementById('rank3-amount').textContent = d.rank3.amount || 'Rp 0';
-            document.getElementById('rank3-skin').src = `https://visage.surgeplay.com/bust/128/${d.rank3.name.replace(/^\.+/, '')}`;
+          if(d.r3) {
+            document.getElementById('rank3-name').textContent = d.r3.name || "None";
+            document.getElementById('rank3-amount').textContent = "Rp " + (d.r3.amount || "0");
+            document.getElementById('rank3-skin').src = `https://visage.surgeplay.com/bust/128/${d.r3.name || 'Steve'}`;
+            document.getElementById('admin-r3-name').value = d.r3.name || "";
+            document.getElementById('admin-r3-amount').value = d.r3.amount || "";
           }
         }
       });
+    }
+    listenTopDonate();
 
-      // Users List Listener
-      onSnapshot(collection(db, "users"), (snapshot) => {
-        let total = snapshot.size;
-        document.getElementById('registered-accounts-count').textContent = `(${total} Akun terdaftar dalam web)`;
-        document.getElementById('admin-total-accounts').textContent = `Total: ${total}`;
-        
-        let tbody = document.getElementById('user-table-body');
-        tbody.innerHTML = '';
-        let rows = '';
-        snapshot.forEach((docSnap) => {
-          let u = docSnap.data();
-          rows += `<tr>
-            <td>${u.username}</td>
-            <td>${u.platform}</td>
-            <td>******</td>
-            <td><span class="badge-status ${u.status === 'banned' ? 'status-banned' : 'status-active'}">${u.status || 'active'}</span></td>
-            <td>
-              ${u.status === 'banned' ? `<button class="btn-action btn-unban" onclick="setUserStatus('${docSnap.id}', 'active')">Unban</button>` : `<button class="btn-action btn-ban" onclick="setUserStatus('${docSnap.id}', 'banned')">Ban</button>`}
-            </td>
-          </tr>`;
+    async function saveTopDonate() {
+      const data = {
+        r1: { name: document.getElementById('admin-r1-name').value, amount: document.getElementById('admin-r1-amount').value },
+        r2: { name: document.getElementById('admin-r2-name').value, amount: document.getElementById('admin-r2-amount').value },
+        r3: { name: document.getElementById('admin-r3-name').value, amount: document.getElementById('admin-r3-amount').value },
+      };
+
+      await setDoc(doc(db, "system", "topdonate"), data);
+      window.showToast("Top Donate global berhasil diperbarui!");
+    }
+
+    // REALTIME RATING & ULASAN SYSTEM
+    document.querySelectorAll('#star-input-group .fa-star').forEach(star => {
+      star.addEventListener('click', function() {
+        selectedRatingStars = parseInt(this.getAttribute('data-value'), 10);
+        document.querySelectorAll('#star-input-group .fa-star').forEach((s, idx) => {
+          if(idx < selectedRatingStars) s.classList.add('active');
+          else s.classList.remove('active');
         });
-        tbody.innerHTML = rows;
+      });
+    });
+
+    document.getElementById('rating-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if(!activeUser) {
+        window.showToast("Harap login terlebih dahulu!");
+        return;
+      }
+
+      const comment = document.getElementById('rating-comment').value.trim();
+      if(!comment) return;
+
+      const reviewDoc = doc(db, "reviews", activeUser.username.toLowerCase());
+      await setDoc(reviewDoc, {
+        username: activeUser.username,
+        stars: selectedRatingStars,
+        comment: comment,
+        createdAt: new Date().toISOString()
       });
 
-      // Reviews / Ratings Listener (Mondar-mandir Otomatis Infinite Carousel)
-      onSnapshot(collection(db, "reviews"), (snapshot) => {
-        let reviewsTrack = document.getElementById('reviews-carousel-container');
-        let adminReviewsList = document.getElementById('admin-reviews-list');
-        let totalReviews = snapshot.size;
-        let totalScore = 0;
-        let htmlCards = '';
-        let adminHtml = '';
+      window.showToast("Ulasan Anda berhasil dikirim!");
+      document.getElementById('rating-comment').value = '';
+    });
 
-        if(totalReviews === 0) {
-          reviewsTrack.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem; padding: 10px;">Belum ada ulasan player.</p>`;
-          adminReviewsList.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Tidak ada komentar.</p>`;
-          document.getElementById('floating-rating-avg').textContent = '5.0';
-          document.getElementById('floating-rating-count').textContent = `0 Ulasan`;
+    function listenReviews() {
+      onSnapshot(collection(db, "reviews"), (snapshot) => {
+        const carousel = document.getElementById('reviews-carousel-container');
+        carousel.innerHTML = '';
+        
+        let totalStars = 0;
+        let count = 0;
+        const reviewsArr = [];
+
+        snapshot.forEach(doc => {
+          const d = doc.data();
+          d.id = doc.id;
+          reviewsArr.push(d);
+          totalStars += d.stars;
+          count++;
+        });
+
+        // CALCULATE AVERAGE & UPDATE FLOATING RATING BAR
+        const avg = count > 0 ? (totalStars / count).toFixed(1) : "0.0";
+        document.getElementById('floating-rating-avg').textContent = isNaN(avg) ? "0.0" : avg;
+        document.getElementById('floating-rating-count').textContent = `${count} Ulasan (Beri Rating)`;
+
+        const starsContainer = document.getElementById('floating-rating-stars');
+        starsContainer.innerHTML = '';
+        const numericAvg = isNaN(avg) ? 0 : Math.round(parseFloat(avg));
+        for(let i=1; i<=5; i++) {
+          const starIcon = document.createElement('i');
+          starIcon.className = i <= numericAvg ? "fa-solid fa-star" : "fa-regular fa-star";
+          starsContainer.appendChild(starIcon);
+        }
+
+        // RENDER TO INFINITE SCROLL CAROUSEL
+        if(reviewsArr.length === 0) {
+          carousel.innerHTML = '<p style="color:var(--text-muted);">Belum ada ulasan player.</p>';
           return;
         }
 
-        let reviewsArray = [];
-        snapshot.forEach((docSnap) => {
-          let r = docSnap.data();
-          reviewsArray.push({ id: docSnap.id, ...r });
-          totalScore += (parseInt(r.rating) || 5);
-        });
-
-        let avgRating = (totalScore / totalReviews).toFixed(1);
-        document.getElementById('floating-rating-avg').textContent = avgRating;
-        document.getElementById('floating-rating-count').textContent = `${totalReviews} Ulasan`;
-
-        // Render Cards
-        reviewsArray.forEach(r => {
+        // DOUBLE ARRAY FOR CONTINUOUS INFINITE SCROLL
+        const doubleReviews = [...reviewsArr, ...reviewsArr];
+        doubleReviews.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'review-card';
+          
           let starsHtml = '';
           for(let i=1; i<=5; i++) {
-            starsHtml += `<i class="fa-solid fa-star ${i <= r.rating ? '' : 'style="color:#4b5563"'}" style="color:${i <= r.rating ? 'var(--gold-vip)' : '#4b5563'}"></i>`;
+            starsHtml += `<i class="${i <= r.stars ? 'fa-solid' : 'fa-regular'} fa-star" style="color:var(--gold-vip); font-size:0.75rem;"></i>`;
           }
-          let cleanName = r.platform === 'bedrock' ? r.username.replace(/^\.+/, '') : r.username;
-          
-          htmlCards += `
-            <div class="review-card">
-              <div class="review-user-header">
-                <img src="https://visage.surgeplay.com/bust/128/${cleanName}" class="review-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
-                <div>
-                  <div class="review-user-name">${r.username}</div>
-                  <div style="font-size:0.75rem;">${starsHtml}</div>
-                </div>
-              </div>
-              <div class="review-text">${r.comment}</div>
-            </div>
-          `;
 
-          adminHtml += `
-            <div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+          card.innerHTML = `
+            <div class="review-user-header">
+              <img src="https://visage.surgeplay.com/bust/128/${r.username}" class="review-avatar" onerror="this.src='https://visage.surgeplay.com/bust/128/Steve'">
               <div>
-                <strong>${r.username}</strong>: ${r.comment}
+                <div class="review-user-name">${r.username}</div>
+                <div>${starsHtml}</div>
               </div>
-              <button class="btn-action btn-del" onclick="deleteReview('${r.id}')">Hapus</button>
+            </div>
+            <p class="review-text">"${r.comment}"</p>
+          `;
+          carousel.appendChild(card);
+        });
+
+        if(activeUser && activeUser.isAdmin) {
+          loadAdminReviews();
+        }
+      });
+    }
+    listenReviews();
+
+    // REALTIME PLAYER GALLERY
+    function listenPlayerGallery() {
+      onSnapshot(collection(db, "player_gallery"), (snapshot) => {
+        const grid = document.getElementById('player-gallery-grid');
+        grid.innerHTML = '';
+        let count = 0;
+
+        snapshot.forEach(docSnap => {
+          const d = docSnap.data();
+          const id = docSnap.id;
+          count++;
+
+          const likes = d.likes || [];
+          const isLiked = activeUser && likes.includes(activeUser.username);
+
+          const card = document.createElement('div');
+          card.className = 'gallery-card';
+          card.innerHTML = `
+            <div class="gallery-img-box">
+              <img src="${d.imageUrl}" class="gallery-img">
+              <div class="gallery-overlay-badge"><i class="fa-solid fa-user"></i> ${d.author}</div>
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">${d.title}</div>
+              <div class="gallery-desc">${d.desc}</div>
+              <div class="gallery-footer">
+                <button class="btn-like ${isLiked ? 'liked' : ''}" onclick="toggleLike('player_gallery', '${id}')">
+                  <i class="fa-solid fa-heart"></i> ${likes.length}
+                </button>
+                <span class="tag-badge"><i class="fa-solid fa-calendar"></i> ${new Date(d.createdAt).toLocaleDateString()}</span>
+              </div>
             </div>
           `;
+          grid.appendChild(card);
         });
 
-        // Duplikasi array untuk efek infinite scroll loop yang mulus tanpa putus
-        reviewsTrack.innerHTML = htmlCards + htmlCards;
-        adminReviewsList.innerHTML = adminHtml;
+        document.getElementById('pg-total-count').textContent = `Total Foto: ${count}`;
+        updateUserPostCounts();
       });
     }
+    listenPlayerGallery();
 
-    window.setUserStatus = async function(userId, status) {
-      if(!activeUser || activeUser.role !== 'admin') return;
-      await updateDoc(doc(db, "users", userId), { status: status });
-      window.showToast("Status akun berhasil diperbarui!");
-    };
+    // REALTIME BUILD GALLERY
+    function listenBuildGallery() {
+      onSnapshot(collection(db, "build_gallery"), (snapshot) => {
+        const grid = document.getElementById('build-gallery-grid');
+        grid.innerHTML = '';
+        let count = 0;
 
-    window.deleteReview = async function(reviewId) {
-      if(!activeUser || activeUser.role !== 'admin') return;
-      await deleteDoc(doc(db, "reviews", reviewId));
-      window.showToast("Komentar berhasil dihapus!");
-    };
+        snapshot.forEach(docSnap => {
+          const d = docSnap.data();
+          const id = docSnap.id;
+          count++;
 
-    // RATING FORM SUBMISSION
-    const ratingForm = document.getElementById('rating-form');
-    if(ratingForm) {
-      // Star selection
-      document.querySelectorAll('#star-input-group .fa-star').forEach((star, idx, arr) => {
-        star.addEventListener('click', () => {
-          selectedRatingStars = idx + 1;
-          arr.forEach((s, sIdx) => {
-            s.classList.toggle('active', sIdx <= idx);
-          });
-        });
-      });
+          const likes = d.likes || [];
+          const isLiked = activeUser && likes.includes(activeUser.username);
 
-      ratingForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if(!activeUser) {
-          window.showToast("Silakan login terlebih dahulu!");
-          return;
-        }
-        let commentText = document.getElementById('rating-comment').value.trim();
-        if(!commentText) {
-          window.showToast("Tulis komentar ulasan terlebih dahulu!");
-          return;
-        }
-
-        try {
-          await addDoc(collection(db, "reviews"), {
-            username: activeUser.username,
-            platform: activeUser.platform,
-            rating: selectedRatingStars,
-            comment: commentText,
-            createdAt: new Date().toISOString()
-          });
-          document.getElementById('rating-comment').value = '';
-          window.showToast("Ulasan berhasil dikirim!");
-        } catch(err) {
-          window.showToast("Gagal mengirim ulasan.");
-        }
-      });
-    }
-
-    async function loadMyProfileStats() {
-      if(!activeUser) return;
-      // Load user uploads count
-      const qPhotos = query(collection(db, "player_gallery"), where("username", "==", activeUser.username));
-      const snapPhotos = await getDocs(qPhotos);
-      document.getElementById('my-photo-count').textContent = snapPhotos.size;
-
-      const qBuilds = query(collection(db, "build_gallery"), where("username", "==", activeUser.username));
-      const snapBuilds = await getDocs(qBuilds);
-      document.getElementById('my-build-count').textContent = snapBuilds.size;
-
-      // Load my uploads list for management
-      let myUploadsList = document.getElementById('my-uploads-list');
-      let listHtml = '';
-      
-      snapPhotos.forEach(d => {
-        let p = d.data();
-        listHtml += `<div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
-          <span>[Foto] ${p.title}</span>
-          <button class="btn-action btn-del" onclick="deleteMyUpload('player_gallery', '${d.id}')">Hapus</button>
-        </div>`;
-      });
-
-      snapBuilds.forEach(d => {
-        let b = d.data();
-        listHtml += `<div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
-          <span>[Build] ${b.name}</span>
-          <button class="btn-action btn-del" onclick="deleteMyUpload('build_gallery', '${d.id}')">Hapus</button>
-        </div>`;
-      });
-
-      myUploadsList.innerHTML = listHtml || `<p style="color:var(--text-muted); font-size:0.85rem;">Belum ada postingan yang di-upload.</p>`;
-    }
-
-    window.deleteMyUpload = async function(colName, docId) {
-      await deleteDoc(doc(db, colName, docId));
-      window.showToast("Postingan berhasil dihapus");
-      loadMyProfileStats();
-    };
-
-    // GALLERY LOADERS (PLAYER & BUILD)
-    async function loadGalleries() {
-      // Player Gallery
-      const pgGrid = document.getElementById('player-gallery-grid');
-      const pgSnapshot = await getDocs(collection(db, "player_gallery"));
-      document.getElementById('pg-total-count').textContent = `Total Foto: ${pgSnapshot.size}`;
-      
-      let pgHtml = '';
-      pgSnapshot.forEach(d => {
-        let item = d.data();
-        pgHtml += `
-          <div class="gallery-card">
+          const card = document.createElement('div');
+          card.className = 'gallery-card';
+          card.innerHTML = `
             <div class="gallery-img-box">
-              <img src="${item.imageUrl || 'https://i.imgur.com/DfdCsWN.png'}" class="gallery-img" alt="Gallery Photo">
+              <img src="${d.imageUrl}" class="gallery-img">
+              <div class="gallery-overlay-badge"><i class="fa-solid fa-cubes"></i> ${d.size} Base</div>
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">${item.title}</div>
-              <div class="gallery-desc">${item.desc}</div>
-              <div class="gallery-author"><i class="fa-solid fa-user"></i> ${item.username}</div>
-              <div class="gallery-footer">
-                <button class="btn-like" onclick="window.showToast('Liked!')"><i class="fa-solid fa-heart"></i> ${item.likes || 0}</button>
-                <span class="tag-badge">${item.platform || 'Java'}</span>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-      pgGrid.innerHTML = pgHtml || `<p style="color:var(--text-muted);">Belum ada foto galeri.</p>`;
-
-      // Build Gallery
-      const bgGrid = document.getElementById('build-gallery-grid');
-      const bgSnapshot = await getDocs(collection(db, "build_gallery"));
-      document.getElementById('bg-total-count').textContent = `Total Build Base: ${bgSnapshot.size}`;
-
-      let bgHtml = '';
-      bgSnapshot.forEach(d => {
-        let item = d.data();
-        bgHtml += `
-          <div class="gallery-card">
-            <div class="gallery-img-box">
-              <img src="${item.imageUrl || 'https://i.imgur.com/DfdCsWN.png'}" class="gallery-img" alt="Build Photo">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">${item.name}</div>
-              <div class="gallery-desc">${item.desc}</div>
+              <div class="gallery-title">${d.name}</div>
+              <div class="gallery-desc">${d.desc}</div>
               <div class="gallery-meta-tags">
-                <span class="tag-badge">Size: ${item.size}</span>
-                <span class="tag-badge" style="color:var(--gold-vip)">Cost: ${item.cost}</span>
+                <span class="tag-badge" style="background:rgba(220,38,38,0.2); color:#fca5a5;">Cost: ${d.cost}</span>
+                <span class="tag-badge">Time: ${d.timeNum} ${d.timeUnit}</span>
+                <span class="tag-badge" style="text-transform:uppercase;">${d.category}</span>
               </div>
-              <div class="gallery-author" style="margin-top:6px;"><i class="fa-solid fa-user"></i> ${item.username} (${item.timeNeeded || '1 Week'})</div>
               <div class="gallery-footer">
-                <button class="btn-like" onclick="window.showToast('Liked Build!')"><i class="fa-solid fa-heart"></i> ${item.likes || 0}</button>
-                <span class="tag-badge">${item.category}</span>
+                <button class="btn-like ${isLiked ? 'liked' : ''}" onclick="toggleLike('build_gallery', '${id}')">
+                  <i class="fa-solid fa-heart"></i> ${likes.length}
+                </button>
+                <span class="tag-badge"><i class="fa-solid fa-user"></i> ${d.author}</span>
               </div>
             </div>
-          </div>
-        `;
-      });
-      bgGrid.innerHTML = bgHtml || `<p style="color:var(--text-muted);">Belum ada build base.</p>`;
-    }
-    loadGalleries();
+          `;
+          grid.appendChild(card);
+        });
 
-    // UPLOAD FORMS (PLAYER GALLERY & BUILD GALLERY)
+        document.getElementById('bg-total-count').textContent = `Total Build Base: ${count}`;
+        updateUserPostCounts();
+      });
+    }
+    listenBuildGallery();
+
+    // UPDATE USER POST COUNTS IN PROFILE CARD
+    async function updateUserPostCounts() {
+      if(!activeUser) return;
+      const qPhoto = query(collection(db, "player_gallery"), where("author", "==", activeUser.username));
+      const qBuild = query(collection(db, "build_gallery"), where("author", "==", activeUser.username));
+
+      const snapPhoto = await getDocs(qPhoto);
+      const snapBuild = await getDocs(qBuild);
+
+      document.getElementById('my-photo-count').textContent = snapPhoto.size;
+      document.getElementById('my-build-count').textContent = snapBuild.size;
+    }
+
+    // TOGGLE LIKE ACCROSS GALLERIES
+    window.toggleLike = async function(collectionName, docId) {
+      if(!activeUser) {
+        window.showToast("Silakan login untuk menyukai postingan!");
+        return;
+      }
+      const ref = doc(db, collectionName, docId);
+      const snap = await getDoc(ref);
+      if(snap.exists()) {
+        const likes = snap.data().likes || [];
+        if(likes.includes(activeUser.username)) {
+          await updateDoc(ref, { likes: arrayRemove(activeUser.username) });
+        } else {
+          await updateDoc(ref, { likes: arrayUnion(activeUser.username) });
+        }
+      }
+    };
+
+    // CONVERT FILE TO BASE64 UTILITY
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    // UPLOAD PHOTO SUBMISSION
     document.getElementById('pg-upload-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       if(!activeUser) {
-        window.showToast("Silakan login terlebih dahulu!");
+        window.showToast("Harap login terlebih dahulu!");
         return;
       }
-      const title = document.getElementById('pg-title').value;
-      const desc = document.getElementById('pg-desc').value;
-      
-      try {
+
+      const editId = document.getElementById('pg-edit-id').value;
+      const title = document.getElementById('pg-title').value.trim();
+      const desc = document.getElementById('pg-desc').value.trim();
+      const fileInput = document.getElementById('pg-file');
+
+      let imageUrl = "https://i.imgur.com/DfdCsWN.png";
+      if(fileInput.files.length > 0) {
+        imageUrl = await fileToBase64(fileInput.files[0]);
+      } else if(!editId) {
+        window.showToast("Pilih file gambar untuk di-upload!");
+        return;
+      }
+
+      if(editId) {
+        const ref = doc(db, "player_gallery", editId);
+        const updateData = { title, desc };
+        if(fileInput.files.length > 0) updateData.imageUrl = imageUrl;
+        await updateDoc(ref, updateData);
+        window.showToast("Foto berhasil diperbarui!");
+      } else {
         await addDoc(collection(db, "player_gallery"), {
-          username: activeUser.username,
-          platform: activeUser.platform,
-          title: title,
-          desc: desc,
-          imageUrl: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600",
-          likes: 0,
+          title, desc, imageUrl,
+          author: activeUser.username,
+          likes: [],
           createdAt: new Date().toISOString()
         });
-        closeModal('pg-upload-modal');
-        window.showToast("Foto Berhasil Di-upload!");
-        loadGalleries();
-        loadMyProfileStats();
-      } catch(err) {
-        window.showToast("Gagal mengupload foto.");
+        window.showToast("Foto berhasil di-upload!");
       }
+
+      closeModal('pg-upload-modal');
     });
 
+    // UPLOAD BUILD SUBMISSION
     document.getElementById('bg-upload-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       if(!activeUser) {
-        window.showToast("Silakan login terlebih dahulu!");
+        window.showToast("Harap login terlebih dahulu!");
         return;
       }
-      const name = document.getElementById('bg-name').value;
-      const desc = document.getElementById('bg-desc').value;
+
+      const editId = document.getElementById('bg-edit-id').value;
+      const name = document.getElementById('bg-name').value.trim();
+      const desc = document.getElementById('bg-desc').value.trim();
       const size = document.getElementById('bg-size').value;
       const category = document.getElementById('bg-category').value;
       const cost = document.getElementById('bg-cost').value;
       const timeNum = document.getElementById('bg-time-num').value;
       const timeUnit = document.getElementById('bg-time-unit').value;
+      const fileInput = document.getElementById('bg-file');
 
-      try {
+      let imageUrl = "https://i.imgur.com/DfdCsWN.png";
+      if(fileInput.files.length > 0) {
+        imageUrl = await fileToBase64(fileInput.files[0]);
+      } else if(!editId) {
+        window.showToast("Pilih file gambar build!");
+        return;
+      }
+
+      if(editId) {
+        const ref = doc(db, "build_gallery", editId);
+        const updateData = { name, desc, size, category, cost, timeNum, timeUnit };
+        if(fileInput.files.length > 0) updateData.imageUrl = imageUrl;
+        await updateDoc(ref, updateData);
+        window.showToast("Build base berhasil diperbarui!");
+      } else {
         await addDoc(collection(db, "build_gallery"), {
-          username: activeUser.username,
-          platform: activeUser.platform,
-          name: name,
-          desc: desc,
-          size: size,
-          category: category,
-          cost: cost,
-          timeNeeded: `${timeNum} ${timeUnit}`,
-          imageUrl: "https://images.unsplash.com/photo-1627856013091-fed6e4e30e77?w=600",
-          likes: 0,
+          name, desc, size, category, cost, timeNum, timeUnit, imageUrl,
+          author: activeUser.username,
+          likes: [],
           createdAt: new Date().toISOString()
         });
-        closeModal('bg-upload-modal');
-        window.showToast("Build Base Berhasil Di-upload!");
-        loadGalleries();
-        loadMyProfileStats();
-      } catch(err) {
-        window.showToast("Gagal mengupload build.");
+        window.showToast("Build base berhasil di-upload!");
       }
+
+      closeModal('bg-upload-modal');
     });
 
-    // ADMIN GALLERY MODERATION LOADER
-    window.loadAdminGallery = async function(type) {
-      const listContainer = document.getElementById('admin-gallery-list');
-      const col = type === 'photo' ? 'player_gallery' : 'build_gallery';
-      const snap = await getDocs(collection(db, col));
-      
-      let html = '';
-      snap.forEach(d => {
-        let item = d.data();
-        let titleName = item.title || item.name;
-        html += `
-          <div style="display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
-            <span>[${item.username}] ${titleName}</span>
-            <button class="btn-action btn-del" onclick="deleteAdminGalleryItem('${col}', '${d.id}')">Hapus</button>
+    // LOAD & MANAGE USER OWN POSTS IN PROFILE
+    async function loadMyUploads() {
+      if(!activeUser) return;
+      const container = document.getElementById('my-uploads-list');
+      container.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Memuat postingan Anda...</p>';
+
+      const qPhoto = query(collection(db, "player_gallery"), where("author", "==", activeUser.username));
+      const qBuild = query(collection(db, "build_gallery"), where("author", "==", activeUser.username));
+
+      const snapPhoto = await getDocs(qPhoto);
+      const snapBuild = await getDocs(qBuild);
+
+      container.innerHTML = '';
+
+      if(snapPhoto.empty && snapBuild.empty) {
+        container.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Anda belum pernah mengunggah postingan.</p>';
+        return;
+      }
+
+      snapPhoto.forEach(docSnap => {
+        const d = docSnap.data();
+        const id = docSnap.id;
+        const div = document.createElement('div');
+        div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px 14px; border-radius:10px; border:1px solid var(--border-color);";
+        div.innerHTML = `
+          <div>
+            <span class="tag-badge" style="background:var(--red-primary); color:#fff; margin-right:8px;">Foto</span>
+            <strong style="color:#fff; font-size:0.9rem;">${d.title}</strong>
+          </div>
+          <div>
+            <button class="btn-action" style="background:#3b82f6; color:#fff;" onclick="editPost('photo', '${id}')"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn-action btn-del" onclick="deletePost('player_gallery', '${id}')"><i class="fa-solid fa-trash"></i> Hapus</button>
           </div>
         `;
+        container.appendChild(div);
       });
-      listContainer.innerHTML = html || `<p style="color:var(--text-muted); font-size:0.85rem;">Tidak ada item.</p>`;
+
+      snapBuild.forEach(docSnap => {
+        const d = docSnap.data();
+        const id = docSnap.id;
+        const div = document.createElement('div');
+        div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px 14px; border-radius:10px; border:1px solid var(--border-color);";
+        div.innerHTML = `
+          <div>
+            <span class="tag-badge" style="background:#38bdf8; color:#fff; margin-right:8px;">Build</span>
+            <strong style="color:#fff; font-size:0.9rem;">${d.name}</strong>
+          </div>
+          <div>
+            <button class="btn-action" style="background:#3b82f6; color:#fff;" onclick="editPost('build', '${id}')"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn-action btn-del" onclick="deletePost('build_gallery', '${id}')"><i class="fa-solid fa-trash"></i> Hapus</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    window.editPost = async function(type, id) {
+      if(type === 'photo') {
+        const snap = await getDoc(doc(db, "player_gallery", id));
+        if(snap.exists()) {
+          const d = snap.data();
+          document.getElementById('pg-edit-id').value = id;
+          document.getElementById('pg-title').value = d.title;
+          document.getElementById('pg-desc').value = d.desc;
+          document.getElementById('pg-modal-title').innerHTML = `<i class="fa-solid fa-pen"></i> Edit Foto Player`;
+          openModal('pg-upload-modal');
+        }
+      } else {
+        const snap = await getDoc(doc(db, "build_gallery", id));
+        if(snap.exists()) {
+          const d = snap.data();
+          document.getElementById('bg-edit-id').value = id;
+          document.getElementById('bg-name').value = d.name;
+          document.getElementById('bg-desc').value = d.desc;
+          document.getElementById('bg-size').value = d.size;
+          document.getElementById('bg-category').value = d.category;
+          document.getElementById('bg-cost').value = d.cost;
+          document.getElementById('bg-time-num').value = d.timeNum;
+          document.getElementById('bg-time-unit').value = d.timeUnit;
+          document.getElementById('bg-modal-title').innerHTML = `<i class="fa-solid fa-pen"></i> Edit Build Base`;
+          openModal('bg-upload-modal');
+        }
+      }
     };
 
-    window.deleteAdminGalleryItem = async function(col, id) {
-      if(!activeUser || activeUser.role !== 'admin') return;
-      await deleteDoc(doc(db, col, id));
-      window.showToast("Item berhasil dihapus oleh admin!");
-      loadGalleries();
+    window.deletePost = async function(collectionName, id) {
+      if(confirm("Apakah Anda yakin ingin menghapus postingan ini secara permanen?")) {
+        await deleteDoc(doc(db, collectionName, id));
+        window.showToast("Postingan berhasil dihapus!");
+        loadMyUploads();
+        if(activeUser && activeUser.isAdmin) {
+          loadAdminGallery('photo');
+        }
+      }
     };
 
-    // FAQ DATA & FILTER
+    // ADMIN PANEL MANAGEMENTS
+    async function loadAdminUserList() {
+      onSnapshot(collection(db, "users"), (snapshot) => {
+        allRegisteredUsers = [];
+        snapshot.forEach(docSnap => {
+          const d = docSnap.data();
+          allRegisteredUsers.push(d);
+        });
+
+        document.getElementById('registered-accounts-count').textContent = `(${allRegisteredUsers.length} Akun terdaftar dalam web)`;
+        document.getElementById('admin-total-accounts').textContent = `Total: ${allRegisteredUsers.length}`;
+        renderAdminUserTable(allRegisteredUsers);
+      });
+    }
+
+    // RENDER USER TABLE WITH FILTER SEARCH
+    function renderAdminUserTable(usersList) {
+      const tbody = document.getElementById('user-table-body');
+      tbody.innerHTML = '';
+
+      if(usersList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Tidak ada data pengguna ditemukan.</td></tr>';
+        return;
+      }
+
+      usersList.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:800; color:#fff;">${u.username}</td>
+          <td><span class="tag-badge">${u.platform}</span></td>
+          <td style="font-family:monospace; color:var(--text-muted);">${u.password}</td>
+          <td><span class="badge-status ${u.isBanned ? 'status-banned' : 'status-active'}">${u.isBanned ? 'Banned' : 'Aktif'}</span></td>
+          <td>
+            <button class="btn-action ${u.isBanned ? 'btn-unban' : 'btn-ban'}" onclick="toggleBanUser('${u.username.toLowerCase()}', ${u.isBanned})">
+              ${u.isBanned ? 'Unban' : 'Ban'}
+            </button>
+            <button class="btn-action btn-del" onclick="deleteUserAccount('${u.username.toLowerCase()}')"><i class="fa-solid fa-trash"></i> Hapus</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // EVENT LISTENER UNTUK PENCARIAN USER DI ADMIN PANEL
+    document.getElementById('admin-search-user').addEventListener('input', (e) => {
+      const keyword = e.target.value.toLowerCase().trim();
+      const filtered = allRegisteredUsers.filter(u => u.username.toLowerCase().includes(keyword));
+      renderAdminUserTable(filtered);
+    });
+
+    window.toggleBanUser = async function(usernameKey, currentStatus) {
+      await updateDoc(doc(db, "users", usernameKey), { isBanned: !currentStatus });
+      window.showToast(`Status akun ${usernameKey} berhasil diubah!`);
+    };
+
+    window.deleteUserAccount = async function(usernameKey) {
+      if(confirm(`Hapus akun ${usernameKey} secara permanen dari database?`)) {
+        await deleteDoc(doc(db, "users", usernameKey));
+        window.showToast(`Akun ${usernameKey} terhapus!`);
+      }
+    };
+
+    window.loadAdminGallery = async function(type) {
+      const container = document.getElementById('admin-gallery-list');
+      container.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Memuat data galeri...</p>';
+
+      const collectionName = type === 'photo' ? "player_gallery" : "build_gallery";
+      const snap = await getDocs(collection(db, collectionName));
+
+      container.innerHTML = '';
+      if(snap.empty) {
+        container.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Tidak ada konten galeri.</p>';
+        return;
+      }
+
+      snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const id = docSnap.id;
+        const div = document.createElement('div');
+        div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px 14px; border-radius:10px; border:1px solid var(--border-color);";
+        div.innerHTML = `
+          <div>
+            <strong style="color:#fff; font-size:0.9rem;">${d.title || d.name}</strong>
+            <span style="font-size:0.8rem; color:var(--text-muted); margin-left:8px;">oleh ${d.author}</span>
+          </div>
+          <button class="btn-action btn-del" onclick="deletePost('${collectionName}', '${id}')"><i class="fa-solid fa-trash"></i> Hapus Konten</button>
+        `;
+        container.appendChild(div);
+      });
+    };
+
+    // MANAJEMEN ULASAN ADMIN: LIHAT DETAIL & HAPUS ULASAN
+    async function loadAdminReviews() {
+      const container = document.getElementById('admin-reviews-list');
+      const snap = await getDocs(collection(db, "reviews"));
+
+      container.innerHTML = '';
+      if(snap.empty) {
+        container.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Belum ada ulasan terdaftar.</p>';
+        return;
+      }
+
+      snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const id = docSnap.id;
+        const div = document.createElement('div');
+        div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#050203; padding:10px 14px; border-radius:10px; border:1px solid var(--border-color);";
+        div.innerHTML = `
+          <div>
+            <strong style="color:#fff; font-size:0.9rem;">${d.username}</strong>
+            <span style="color:var(--gold-vip); font-size:0.8rem; margin-left:8px;"><i class="fa-solid fa-star"></i> ${d.stars}</span>
+          </div>
+          <div>
+            <button class="btn-action" style="background:var(--red-primary); color:#fff;" onclick="viewAdminReview('${id}')"><i class="fa-solid fa-eye"></i> Lihat Ulasan</button>
+            <button class="btn-action btn-del" onclick="deleteAdminReview('${id}')"><i class="fa-solid fa-trash"></i> Hapus Ulasan</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    window.viewAdminReview = async function(id) {
+      const snap = await getDoc(doc(db, "reviews", id));
+      if(snap.exists()) {
+        const d = snap.data();
+        document.getElementById('review-modal-username').textContent = d.username;
+        document.getElementById('review-modal-avatar').src = `https://visage.surgeplay.com/bust/128/${d.username}`;
+        document.getElementById('review-modal-text').textContent = d.comment;
+        
+        let stars = '';
+        for(let i=1; i<=5; i++) {
+          stars += `<i class="${i <= d.stars ? 'fa-solid' : 'fa-regular'} fa-star"></i> `;
+        }
+        document.getElementById('review-modal-stars').innerHTML = stars;
+        openModal('admin-view-review-modal');
+      }
+    };
+
+    window.deleteAdminReview = async function(id) {
+      if(confirm("Apakah Anda yakin ingin menghapus ulasan ini?")) {
+        await deleteDoc(doc(db, "reviews", id));
+        window.showToast("Ulasan berhasil dihapus!");
+        loadAdminReviews();
+      }
+    };
+
+    // FAQ ACCORDION ENGINE
     const faqData = [
-      { q: "Bagaimana cara bergabung ke server MineHera?", a: "Kamu bisa masuk menggunakan Minecraft versi 1.21.7 dengan alamat IP play.minehera.xyz:19155 baik dari Java maupun Bedrock Edition.", cat: "umum" },
-      { q: "Apa itu mode Lifesteal Semi-Anarchy?", a: "Lifesteal berarti kamu kehilangan hati (heart) saat mati dan bisa mendapatkannya saat membunuh player lain. Semi-Anarchy berarti sedikit aturan namun tetap adil tanpa cheat.", cat: "umum" },
-      { q: "Apakah server ini mendukung Bedrock Edition?", a: "Ya! Player MCPE / Bedrock bisa join dengan port default.", cat: "umum" },
-      { q: "Bagaimana jika saya menggunakan cheat?", a: "Penggunaan cheat, X-Ray, atau mod illegal berakibat pada BANNED PERMANEN tanpa peringatan.", cat: "aturan" },
-      { q: "Apakah boleh melakukan griefing base player lain?", a: "Karena ini bergenre Anarchy, aksi griefing dan raiding base diizinkan selama tidak melanggar aturan eksploitasi server.", cat: "aturan" },
-      { q: "Bagaimana cara membeli rank atau shards?", a: "Kamu bisa membuka menu Shop di website ini lalu melakukan pembelian resmi melalui tiket Discord kami.", cat: "donasi" }
+      { cat: 'umum', q: 'Apa itu MineHera?', a: 'MineHera adalah server Minecraft Lifesteal Semi-Anarchy Indonesia yang menawarkan pengalaman bermain PvP intens, bertahan hidup, serta merebut hati musuh.' },
+      { cat: 'umum', q: 'Berapa IP & Port Server MineHera?', a: 'IP Server Java & Bedrock adalah play.minehera.xyz dengan Port 19155.' },
+      { cat: 'umum', q: 'Versi berapa yang didukung oleh server?', a: 'Server mendukung versi Minecraft 1.21.7 hingga versi terbaru.' },
+      { cat: 'umum', q: 'Apakah player Bedrock Edition bisa bergabung?', a: 'Ya! Player Bedrock (HP/PE, Windows 10, Console) bisa bergabung menggunakan IP play.minehera.xyz dan port 19155.' },
+      { cat: 'umum', q: 'Bagaimana cara menambahkan awalan nama Bedrock?', a: 'Player Bedrock wajib menyertakan tanda titik (.) di awal username saat registrasi/login.' },
+      { cat: 'aturan', q: 'Apakah penggunaan Cheat/X-Ray diperbolehkan?', a: 'Sangat DILARANG! Penggunaan cheat, X-Ray, atau modifikasi ilegal akan berakibat Banned Permanen tanpa toleransi.' },
+      { cat: 'aturan', q: 'Apakah Griefing dan Looting diperbolehkan?', a: 'Karena ini adalah server Semi-Anarchy, griefing dan looting diperbolehkan di area non-protected.' },
+      { cat: 'aturan', q: 'Bagaimana jika saya menjadi korban scamming pemain?', a: 'Gunakan fitur Trade resmi server untuk menghindari scamming. Pihak staff tidak bertanggung jawab atas transaksi di luar sistem resmi.' },
+      { cat: 'donasi', q: 'Bagaimana cara membeli Rank atau Shards?', a: 'Kamu bisa membuka tiket pembelian resmi melalui server Discord MineHera kami.' },
+      { cat: 'donasi', q: 'Metode pembayaran apa saja yang diterima?', a: 'Kami menerima QRIS, E-Wallet (Dana, Ovo, GoPay, ShopeePay), dan Transfer Bank.' }
     ];
 
-    function renderFaqs(filterCat) {
-      const container = document.querySelector('.faq-container');
-      let html = '';
-      faqData.filter(f => filterCat === 'all' || f.cat === filterCat).forEach(item => {
-        html += `
-          <div class="faq-item" onclick="this.classList.toggle('active')">
-            <button class="faq-question">
-              <span>${item.q}</span>
-              <i class="fa-solid fa-chevron-down" style="font-size:0.85rem;"></i>
-            </button>
-            <div class="faq-answer">${item.a}</div>
-          </div>
-        `;
-      });
-      container.innerHTML = html;
-    }
-    renderFaqs('all');
-
-    window.filterFaq = function(cat, btn) {
+    window.filterFaq = function(category, btn) {
       document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderFaqs(cat);
+
+      const container = document.querySelector('.faq-container');
+      container.innerHTML = '';
+
+      const filtered = category === 'all' ? faqData : faqData.filter(f => f.cat === category);
+      filtered.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'faq-item';
+        div.innerHTML = `
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+            <span>${index + 1}. ${item.q}</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">${item.a}</div>
+        `;
+        container.appendChild(div);
+      });
     };
+
+    // INITIAL RENDER FOR FAQ
+    filterFaq('all', document.querySelector('.faq-filter-btn.active'));
   </script>
 </body>
 </html>
